@@ -1,0 +1,31 @@
+.status-box {
+  position: relative;
+  height: 100%;
+  text-align: center;
+}
+.status-bg {
+  margin: auto;
+  margin-top: 218rpx;
+}
+.status-text {
+  color: #59db9d;
+  font-size: 36rpx;
+}
+.status-content {
+  font-size: 22rpx;
+  color:rgba(0,0,0,1);
+  line-height: 37px;
+  opacity: 0.6;
+}
+.status-tips {
+  position: fixed;
+  bottom: 50rpx;
+  left: 0;
+  right: 0;
+  margin: auto;
+  font-size:22rpx;
+  font-weight:400;
+  color:rgba(0,0,0,1);
+  line-height:44px;
+  opacity:0.4;
+}

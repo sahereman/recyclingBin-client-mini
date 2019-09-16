@@ -1,2 +1,26 @@
-<!--pages/order/order.wxml-->
-<text>pages/order/order.wxml</text>
+<view class="orderLists container-inner">
+  <view wx:if="{{!orderLists.length}}">
+    暂无订单列表
+  </view>
+  <view wx:else>
+    <block wx:for="{{orderLists}}" wx:key="{{index}}">
+      <view class="order-list">
+        <view class="list-time-status">
+          <view class="list-time">2019-09-06 14:20</view>
+           <view class="list-status">{{item.status_text}}</view>
+          <!-- <view class="list-total">共收入<text>{{item.total}}</text>奖励金</view> -->
+        </view>
+        <view class="list-localtion">{{item.bin_name}}</view>
+        <view class="list-info" wx:if="{{item.items.length}}">
+          <block wx:for="{{item.items}}" wx:for-index="idx" wx:for-item="childItem" wx:key="{{idx}}">
+            <view class="child_list">
+              <view>{{childItem.type_name}}</view>
+              <view>{{childItem.number}}{{childItem.unit}}}</view>
+              <view><image class="price-image" src="../../assets/images/deliver/dollar_icon.png" />{{childItem.subtotal}}</view>
+            </view>
+          </block>
+        </view>
+      </view>
+    </block>
+  </view>
+</view>

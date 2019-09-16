@@ -11,6 +11,9 @@
   <!-- 我的奖励金 -->
   <my-reward class="container-inner my-reward"></my-reward>
 </view>
+
+
+
 <!-- 弹窗内容 -->
   <!-- 授权登陆弹窗 -->
 <!-- <view class='modal-mask' wx:if='{{show}}'>

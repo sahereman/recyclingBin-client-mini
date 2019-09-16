@@ -1,45 +1,8 @@
 <!-- 判断显示模式为地图模式/列表模式 -->
 <view wx:if="{{ismap}}" class="map-case">
-  <map id="map" longitude="120.37479" latitude="36.08743" 
-       scale="14">
-  </map>
-  <cover-view class="map-element">
-    <cover-view>
-      <cover-view>距离</cover-view>
-      <cover-view>工作时间和编码</cover-view>
-      <cover-view>回收箱状态</cover-view>
-    </cover-view>
-  </cover-view>
+  <map-mode></map-mode>
 </view>
 <view wx:else>
+  <!-- 列表模式 -->
   <list-mode lists="{{ binsLists }}"></list-mode>
-  <!-- <view class="bin-lists container-inner">
-    <block wx:for="{{binsLists}}" wx:key="{{item.id}}">
-      <view class="bin-list">
-       <view class="bin-list-left">
-        <view class="bin-list-img">
-         <image src="../../assets/images/map/place_active_icon.png" mode='widthFix'/>
-        </view>
-        <view class="bin-list-content">
-          <view class="location-name">{{item.name}}</view>
-          <view class="location-info">{{item.address}}</view>
-          <view class="location-status">正常投递</view>
-        </view>
-       </view>
-       <view class="bin-list-right">
-         <text wx:if="{{item.distance>1000}}">{{item.distance/1000}}km</text>
-         <text wx:else>{{item.distance}}m</text>
-       </view>
-      </view>
-    </block>
-  </view>
-  <cover-view class="normal-location">
-    <cover-view class="normal-location-info">
-      <cover-view>当前位置：</cover-view>
-      <cover-view>敦化路街道328号诺德广场B座</cover-view>
-    </cover-view>
-    <cover-view class="normal-location-img">
-      <cover-image src="../../assets/images/map/location_info_icon.png"/>
-    </cover-view>
-  </cover-view> -->
 </view>

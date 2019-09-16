@@ -4,7 +4,7 @@ import { getNearbyBin, getBinLists } from '../../service/api/recyclingBins.js'
 
 Page({
   data: {
-    ismap: false,
+    ismap: true,
     token: "",
     lat: null,
     lng: null,

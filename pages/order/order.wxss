@@ -1,1 +1,7 @@
-/* pages/order/order.wxss */
+.order-list {
+  background: #fff;
+}
+.price-image {
+  width: 36rpx;
+  height: 38rpx;
+}

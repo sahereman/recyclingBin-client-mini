@@ -1,0 +1,6 @@
+<view class="status-box">
+  <image class="status-bg" src="../../../../assets/images/deliver/underway_bg.png"/>
+  <view class="status-text">箱门已自动打开，请投递相应物品！</view>
+  <view class="status-content">投递完成之后，请随手关门结算，您可以在该页面查看投递详情</view>
+  <view class="status-tips">tips: 尽量保持干燥，已破损或者有尖锐边角的请包好后投放！</view>
+</view>

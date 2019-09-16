@@ -10,7 +10,7 @@ Component({
     }
   },
   data: {
-
+    localInfo: "敦化路街道328号诺德广场B座"
   },
 
   methods: {

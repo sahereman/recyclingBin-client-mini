@@ -1,4 +1,7 @@
 <view class="category-lists">
+<!-- 正式扫码方式 -->
+  <!-- <view class="category-list-item" bindtap="getScanCode"> -->
+  <!-- 开发测试跳转 -->
   <view class="category-list-item" bindtap="getScanCode">
     <image src="../../../../assets/images/home_nav/sweepCode.png" mode='widthFix'/>
     <text>扫码回收</text>

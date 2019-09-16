@@ -11,7 +11,6 @@ export function examineToken(time) {
 }
 // 判断token是否失效
 export function isTokenFailure(){
-  console.log("进入token判断")
   const token = wx.getStorageSync(TOKEN);
   if (token && token.length != 0) {
     // 验证token是否过期

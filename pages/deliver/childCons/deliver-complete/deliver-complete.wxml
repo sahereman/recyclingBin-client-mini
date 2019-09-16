@@ -1,0 +1,30 @@
+<view class="container-inner complete-status-box">
+  <image class="complete-status-bg" src="../../../../assets/images/deliver/complete_bg.png" mode="widthFix"/>
+  <view class="status-title">本次投递奖励金共 ￥{{totalPrice}} 已计入您的账户</view>
+  <view class="table-title">
+    <text>您本次投递的物品清单如下</text>
+  </view>
+  <view class="table">
+    <view class="tr bottom-border">
+      <view class="th">物品信息</view>
+      <view class="th">重量/公斤</view>
+      <view class="th ">获得奖励金</view>
+    </view>
+    <block wx:for="{{listData}}" wx:key="{{item.id}}">
+      <view class="tr bottom-border">
+        <view class="td">{{item.name}}</view>
+        <view class="td">{{item.weight}}</view>
+        <view class="td price">
+          <image src="../../../../assets/images/deliver/dollar_icon.png" mode="widthFix"/>{{item.bounty}}
+        </view>
+      </view>
+    </block>
+    <view class="tr">
+        <view class="th">合计信息</view>
+        <view class="th">{{totalWeight}}</view>
+        <view class="th price">
+          <image src="../../../../assets/images/deliver/dollar_icon.png" mode="widthFix"/>{{totalPrice}}
+        </view>
+      </view>
+  </view>
+</view>

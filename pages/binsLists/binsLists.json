@@ -1,6 +1,7 @@
 {
   "usingComponents": {
-    "list-mode": "childCons/list-mode/list-mode"
+    "list-mode": "childCons/list-mode/list-mode",
+    "map-mode": "childCons/map-mode/map-mode"
   },
   "navigationBarTitleText": "附近回收机"
 }

@@ -1,0 +1,7 @@
+{
+  "usingComponents": {
+    "deliver-underway": "childCons/deliver-underway/deliver-underway",
+    "deliver-complete": "childCons/deliver-complete/deliver-complete"
+  },
+  "navigationBarTitleText": "扫码成功请投递"
+}

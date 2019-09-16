@@ -1,0 +1,41 @@
+<!-- 地图模式 -->
+  <map id="map" longitude="120.37479" latitude="36.08743" 
+      markers="{{markers}}" scale="14">
+  </map>
+  <view class="map-element">
+    <view class="nav_icon" bindtap="openMapChoose">
+      <image src="../../../../assets/images/map/navigation_icon.png"/>
+      <view class="nav_icon_text">导航</view>
+    </view>
+    <view class="community-info container-inner">
+      <view class="community-info-top">
+        <view class="info-top-part">
+          <image src="../../../../assets/images/map/place_icon.png" mode='widthFix'/>
+          <view>{{binDistance}}</view>
+        </view>
+        <view class="info-top-part">
+          <image src="../../../../assets/images/map/time_icon.png" mode='widthFix'/>
+          <view>{{binTime}} | 编码：{{binencoding}}</view>
+        </view>
+      </view>
+      <view class="community-info-bottom">
+        <block wx:for="{{classifyArry}}" wx:key="{{item.id}}">
+          <view class="community-bottom-part">
+            <view wx:if="{{item.child_arr}}" class="bottom-img">
+              <block wx:for="{{item.child_arr}}" wx:for-item="childItem" wx:key="{{childItem.child_id}}">
+                <view class="bottom-img-box">
+                  <image src="{{childItem.image_url}}"/>
+                  <view class="bottom-img-name">{{childItem.child_name}}</view>
+                </view>
+              </block>
+            </view>
+            <view class="bottom-info">
+              <image src="{{item.image}}"/>
+              <view class="bottom-info-name">{{item.name}}</view>
+              <view class="bottom-info-price">{{item.price}}</view>
+            </view>
+          </view>
+        </block>
+      </view>
+    </view>
+  </view>

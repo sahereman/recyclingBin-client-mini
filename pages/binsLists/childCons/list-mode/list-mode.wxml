@@ -23,7 +23,7 @@
   <cover-view class="normal-location">
     <cover-view class="normal-location-info">
       <cover-view>当前位置：</cover-view>
-      <cover-view>敦化路街道328号诺德广场B座</cover-view>
+      <cover-view>{{localInfo}}</cover-view>
     </cover-view>
     <cover-view class="normal-location-img">
       <cover-image src="../../../../assets/images/map/location_info_icon.png"/>

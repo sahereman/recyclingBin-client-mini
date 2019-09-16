@@ -4,7 +4,7 @@ import { isTokenFailure } from '../../util/util.js'
 
 Page({
   data: {
-
+    orderLists:[]
   },
   onLoad: function (options) {
     // 判断token，刷新token
@@ -21,6 +21,12 @@ Page({
     const token = wx.getStorageSync(TOKEN);
     getTopicCategories(token).then(res => {
       console.log(res);
+      if (res.data.data ||res.data.data.length>0){
+        this.setData({
+          hasData: true,
+          orderLists: res.data.data
+        })
+      }
     }).catch(res => {
       console.log(res)
     })
