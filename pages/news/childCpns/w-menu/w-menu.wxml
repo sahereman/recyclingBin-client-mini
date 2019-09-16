@@ -1,0 +1,10 @@
+<!-- 话题列表分类 -->
+  <view class="categories-menu">
+    <block wx:for="{{categories}}" wx:key="index">
+      <view class='item {{index == currentIndex ? "active": ""}}' 
+            bindtap='onItemClick' 
+            data-index="{{index}}">
+        {{item.name}}
+      </view>
+    </block>
+  </view>

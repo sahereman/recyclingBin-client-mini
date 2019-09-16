@@ -1,0 +1,54 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/news/news",
+    "pages/userCenter/userCenter",
+    "pages/order/order",
+    "pages/categroies/categroies",
+    "pages/deliveryGuide/deliveryGuide",
+    "pages/binsLists/binsLists"
+  ],
+  "permission": {
+    "scope.userLocation": {
+      "desc": "你的位置信息将用于小程序位置接口的效果展示"
+    }
+  },
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTitleText": "工蚁回收",
+    "navigationBarTextStyle": "black",
+    "enablePullDownRefresh": false,
+    "backgroundColor": "#eeeeee"
+  },
+  "tabBar": {
+    "selectedColor": "#59db9d",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "text": "首页",
+        "iconPath": "assets/images/tabbar/home.png",
+        "selectedIconPath": "assets/images/tabbar/home_select.png"
+      },
+      {
+        "pagePath": "pages/news/news",
+        "text": "发现",
+        "iconPath": "assets/images/tabbar/search.png",
+        "selectedIconPath": "assets/images/tabbar/search_select.png"
+      },
+      {
+        "pagePath": "pages/order/order",
+        "text": "订单",
+        "iconPath": "assets/images/tabbar/order.png",
+        "selectedIconPath": "assets/images/tabbar/order_select.png"
+      },
+      {
+        "pagePath": "pages/userCenter/userCenter",
+        "text": "我的",
+        "iconPath": "assets/images/tabbar/user.png",
+        "selectedIconPath": "assets/images/tabbar/user_select.png"
+      }
+    ]
+  },
+  "sitemapLocation": "sitemap85.json"
+}

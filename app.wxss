@@ -1,0 +1,19 @@
+page {
+  height: 100%;
+}
+.container {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  background: #f3f4f5;
+  width: 100%;
+  min-height: 100%;
+}
+.container-inner {
+  width: 95%;
+  margin: 0 auto;
+}
+.border-circle {
+  border-radius: 15rpx;
+  overflow: hidden;
+}

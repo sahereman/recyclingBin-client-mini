@@ -1,0 +1,11 @@
+.swiper-box {
+  margin: 30rpx auto;
+  box-shadow:0rpx 3rpx 8rpx 0rpx rgba(86,135,233,0.61);
+}
+.nearby-bin {
+  margin: 54rpx auto;
+  margin-bottom: 36rpx;
+}
+.my-reward {
+  margin-bottom: 54rpx;
+}

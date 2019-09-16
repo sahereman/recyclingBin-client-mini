@@ -1,0 +1,6 @@
+{
+  "usingComponents": {
+    "list-mode": "childCons/list-mode/list-mode"
+  },
+  "navigationBarTitleText": "附近回收机"
+}

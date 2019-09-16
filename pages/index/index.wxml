@@ -1,0 +1,48 @@
+<view class="container">
+  <!-- 轮播图 -->
+  <w-swiper class="container-inner swiper-box border-circle" images="{{ banners }}"></w-swiper>
+
+  <!-- 扫码导航 -->
+  <category-nav class="container-inner"></category-nav>
+
+  <!-- 距离最近的回收箱 -->
+  <nearby-bin class="container-inner nearby-bin"></nearby-bin>
+
+  <!-- 我的奖励金 -->
+  <my-reward class="container-inner my-reward"></my-reward>
+</view>
+<!-- 弹窗内容 -->
+  <!-- 授权登陆弹窗 -->
+<!-- <view class='modal-mask' wx:if='{{show}}'>
+  <view class='modal-content'>
+    <text>您还未登录，登录后可获得完整体验</text>
+    <button wx:if="{{canIUse}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo">授权登陆</button>
+    <view wx:else>请升级微信版本</view>
+  </view>
+</view> -->
+<!-- 绑定手机号弹窗 -->
+<!-- <view>
+  <w-dialog show="{{showModal}}" bindcancel="modalCancel" bindconfirm='modalConfirm' single='{{single}}'>
+    <view class='modal-content'>
+      <scroll-view slot='content' scroll-y class='main-content'>
+        <view>这里面可替换成你想显示的其他内容</view>
+        <view>这里面可替换成你想显示的其他内容</view>
+        <text>这里面可替换成你想显示的其他内容</text>
+      </scroll-view>
+    </view>
+  </w-dialog>
+</view> -->
+<!-- 测试弹窗 -->
+<!-- <view> -->
+  <!-- <w-dialog show="true" bindcancel="modalCancel" bindconfirm='modalConfirm' single='{{single}}'>
+      <view slot="content" class='main-content'>
+        <view>这里面可替换成你想显示的其他内容</view>
+        <view>这里面可替换成你想显示的其他内容</view>
+        <text>这里面可替换成你想显示的其他内容</text>
+      </view>
+      <view slot="operation">
+        <!-- <view wx:if='false' class='cancel-btn' bindtap='cancel'>取消</view> -->
+        <!-- <view class='confirm-btn' bindtap='confirm'>确定</view> -->
+      <!-- </view> -->
+  <!-- </w-dialog> -->
+<!-- </view> -->

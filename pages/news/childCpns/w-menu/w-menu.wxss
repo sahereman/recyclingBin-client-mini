@@ -1,0 +1,10 @@
+.categories-menu {
+  display: flex;
+  justify-content: space-between;
+}
+.item {
+  flex: 1;
+}
+.active {
+  color: red;
+}

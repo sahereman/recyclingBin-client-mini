@@ -1,0 +1,10 @@
+<view>
+   <!-- 发送短信验证码 -->
+  <view class="smsVerification">
+    <input value="" type="number" bindinput="getPhoneNum" placeholder="输入手机号"/>
+    <input value="" type="number" bindinput="getPhoneCode" placeholder="输入验证码"/>
+    <button bindtap="sendVerification">获取验证码</button>
+    <button bindtap="bindUserPhone">绑定手机号</button>
+    <button bindtap="showOrderList">订单列表</button>
+  </view>
+</view>

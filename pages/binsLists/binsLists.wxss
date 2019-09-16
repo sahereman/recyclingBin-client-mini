@@ -1,0 +1,29 @@
+.map-case {
+  width: 100%;
+  height: 100%;
+
+}
+map{
+ width: 100%;
+ height: 100%;
+}
+.map-element {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  height: 45%;
+  background-color: #fff;
+  overflow: visible;
+}
+.map-element:after{ 
+  position:absolute; 
+  left:0; 
+  right:0; 
+  top:-40rpx; 
+  content:""; 
+  z-index:-1; 
+  height:100rpx; 
+  width:100%; 
+  border-radius:50%; 
+  background:#fff;
+  }

@@ -1,0 +1,14 @@
+<!--components/w-dialog/w-dialog.wxml-->
+<view class='modal-mask' wx:if='{{show}}' bindtap='clickMask'>
+  <view class='modal-content'>
+    <scroll-view scroll-y class='main-content'>
+      <slot name='content'></slot>
+    </scroll-view>
+    <view class='modal-footer'>
+      <slot name='operation'>
+        <view wx:if='{{single}}' class='cancel-btn' bindtap='cancel'>{{cancelText}}</view>
+        <view class='confirm-btn' bindtap='confirm'>{{confirmText}}</view>
+      </slot>
+    </view>
+  </view>
+</view>

@@ -1,0 +1,16 @@
+<view class="category-lists">
+  <view class="category-list-item" bindtap="getScanCode">
+    <image src="../../../../assets/images/home_nav/sweepCode.png" mode='widthFix'/>
+    <text>扫码回收</text>
+  </view>
+  <view class="category-list-item" bindtap="categroiesShow">
+    <image src="../../../../assets/images/home_nav/recyclingClassification.png" mode='widthFix'/>
+    <text>回收分类</text>
+  </view>
+  <view class="category-list-item" bindtap="deliveryGuideShow">
+    <image src="../../../../assets/images/home_nav/deliveryGuide.png" mode='widthFix'/>
+    <text>投递指南</text>
+  </view>
+  <!-- <navigator class="category-list-item" url="../categroies/categroies">回收分类</navigator>
+  <navigator class="category-list-item" url="../deliveryGuide/deliveryGuide">投递指南</navigator> -->
+</view>

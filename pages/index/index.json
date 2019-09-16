@@ -1,0 +1,10 @@
+{
+  "usingComponents": {
+    "w-swiper": "/components/w-swiper/w-swiper",
+    "w-dialog": "/components/w-dialog/w-dialog",
+    "category-nav": "childcon/category-nav/category-nav",
+    "nearby-bin": "childcon/nearby-bin/nearby-bin",
+    "my-reward": "childcon/my-reward/my-reward"
+  },
+  "navigationBarTitleText": "首页"
+}

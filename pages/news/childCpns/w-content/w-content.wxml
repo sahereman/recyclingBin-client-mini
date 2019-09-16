@@ -1,0 +1,10 @@
+<!--pages/news/childCpns/w-content/w-content.wxml-->
+<view>
+  <block wx:for="{{categoryLists}}" wx:key="{{ item.id }}">
+    <view class='category-list' 
+          bindtap='onItemClick' 
+          data-listid="{{item.id}}">
+      {{item.title}}
+    </view>
+  </block>
+</view>

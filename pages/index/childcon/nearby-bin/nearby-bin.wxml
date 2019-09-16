@@ -1,0 +1,16 @@
+<view class="module-square">
+  <view class="module-title">
+    <image src="../../../../assets/images/home_nav/address.png"/>
+    <text>{{title}}</text>
+  </view>
+  <view class="nearby-bin-content border-circle" bindtap="binsListShow">
+    <view class="bg-image">
+      <image src="../../../../assets/images/home_nav/address_phone.png" mode='widthFix'/>
+    </view>
+    <view class="model-content">
+      <view class="module-content-title">{{content_title}}</view>
+      <view class="module-content-info">{{content_info}}</view>
+      <view class="model-content-btn">{{content_btn}}</view>
+    </view>
+  </view>  
+</view>
