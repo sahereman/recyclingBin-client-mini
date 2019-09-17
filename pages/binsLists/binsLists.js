@@ -37,10 +37,12 @@ Page({
           lat: res.latitude,
           lng: res.longitude
         })
+        this._getBinsLists();
+        this._getNearbyBin();
         wx.getSetting({
           success: settingRes => {
             if (settingRes.authSetting['scope.userInfo']) {
-              this._getBinsLists()
+              
             }
           }
         })
@@ -66,5 +68,26 @@ Page({
       console.log(res)
     })
   },
+  // // 获取距离最近的回收箱
+  _getNearbyBin() {
+    const requestData = {
+      token: this.data.token,
+      lat: this.data.lat,
+      lng: this.data.lng
+    }
+    getNearbyBin(requestData).then(res => {
+      console.log(res)
+      this.setData({
+        nearBybininfo: res.data
+      })
+    }).catch(res => {
+      console.log(res)
+    })
+  },
   // -----------------操作方法---------------------
+  changeShowModule(){
+    this.setData({
+      ismap: !this.data.ismap
+    })
+  }
 })

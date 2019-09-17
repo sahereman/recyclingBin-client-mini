@@ -10,12 +10,15 @@ App({
     code: null,
     userInfo: null,
     iv: null,
-    encryptedData: null
+    encryptedData: null,
+    lat:null,
+    lng:null
   },
   // 小程序初始化时执行
   onLaunch: function () {
     // 登陆
     this.login();
+    this.getLocation();
   },
   // 登录
   login(){
@@ -25,34 +28,29 @@ App({
       }
     })
   },
-  // 获取用户信息
-  getUserInfo(code){
-    console.log("获取用户信息")
-    wx.getSetting({
-      success: settingRes => {
-        if (settingRes.authSetting['scope.userInfo']) {
-          // 已经授权，直接调用getUserInfo获取用户信息
-          wx.getUserInfo({
-            success: successInfo => {
-              this.globalData.iv = successInfo.iv
-              this.globalData.encryptedData = successInfo.encryptedData
-              const requestData = {
-                code:code,
-                iv: this.globalData.iv,
-                encryptedData: this.globalData.encryptedData
-              }
-              // 获取token
-              // getToken(requestData);
-            },
-            fail: failInfo => {
-              // 用户信息获取失败（可以跳转到登陆页）
-              console.log(failInfo)
-            }
-          })
-        }else {
-          // 如果用户未授权
-        }
+  // 获取位置信息
+  getLocation() {
+    // 获取位置信息
+    wx.getLocation({
+      type: 'wgs84',
+      success: res => {
+        console.log(res)
+          this.globalData.lat = res.latitude;
+          this.globalData.lng = res.longitude
+        // wx.setStorageSync(LAT, res.latitude)
+        // wx.setStorageSync(LNG, res.longitude)
+        // this._getNearbyBin()
+        // wx.getSetting({
+        //   success: settingRes => {
+        //     if (settingRes.authSetting['scope.userInfo']) {
+        //       this._getNearbyBin()
+        //     }
+        //   }
+        // })
+      },
+      fail: res => {
+        console.log(res)
       }
     })
-  }
+  },
 })

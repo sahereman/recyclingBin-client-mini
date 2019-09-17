@@ -13,15 +13,6 @@ export function getToken(requestData) {
       iv: requestData.iv,
       encryptedData: requestData.encryptedData
     }
-  }).then(res => {
-    // 存储到本地缓存
-    const token = res.data.token_type + " " + res.data.access_token
-    const validTime = res.data.expires_in
-    // token和有效期存入缓存
-    wx.setStorageSync(TOKEN, token)
-    examineToken(validTime)
-  }).catch(err => {
-    console.log(err)
   })
 } 
 // 刷新token

@@ -1,4 +1,5 @@
 <view>
+ 
    <!-- 发送短信验证码 -->
   <view class="smsVerification">
     <input value="" type="number" bindinput="getPhoneNum" placeholder="输入手机号"/>

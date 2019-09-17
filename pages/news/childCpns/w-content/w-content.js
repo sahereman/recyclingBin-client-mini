@@ -1,4 +1,3 @@
-// pages/news/childCpns/w-content/w-content.js
 Component({
   properties: {
     categoryLists:{

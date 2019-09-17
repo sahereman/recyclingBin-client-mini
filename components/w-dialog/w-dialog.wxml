@@ -5,10 +5,7 @@
       <slot name='content'></slot>
     </scroll-view>
     <view class='modal-footer'>
-      <slot name='operation'>
-        <view wx:if='{{single}}' class='cancel-btn' bindtap='cancel'>{{cancelText}}</view>
-        <view class='confirm-btn' bindtap='confirm'>{{confirmText}}</view>
-      </slot>
+      <slot name='operation'></slot>
     </view>
   </view>
 </view>

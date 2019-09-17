@@ -4,12 +4,13 @@ Component({
     styleIsolation: 'apply-shared'
   },
   properties: {
-
+    nearByInfo: {
+      type: Object,
+      value: {}
+    }
   },
   data: {
     title: "距离最近的回收箱",
-    content_title: "诺德广场B座",
-    content_info: "敦化路328号诺德广场敦化路328号诺德广场敦化路328号诺德广场敦化路328号诺德广场",
     content_btn: "正常投递"
   },
   methods: {

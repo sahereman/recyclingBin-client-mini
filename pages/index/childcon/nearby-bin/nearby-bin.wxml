@@ -8,8 +8,8 @@
       <image src="../../../../assets/images/home_nav/address_phone.png" mode='widthFix'/>
     </view>
     <view class="model-content">
-      <view class="module-content-title">{{content_title}}</view>
-      <view class="module-content-info">{{content_info}}</view>
+      <view class="module-content-title">{{nearByInfo.name}}</view>
+      <view class="module-content-info">{{nearByInfo.address}}</view>
       <view class="model-content-btn">{{content_btn}}</view>
     </view>
   </view>  

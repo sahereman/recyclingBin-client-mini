@@ -9,3 +9,11 @@
 .my-reward {
   margin-bottom: 54rpx;
 }
+.main-footer {
+  width: 100%;
+}
+.confirm-btn {
+  width: 100%;
+  background-color: transparent;
+  border: none;
+}

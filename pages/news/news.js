@@ -11,9 +11,12 @@ import { isTokenFailure } from '../../util/util.js'
 Page({
   data: {
     category_id: 0,
+    category_page: 1,
+    total_pages: 0,
     topic_id: 0,
     token:"",
     categories: [],
+    dataList: [],
     categoryLists: [],
     currentIndex: 0
   },
@@ -24,6 +27,12 @@ Page({
     this.data.token = wx.getStorageSync(TOKEN);
     this._getData();
   },
+  onReachBottom: function () {
+    // 监听用户上拉触底事件
+    if (this.data.category_page < this.data.total_pages){
+      this._getTopicLists()
+    }
+  },
   _getData(){
     this._getTopicCategories(this.data.token)
   },
@@ -31,38 +40,44 @@ Page({
   _getTopicCategories(requestData){
     getTopicCategories(requestData).then(res => {
       this.setData({
-        categories: res.data.data
+        categories: res.data.data,
+        category_id: res.data.data[0].id
       })
       // 默认获取第一个分类列表
-      this._getTopicLists(res.data.data[0].id);
+      this._getTopicLists();
     }).catch(res => {
       console.log(res)
     })
   },
   // 获取话题列表
-  _getTopicLists(category_id){
-    const requestData = {
-      category_id: category_id,
-      token: this.data.token
+  _getTopicLists(){
+    let requestData = {}
+    if (this.data.category_page == 1) {
+      requestData = {
+        category_id: this.data.category_id,
+        token: this.data.token
+      }
+    }else {
+      requestData = {
+        category_id: this.data.category_id +"?page="+ this.data.category_page,
+        token: this.data.token
+      }
     }
     getTopicLists(requestData).then(res => {
-      console.log(res)
+      const list = res.data.data;
+      let page_num;
+      this.data.dataList.push(...list);
+      if (res.data.meta.pagination.links.next){
+        page_num = res.data.meta.pagination.links.next.split("=")[1]
+      }else {
+        page_num = 1;
+      }
       this.setData({
-        categoryLists: res.data.data
+        categoryLists: this.data.dataList,
+        category_page: page_num,
+        total_pages: res.data.meta.pagination.total_pages
       })
     }).catch(res => {
-      console.log(res)
-    })
-  },
-  // 获取话题详情
-  _getTopicDetails(topic_id){
-    const requestData = {
-      topic_id: topic_id,
-      token: this.data.token
-    }
-    getTopicDetails(requestData).then(res => {
-      console.log(res)
-    }).catch(res =>{
       console.log(res)
     })
   },
@@ -72,11 +87,23 @@ Page({
     const currentIndex = e.detail.currentIndex;
     const maitkey = this.data.categories[currentIndex].id;
     // 获取点击的menu的按钮的id，通过id获取分类下的列表
-    this._getTopicLists(maitkey)
+    this.setData({
+      category_id: maitkey,
+      dataList: []
+    })
+    this._getTopicLists()
   },
   // 点击lists查看对应的详情
   listsClick(e){
     const currentId = e.detail.currentId;
-    this._getTopicDetails(currentId)
+    const dataObj = {currentId: currentId,token: this.data.token}
+    // this._getTopicDetails(currentId)
+    wx.navigateTo({
+      url: '../newsDetail/newsDetail',
+      success: function (res) {
+        // 通过eventChannel向被打开页面传送数据
+        res.eventChannel.emit('acceptDataFromOpenerPage', { data: dataObj})
+      }
+    })
   }
 })

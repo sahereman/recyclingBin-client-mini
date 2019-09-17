@@ -6,3 +6,6 @@
   <!-- 列表模式 -->
   <list-mode lists="{{ binsLists }}"></list-mode>
 </view>
+<!-- 切换按钮 -->
+<cover-view class="change-module-btn {{ismap? 'map-module': 'list-module'}}" 
+            bindtap="changeShowModule">{{ismap?"列表模式":"地图模式"}}</cover-view>

@@ -1,10 +1,14 @@
-<!--pages/news/news.wxml-->
-<view>
-  <text>话题列表</text>
-  <!-- 分类菜单 -->
-  <w-menu categories="{{categories}}"
-          bind:menuclick="menuClick"/>
-  <!-- 分类列表 -->
-  <w-content categoryLists="{{categoryLists}}" 
-             bind:listsclick="listsClick"/>
+<view class="container">
+  <!-- 导图 -->
+  <view class="page-banner container-inner">
+    <image src="../../assets/images/search/search_banner.png" mode="widthFix" />
+  </view>
+  <view class="container-inner page-content">
+    <!-- 分类菜单 -->
+    <w-menu  categories="{{categories}}"
+            bind:menuclick="menuClick"/>
+    <!-- 分类列表 -->
+    <w-content categoryLists="{{categoryLists}}" 
+               bind:listsclick="listsClick"/>
+  </view>
 </view>

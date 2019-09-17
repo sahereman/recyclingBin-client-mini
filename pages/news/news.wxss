@@ -1,1 +1,9 @@
-/* pages/news/news.wxss */
+.page-banner {
+  margin: 27rpx auto;
+}
+.page-banner image {
+  width: 100%;
+}
+.page-content {
+  background-color: #fff;
+}

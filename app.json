@@ -7,7 +7,8 @@
     "pages/categroies/categroies",
     "pages/deliveryGuide/deliveryGuide",
     "pages/binsLists/binsLists",
-    "pages/deliver/deliver"
+    "pages/deliver/deliver",
+    "pages/newsDetail/newsDetail"
   ],
   "permission": {
     "scope.userLocation": {

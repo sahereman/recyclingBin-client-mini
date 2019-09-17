@@ -1,8 +1,9 @@
-import { TOKEN, VALIDTIME } from '../../common/const.js'
+import { TOKEN, LAT, LNG } from '../../common/const.js'
 import {getToken,updateToken} from '../../service/api/user.js'
 import {getBanners} from '../../service/api/banner.js'
 import { isTokenFailure } from '../../util/util.js'
 import { getNearbyBin, getBinLists } from '../../service/api/recyclingBins.js'
+import { examineToken } from '../../util/util.js'
 
 //获取应用实例
 const app = getApp()
@@ -14,10 +15,12 @@ Page({
     token:"",
     lat: null,
     lng: null,
-    showModal: true, // 显示modal弹窗
-    single: false // false 只显示一个按钮，如果想显示两个改为true即可
+    showModal: false, // 显示modal弹窗
+    single: false, // false 只显示一个按钮，如果想显示两个改为true即可
+    nearBybininfo:{}
   },
   onLoad: function () {
+    console.log("页面刷新了")
     // 判断token，刷新token
     isTokenFailure();
     const token = wx.getStorageSync(TOKEN);
@@ -26,15 +29,33 @@ Page({
         show: false,
         token: token
       })
+      // 发送网络请求
+      this._getData();
     }
-    // 发送网络请求
-    this._getData();
   },
   // ------------------网络请求相关方法----------
   _getData(){
     this._getBanners()
     // 获取位置授权及信息
     this.getLocation()
+  },
+  // 获取token
+  _getToken(requestData){
+    getToken(requestData).then(res => {
+      // 存储到本地缓存
+      const token = res.data.token_type + " " + res.data.access_token
+      const validTime = res.data.expires_in
+      // token和有效期存入缓存
+      wx.setStorageSync(TOKEN, token)
+      examineToken(validTime)
+      this.setData({ 
+        show: false,
+        token: token
+      })
+      this._getData();
+    }).catch(err => {
+      console.log(err)
+    })
   },
   // 获取banner图数组
   _getBanners(){
@@ -59,20 +80,20 @@ Page({
       lat: this.data.lat,
       lng: this.data.lng
     }
-    // console.log(requestData)
     getNearbyBin(requestData).then(res => {
       console.log(res)
+      this.setData({
+        nearBybininfo: res.data
+      })
     }).catch(res => {
       console.log(res)
     })
   },
-  // -------------------------------事件操作----------
+  // -------------------------------事件监听及操作----------
   // 获取用户信息
   getUserInfo(e){
-    // 点击授权登陆后获取token并存住
     if(app.globalData.code){
       if (e.detail.errMsg == "getUserInfo:ok") {
-        this.setData({ show: false })
         app.globalData.userInfo = e.detail.userInfo
         const requestData = {
           code: app.globalData.code,
@@ -80,9 +101,9 @@ Page({
           encryptedData: e.detail.encryptedData
         }
         // 获取token
-        getToken(requestData);
+        this._getToken(requestData)
+        // getToken(requestData);
       }
-
     }else {
       // app.login()
     }
@@ -98,11 +119,13 @@ Page({
           lat: res.latitude,
           lng: res.longitude
         })
+        // wx.setStorageSync(LAT, res.latitude)
+        // wx.setStorageSync(LNG, res.longitude)
+        this._getNearbyBin()
         wx.getSetting({
           success: settingRes => {
             if (settingRes.authSetting['scope.userInfo']) {
               this._getNearbyBin()
-              // this._getBinsLists()
             }
           }
         })
@@ -121,8 +144,5 @@ Page({
   modalConfirm(e) {
     // 这里面处理点击确定按钮业务逻辑
     console.log('点击了确定')
-  },
-  confirm(){
-    console.log("点击了自定义组件的确定按钮")
   }
 })

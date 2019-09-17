@@ -1,10 +1,19 @@
 .categories-menu {
   display: flex;
+  margin-bottom: 30rpx;
   justify-content: space-between;
+  height: 150rpx;
+  border-bottom: 1px solid #f7f7f7;
 }
 .item {
-  flex: 1;
+  margin: auto;
+  padding: 20rpx 28rpx;
+  background:#f3f4f5;
+  border-radius:10px;
+  text-align: center;
+  font-size: 28rpx;
 }
 .active {
-  color: red;
+  color: #fff;
+  background: #5adb9e;
 }
