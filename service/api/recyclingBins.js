@@ -18,7 +18,7 @@ export function getNearbyBin(requestData) {
 // 获取回收箱列表
 export function getBinLists(requestData) {
   return request({
-    url: 'bins',
+    url: 'bins?page=' + requestData.page,
     method: "GET",
     header: {
       Authorization: requestData.token

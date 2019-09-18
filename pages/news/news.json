@@ -4,5 +4,5 @@
     "w-content": "./childCpns/w-content/w-content"
   },
   "navigationBarTitleText": "发现",
-  "onReachBottomDistance": 50
+  "onReachBottomDistance": 100
 }

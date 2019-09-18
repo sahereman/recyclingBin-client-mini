@@ -10,8 +10,8 @@
 }
 .category-list-item image {
   margin: 20rpx auto;
-  width: 98rpx;
-  height: 156rpx;
+  width: 90rpx;
+  height: 90rpx;
 }
 .category-list-item text {
   font-size:28rpx;

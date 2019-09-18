@@ -18,7 +18,6 @@ App({
   onLaunch: function () {
     // 登陆
     this.login();
-    this.getLocation();
   },
   // 登录
   login(){
@@ -27,30 +26,5 @@ App({
         this.globalData.code = loginRes.code
       }
     })
-  },
-  // 获取位置信息
-  getLocation() {
-    // 获取位置信息
-    wx.getLocation({
-      type: 'wgs84',
-      success: res => {
-        console.log(res)
-          this.globalData.lat = res.latitude;
-          this.globalData.lng = res.longitude
-        // wx.setStorageSync(LAT, res.latitude)
-        // wx.setStorageSync(LNG, res.longitude)
-        // this._getNearbyBin()
-        // wx.getSetting({
-        //   success: settingRes => {
-        //     if (settingRes.authSetting['scope.userInfo']) {
-        //       this._getNearbyBin()
-        //     }
-        //   }
-        // })
-      },
-      fail: res => {
-        console.log(res)
-      }
-    })
-  },
+  }
 })

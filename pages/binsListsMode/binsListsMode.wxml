@@ -1,0 +1,37 @@
+<view class="bin-lists container-inner">
+  <view wx:if="{{listsArr.length}}">
+    <block wx:for="{{listsArr}}" wx:key="{{item.id}}">
+      <view class="bin-list">
+        <view class="bin-list-left">
+        <view class="bin-list-img">
+          <image src="../../assets/images/map/place_active_icon.png" mode='widthFix'/>
+        </view>
+        <view class="bin-list-content">
+          <view class="location-name">{{item.name}}</view>
+          <view class="location-info">{{item.address}}</view>
+          <!-- <view class="location-status">{{item.site_id}}</view> -->
+          <view class="location-status">正常投递</view>
+        </view>
+        </view>
+        <view class="bin-list-right">
+          <text wx:if="{{item.distance>1000}}">{{item.distance/1000}}km</text>
+          <text wx:else>{{item.distance}}m</text>
+        </view>
+      </view>
+    </block>
+  </view>
+  <view wx:else>暂无回收箱列表</view>
+</view>
+<!-- 当前位置 -->
+<!-- <cover-view class="normal-location">
+  <cover-view class="normal-location-info">
+    <cover-view>当前位置：</cover-view>
+    <cover-view>{{localInfo}}</cover-view>
+  </cover-view>
+  <cover-view class="normal-location-img">
+    <cover-image src="../../assets/images/map/location_info_icon.png"/>
+  </cover-view>
+</cover-view> -->
+<!-- 切换按钮 -->
+<cover-view class="change-module-btn list-module" 
+            bindtap="changeShowModule">地图模式</cover-view> 

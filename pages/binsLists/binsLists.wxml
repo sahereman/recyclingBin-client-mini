@@ -1,11 +1,11 @@
 <!-- 判断显示模式为地图模式/列表模式 -->
 <view wx:if="{{ismap}}" class="map-case">
-  <map-mode></map-mode>
+  <map-mode nearByArr="{{bearByArr}}" latitude="{{lat}}" longitude="{{lng}}"/>
 </view>
+<!-- 
 <view wx:else>
-  <!-- 列表模式 -->
   <list-mode lists="{{ binsLists }}"></list-mode>
-</view>
+</view> -->
 <!-- 切换按钮 -->
-<cover-view class="change-module-btn {{ismap? 'map-module': 'list-module'}}" 
-            bindtap="changeShowModule">{{ismap?"列表模式":"地图模式"}}</cover-view>
+<cover-view class="change-module-btn map-module" 
+            bindtap="changeShowModule">列表模式</cover-view> 

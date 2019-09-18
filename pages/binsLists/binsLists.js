@@ -8,7 +8,7 @@ Page({
     token: "",
     lat: null,
     lng: null,
-    binsLists: []
+    bearByArr: {}
   },
   onLoad: function (options) {
     // 判断token，刷新token
@@ -19,6 +19,8 @@ Page({
         token: token
       })
     }
+  },
+  onShow: function () {
     this._getData();
   },
   // ------------------网络请求-------------------
@@ -32,40 +34,15 @@ Page({
     wx.getLocation({
       type: 'wgs84',
       success: res => {
-        console.log(res)
         this.setData({
           lat: res.latitude,
           lng: res.longitude
         })
-        this._getBinsLists();
         this._getNearbyBin();
-        wx.getSetting({
-          success: settingRes => {
-            if (settingRes.authSetting['scope.userInfo']) {
-              
-            }
-          }
-        })
       },
       fail: res => {
         console.log(res)
       }
-    })
-  },
-  // 获取回收箱列表
-  _getBinsLists() {
-    const requestData = {
-      token: this.data.token,
-      lat: this.data.lat,
-      lng: this.data.lng
-    }
-    getBinLists(requestData).then(res => {
-      console.log(res)
-      this.setData({
-        binsLists: res.data.data
-      })
-    }).catch(res => {
-      console.log(res)
     })
   },
   // // 获取距离最近的回收箱
@@ -78,16 +55,16 @@ Page({
     getNearbyBin(requestData).then(res => {
       console.log(res)
       this.setData({
-        nearBybininfo: res.data
+        bearByArr: res.data
       })
     }).catch(res => {
       console.log(res)
     })
   },
-  // -----------------操作方法---------------------
+  // -----------------事件监听及操作---------------------
   changeShowModule(){
-    this.setData({
-      ismap: !this.data.ismap
+    wx.navigateTo({
+      url: '../binsListsMode/binsListsMode',
     })
   }
 })

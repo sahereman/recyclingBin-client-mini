@@ -1,15 +1,15 @@
 .nearby-bin-content {
   position: relative;
   background-color: #fff;
-  height: 320rpx;
+  height: 233rpx;
   background:rgba(255,255,255,1);
   box-shadow:0px 5rpx 5rpx 0px rgba(0, 0, 0, 0.1);
 }
 .bg-image {
   position: absolute;
-  right: 40rpx;
-  top: 48rpx;
-  width: 266rpx;
+  right: 27rpx;
+  top: 22rpx;
+  width: 188rpx;
 }
 .bg-image image {
   width: 100%;
@@ -19,6 +19,7 @@
   justify-content: flex-start;
   text-align: left;
   margin: 24rpx 0;
+  margin-top: 0;
 }
 .module-title image {
   width: 27rpx;
@@ -33,21 +34,23 @@
   opacity:0.6;
 }
 .model-content {
-  position: relative;
+  position: absolute;
+  top: 0;
+  left: 0;
   height: 100%;
+  width: 100%;
 }
 .module-content-title {
-  padding-top: 50rpx;
-  padding-left: 40rpx;
-  height:29rpx;
-  font-size:36rpx;
-  font-weight:400;
+  margin-top: 23rpx;
+  margin-left: 41rpx;
+  font-size:32rpx;
   color:rgba(89,219,157,1);
-  line-height:30rpx;
+  font-weight: bold;
 }
 .module-content-info {
-  padding-top: 40rpx;
-  padding-left: 40rpx;
+  margin-top: 23rpx;
+  margin-left: 41rpx;
+  margin-bottom: 39rpx;
   width: 360rpx;
   white-space: nowrap;
   overflow: hidden;
@@ -61,13 +64,12 @@
 .model-content-btn {
   position: absolute;
   left: 40rpx;
-  bottom: 40rpx;
-  padding: 10rpx;
+  bottom: 33rpx;
   width:120rpx;
   height:45rpx;
   border:1px solid rgba(89,219,157,1);
   border-radius:30rpx;
-  font-size:26rpx;
+  font-size:24rpx;
   font-weight:400;
   color:rgba(89,219,157,1);
   line-height:45rpx;

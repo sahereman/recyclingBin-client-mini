@@ -1,11 +1,87 @@
-<view>
- 
-   <!-- 发送短信验证码 -->
+<!-- <view>
   <view class="smsVerification">
     <input value="" type="number" bindinput="getPhoneNum" placeholder="输入手机号"/>
     <input value="" type="number" bindinput="getPhoneCode" placeholder="输入验证码"/>
     <button bindtap="sendVerification">获取验证码</button>
     <button bindtap="bindUserPhone">绑定手机号</button>
     <button bindtap="showOrderList">订单列表</button>
+  </view>
+</view> -->
+<view class="container user-home">
+  <view class="content-bg">
+    <image src="../../assets/images/user/user_bg.png"/>
+  </view>
+  <view class="container-inner user-content">
+    <!-- 个人信息区 -->
+    <view class="user-info-part">
+      <view class="user-info">
+        <view class="user-info-head">
+          <image wx:if="{{!isHashead}}" src="../../assets/images/user/default_user.png" />
+          <image wx:else  src="真实的头像路径" />
+        </view>
+        <view class="user-info-edit">
+          <view class="user-info-name">
+            <text>工蚁森林</text>
+            <image src="../../assets/images/user/edit.png" />
+          </view>
+          <view class="user-info-phone">184****6860</view>
+        </view>
+      </view>
+      <view class="user-notification">
+        <image src="../../assets/images/user/notification.png" />
+      </view>
+    </view>
+    <!-- 奖励金显示区 -->
+    <view class="my-reward border-circle">
+      
+    </view>
+    <!-- 链接区域 -->
+    <view class="operating-space">
+      <view class="operating-item border-circle">
+        <view class="item-left">
+          <image src="../../assets/images/user/my_order.png"/>
+          <text>我的订单</text>
+        </view>
+        <view class="item-right">
+          <image src="../../assets/images/user/arrow.png"/>
+        </view>
+      </view>
+      <view class="operating-item border-circle">
+        <view class="item-left">
+          <image src="../../assets/images/user/wallet.png"/>
+          <text>钱包</text>
+        </view>
+        <view class="item-right">
+          <image src="../../assets/images/user/arrow.png"/>
+        </view>
+      </view>
+      <view class="operating-item border-circle">
+        <view class="item-left">
+          <image src="../../assets/images/user/share.png"/>
+          <text>分享给好友</text>
+        </view>
+        <view class="item-right">
+          <image src="../../assets/images/user/arrow.png"/>
+        </view>
+      </view>
+      <view class="operating-item border-circle">
+        <view class="item-left">
+          <image src="../../assets/images/user/help.png"/>
+          <text>帮助中心</text>
+        </view>
+        <view class="item-right">
+          <image src="../../assets/images/user/arrow.png"/>
+        </view>
+      </view>
+      <view class="operating-item border-circle">
+        <view class="item-left">
+          <image src="../../assets/images/user/about.png"/>
+          <text>关于我们</text>
+        </view>
+        <view class="item-right">
+          <image src="../../assets/images/user/arrow.png"/>
+        </view>
+      </view>
+    </view>
   </view>
 </view>

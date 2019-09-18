@@ -6,17 +6,17 @@
   <view class="model-content border-circle">
   <!-- 可能需要循环 -->
     <view class="model-content-item">
-      <image src="../../../../assets/images/home_nav/bounty.png" mode="aspectFit"/>
+      <image class="reward-image" src="../../../../assets/images/home_nav/bounty.png" mode="aspectFit"/>
       <view class="item-title">当前奖励金</view>
       <view class="item-num">{{bounty}}</view>
     </view>
     <view class="model-content-item">
-      <image src="../../../../assets/images/home_nav/deliveryTimes.png" mode="aspectFit"/>
+      <image class="time-image" src="../../../../assets/images/home_nav/deliveryTimes.png" mode="aspectFit"/>
       <view class="item-title">参与投递次数</view>
       <view class="item-num">{{deliveryTimes}}</view>
     </view>
     <view class="model-content-item">
-      <image src="../../../../assets/images/home_nav/totalBounty.png" mode="aspectFit"/>
+      <image class="num-image" src="../../../../assets/images/home_nav/totalBounty.png" mode="aspectFit"/>
       <view class="item-title">累计奖励金</view>
       <view class="item-num">{{totalBounty}}</view>
     </view>

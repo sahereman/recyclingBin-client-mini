@@ -6,7 +6,8 @@ Page({
     userPhone: "",
     verification_code: "",
     verification_key: "",
-    token: ""
+    token: "",
+    isHashead: false
   },
   onLoad: function (options) {
     const token = wx.getStorageSync(TOKEN);

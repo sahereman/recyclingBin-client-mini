@@ -1,5 +1,5 @@
-import { TOKEN, LAT, LNG } from '../../common/const.js'
-import {getToken,updateToken} from '../../service/api/user.js'
+import { TOKEN, LAT, LNG, VALIDTIME } from '../../common/const.js'
+import { getToken, updateToken} from '../../service/api/user.js'
 import {getBanners} from '../../service/api/banner.js'
 import { isTokenFailure } from '../../util/util.js'
 import { getNearbyBin, getBinLists } from '../../service/api/recyclingBins.js'
@@ -20,7 +20,6 @@ Page({
     nearBybininfo:{}
   },
   onLoad: function () {
-    console.log("页面刷新了")
     // 判断token，刷新token
     isTokenFailure();
     const token = wx.getStorageSync(TOKEN);
@@ -29,14 +28,14 @@ Page({
         show: false,
         token: token
       })
-      // 发送网络请求
-      this._getData();
     }
+  },
+  onShow: function () {
+    this._getData();
   },
   // ------------------网络请求相关方法----------
   _getData(){
     this._getBanners()
-    // 获取位置授权及信息
     this.getLocation()
   },
   // 获取token
@@ -77,11 +76,10 @@ Page({
   _getNearbyBin(){
     const requestData = {
       token: this.data.token,
-      lat: this.data.lat,
-      lng: this.data.lng
+      lat: app.globalData.lat,
+      lng: app.globalData.lng
     }
     getNearbyBin(requestData).then(res => {
-      console.log(res)
       this.setData({
         nearBybininfo: res.data
       })
@@ -102,7 +100,6 @@ Page({
         }
         // 获取token
         this._getToken(requestData)
-        // getToken(requestData);
       }
     }else {
       // app.login()
@@ -114,21 +111,13 @@ Page({
     wx.getLocation({
       type: 'wgs84',
       success: res => {
-        console.log(res)
         this.setData({
           lat: res.latitude,
           lng: res.longitude
         })
-        // wx.setStorageSync(LAT, res.latitude)
-        // wx.setStorageSync(LNG, res.longitude)
+        app.globalData.lat = res.latitude;
+        app.globalData.lng = res.longitude;
         this._getNearbyBin()
-        wx.getSetting({
-          success: settingRes => {
-            if (settingRes.authSetting['scope.userInfo']) {
-              this._getNearbyBin()
-            }
-          }
-        })
       },
       fail: res => {
         console.log(res)

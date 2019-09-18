@@ -30,7 +30,6 @@ export function updateToken(requestData) {
     wx.setStorageSync(TOKEN, token)
     examineToken(validTime)
   }).catch(err => {
-    console.log(err)
     wx.setStorageSync(TOKEN, "")
   })
 } 
@@ -79,7 +78,7 @@ export function userInfoShow(requestData) {
     url: 'users/show',
     method: "GET",
     header: {
-      Authorization: requestData
+      Authorization: requestData.token
     },
   })
 }
@@ -89,7 +88,7 @@ export function getBillList(requestData) {
     url: 'users/moneyBill',
     method: "GET",
     header: {
-      Authorization: requestData
+      Authorization: requestData.token
     },
   })
 }
@@ -99,7 +98,7 @@ export function withdrawal(requestData) {
     url: 'susers/withdraw/unionPay',
     method: "POST",
     header: {
-      Authorization: requestData
+      Authorization: requestData.token
     },
     data: {
       name: requestData.name,
