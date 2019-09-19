@@ -3,7 +3,7 @@
 import request from '/service/network.js'
 import { isTokenFailure } from '/util/util.js'
 import { getToken } from '/service/api/user.js'
-import { TOKEN, VALIDTIME} from '/common/const.js'
+import { TOKEN } from '/common/const.js'
 
 App({
   globalData: {
@@ -16,8 +16,13 @@ App({
   },
   // 小程序初始化时执行
   onLaunch: function () {
-    // 登陆
-    this.login();
+    const token = wx.getStorageSync(TOKEN);
+    if (!token && token.length == 0) {
+      // 登陆
+      this.login();
+    }else {
+      isTokenFailure();
+    }
   },
   // 登录
   login(){

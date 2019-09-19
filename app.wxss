@@ -1,3 +1,6 @@
+/* weui组件样式 */
+/* @import './components/weui-miniprogram/weui-wxss/dist/style/weui.wxss'; */
+
 page {
   height: 100%;
 }
@@ -8,6 +11,7 @@ page {
   background: #f3f4f5;
   width: 100%;
   min-height: 100%;
+  color: #333;
 }
 .container-inner {
   width: 95%;
@@ -16,4 +20,9 @@ page {
 .border-circle {
   border-radius: 15rpx;
   overflow: hidden;
+}
+.last-tips {
+  width: 100%;
+  text-align: center;
+  margin: 20rpx auto;
 }

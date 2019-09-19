@@ -1,10 +1,10 @@
-// pages/news/news.js
 import {
   getTopicCategories,
   getTopicLists,
   getTopicDetails
 
 } from '../../service/api/news.js'
+import { updateToken } from '../../service/api/user.js'
 import { TOKEN } from '../../common/const.js'
 import { isTokenFailure } from '../../util/util.js'
 
@@ -21,11 +21,21 @@ Page({
     currentIndex: 0
   },
   onLoad: function (options) {
-    // 每次页面加载时验证token是否过期
-    // 判断token，刷新token
-    isTokenFailure();
-    this.data.token = wx.getStorageSync(TOKEN);
-    this._getData();
+    const token = wx.getStorageSync(TOKEN);
+    if (isTokenFailure()) {
+      // token有效
+      this.data.token = token;
+      this._getData()
+    } else {
+      // token无效
+      if (token && token.length != 0) {
+        // 当token存在只需要进行更新
+        // 刷新token
+        updateToken(token, this);
+      } else {
+
+      }
+    }
   },
   onReachBottom: function () {
     // 监听用户上拉触底事件

@@ -1,12 +1,3 @@
-<!-- <view>
-  <view class="smsVerification">
-    <input value="" type="number" bindinput="getPhoneNum" placeholder="输入手机号"/>
-    <input value="" type="number" bindinput="getPhoneCode" placeholder="输入验证码"/>
-    <button bindtap="sendVerification">获取验证码</button>
-    <button bindtap="bindUserPhone">绑定手机号</button>
-    <button bindtap="showOrderList">订单列表</button>
-  </view>
-</view> -->
 <view class="container user-home">
   <view class="content-bg">
     <image src="../../assets/images/user/user_bg.png"/>
@@ -16,15 +7,16 @@
     <view class="user-info-part">
       <view class="user-info">
         <view class="user-info-head">
-          <image wx:if="{{!isHashead}}" src="../../assets/images/user/default_user.png" />
-          <image wx:else  src="真实的头像路径" />
+          <image src="{{avatar_url}}" />
         </view>
         <view class="user-info-edit">
           <view class="user-info-name">
-            <text>工蚁森林</text>
-            <image src="../../assets/images/user/edit.png" />
+            <text>{{userName}}</text>
+            <navigator url="../../pages/billPage/billPage">
+              <image src="../../assets/images/user/edit.png" />
+            </navigator>
           </view>
-          <view class="user-info-phone">184****6860</view>
+          <view class="user-info-phone">{{phone}}</view>
         </view>
       </view>
       <view class="user-notification">
@@ -33,54 +25,81 @@
     </view>
     <!-- 奖励金显示区 -->
     <view class="my-reward border-circle">
-      
+      <view class="reward-head">
+        <text class="reward-head-title">我的奖励金</text>
+        <navigator class="more-detail" url="../../pages/billPage/billPage" hover-class="more-detail-hover">更多明细</navigator>
+      </view>
+      <view class="reward-content">
+        <view class="reward-content-item">
+          <view class="content-item-title">当前奖励金</view>
+          <view class="content-item-value">￥{{orderMoney}}</view>
+        </view>
+        <view class="reward-content-item">
+          <view class="content-item-title">参与投递次数</view>
+          <view class="content-item-value">{{orderCount}}次</view>
+        </view>
+        <view class="reward-content-item">
+          <view class="content-item-title">累计奖励金</view>
+          <view class="content-item-value">￥{{money}}</view>
+        </view>
+      </view>
     </view>
     <!-- 链接区域 -->
     <view class="operating-space">
       <view class="operating-item border-circle">
-        <view class="item-left">
-          <image src="../../assets/images/user/my_order.png"/>
-          <text>我的订单</text>
-        </view>
-        <view class="item-right">
-          <image src="../../assets/images/user/arrow.png"/>
-        </view>
+        <navigator url="/pages/order/order" open-type="switchTab" hover-class="operating-click">
+          <view class="item-left">
+            <image src="../../assets/images/user/my_order.png"/>
+            <text>我的订单</text>
+          </view>
+          <view class="item-right">
+            <image src="../../assets/images/user/arrow.png"/>
+          </view>
+        </navigator>
       </view>
       <view class="operating-item border-circle">
-        <view class="item-left">
-          <image src="../../assets/images/user/wallet.png"/>
-          <text>钱包</text>
-        </view>
-        <view class="item-right">
-          <image src="../../assets/images/user/arrow.png"/>
-        </view>
+        <navigator url="../../pages/walletPage/walletPage" hover-class="operating-click">
+          <view class="item-left">
+            <image src="../../assets/images/user/wallet.png"/>
+            <text>钱包</text>
+          </view>
+          <view class="item-right">
+            <image src="../../assets/images/user/arrow.png"/>
+          </view>
+        </navigator>
       </view>
       <view class="operating-item border-circle">
-        <view class="item-left">
-          <image src="../../assets/images/user/share.png"/>
-          <text>分享给好友</text>
-        </view>
-        <view class="item-right">
-          <image src="../../assets/images/user/arrow.png"/>
-        </view>
+        <navigator url="../../pages/sharePage/sharePage" hover-class="operating-click">
+          <view class="item-left">
+            <image src="../../assets/images/user/share.png"/>
+            <text>分享给好友</text>
+          </view>
+          <view class="item-right">
+            <image src="../../assets/images/user/arrow.png"/>
+          </view>
+        </navigator>
       </view>
       <view class="operating-item border-circle">
-        <view class="item-left">
-          <image src="../../assets/images/user/help.png"/>
-          <text>帮助中心</text>
-        </view>
-        <view class="item-right">
-          <image src="../../assets/images/user/arrow.png"/>
-        </view>
+        <navigator url="../../pages/helpCenter/helpCenter" hover-class="operating-click">
+          <view class="item-left">
+            <image class="help-icon" src="../../assets/images/user/help.png"/>
+            <text>帮助中心</text>
+          </view>
+          <view class="item-right">
+            <image src="../../assets/images/user/arrow.png"/>
+          </view>
+        </navigator>
       </view>
       <view class="operating-item border-circle">
-        <view class="item-left">
-          <image src="../../assets/images/user/about.png"/>
-          <text>关于我们</text>
-        </view>
-        <view class="item-right">
-          <image src="../../assets/images/user/arrow.png"/>
-        </view>
+        <navigator url="../../pages/aboutUs/aboutUs" hover-class="operating-click">
+          <view class="item-left">
+            <image class="about-icon" src="../../assets/images/user/about.png"/>
+            <text>关于我们</text>
+          </view>
+          <view class="item-right">
+            <image src="../../assets/images/user/arrow.png"/>
+          </view>
+        </navigator>
       </view>
     </view>
   </view>

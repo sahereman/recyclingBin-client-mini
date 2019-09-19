@@ -16,8 +16,7 @@ export function getToken(requestData) {
   })
 } 
 // 刷新token
-export function updateToken(requestData) {
-  console.log("刷新token")
+export function updateToken(requestData,page) {
   return request({
     url: 'authorizations',
     method: "PUT",
@@ -29,7 +28,10 @@ export function updateToken(requestData) {
     const validTime = res.data.expires_in
     wx.setStorageSync(TOKEN, token)
     examineToken(validTime)
-  }).catch(err => {
+    page.data.token = token;
+    console.log("刷新了token")
+    page._getData()
+  }).catch(res => {
     wx.setStorageSync(TOKEN, "")
   })
 } 
@@ -85,7 +87,7 @@ export function userInfoShow(requestData) {
 // 获取金钱账单列表
 export function getBillList(requestData) {
   return request({
-    url: 'users/moneyBill',
+    url: 'users/moneyBill?page=' + requestData.page,
     method: "GET",
     header: {
       Authorization: requestData.token

@@ -1,6 +1,7 @@
 import { TOKEN } from '../../common/const.js'
 import { isTokenFailure } from '../../util/util.js'
 import { getBinLists } from '../../service/api/recyclingBins.js'
+import { updateToken } from '../../service/api/user.js'
 // var QQMapWX = require('../../common/qqmap-wx-jssdk.min.js')
 // var qqmapsdk
 
@@ -20,22 +21,28 @@ Page({
     // qqmapsdk = new QQMapWX({
     //   key: 'OUTBZ-V6R3O-A7AW2-SLGR3-IF27F-VOFTS'
     // });
-    isTokenFailure();
     const token = wx.getStorageSync(TOKEN);
-    if (token && token.length != 0) {
-      this.setData({
-        token: token
-      })
+    if (isTokenFailure()) {
+      // token有效
+      this.data.token = token;
+      this._getData()
+    } else {
+      // token无效
+      if (token && token.length != 0) {
+        // 当token存在只需要进行更新
+        // 刷新token
+        updateToken(token, this);
+      } else {
+      }
     }
-    // this.getLocalInfo()
-  },
-  onShow: function () {
-    this.getLocation();
   },
   onReachBottom: function () {
     if (this.data.category_page < this.data.total_pages) {
       this._getTopicLists()
     }
+  },
+  _getData(){
+    this._getBinsLists()
   },
   // 获取位置信息
   getLocation() {

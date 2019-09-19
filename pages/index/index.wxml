@@ -6,23 +6,32 @@
   <!-- 距离最近的回收箱 -->
   <nearby-bin class="container-inner nearby-bin" nearByInfo="{{nearBybininfo}}" />
   <!-- 我的奖励金 -->
-  <my-reward class="container-inner my-reward" />
+  <my-reward class="container-inner my-reward" 
+             bounty="{{orderMoney}}" deliveryTimes="{{orderCount}}" 
+             totalBounty="{{money}}"/>
   <!-- 授权登陆弹窗 -->
-  <view>
-    <w-dialog show="{{show}}" bindcancel="modalCancel" bindconfirm='modalConfirm' single='{{single}}'>
+  <w-dialog show="{{show}}">
+    <view slot="content" class='main-content'>
+      <view>您还未登录，登录后可获得完整体验</view>
+    </view>
+    <view slot="operation" class="main-footer">
+      <view wx:if='{{!canIUse}}' class='cancel-btn' bindtap='cancel'>请升级微信版本</view>
+      <button wx:else class='confirm-btn' open-type="getUserInfo" bindgetuserinfo="getUserInfo">授权登陆</button>
+    </view>
+  </w-dialog>
+  <!-- 绑定手机号弹窗 -->
+  <w-dialog show="{{showModal}}">
       <view slot="content" class='main-content'>
-        <view>您还未登录，登录后可获得完整体验</view>
+        <view class="content-row">
+          <input placeholder="请输入手机号" />
+          <view class="security">获取验证码</view>
+        </view>
+        <view class="content-row">
+          <input placeholder="输入验证码" />
+        </view>
       </view>
       <view slot="operation" class="main-footer">
-        <view wx:if='{{!canIUse}}' class='cancel-btn' bindtap='cancel'>请升级微信版本</view>
-        <button wx:else class='confirm-btn' open-type="getUserInfo" bindgetuserinfo="getUserInfo">授权登陆</button>
-      </view>
-  </w-dialog>
-  </view>
-  <!-- 绑定手机号弹窗 -->
-  <w-dialog show="{{showModal}}" bindcancel="modalCancel" bindconfirm='modalConfirm' single='{{single}}'>
-      <view scroll-y class='main-content'>
-        <input placeholder="请输入手机号"/>
+        <view class="bindPhone">绑定</view>
       </view>
   </w-dialog>
 </view>

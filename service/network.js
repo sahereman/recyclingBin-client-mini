@@ -4,6 +4,9 @@ import {
 
 // 数据请求封装
 export default function request(options) {
+  wx.showLoading({
+    title: '数据加载中ing',
+  })
   return new Promise((resolve,reject) => {
     wx: wx.request({
       url: baseURL + options.url,
@@ -14,7 +17,9 @@ export default function request(options) {
       responseType: options.responseType || 'text',
       success: resolve,
       fail: reject,
-      complete: function (res) { },
+      complete: res => {
+        wx.hideLoading()
+       },
     })
   })
 }

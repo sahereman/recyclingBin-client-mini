@@ -4,13 +4,21 @@ Component({
     styleIsolation: 'apply-shared'
   },
   properties: {
-
+    bounty:{
+      type: String,
+      value: "0"
+    },
+    deliveryTimes: {
+      type: Number,
+      value: 0
+    },
+    totalBounty: {
+      type: String,
+      value: 0
+    }
   },
   data: {
-    title: "我的奖励金",
-    bounty: "￥8.88",
-    deliveryTimes: "16次",
-    totalBounty: "￥32.00"
+    title: "我的奖励金"
   },
 
   /**

@@ -9,7 +9,12 @@
     "pages/binsLists/binsLists",
     "pages/deliver/deliver",
     "pages/newsDetail/newsDetail",
-    "pages/binsListsMode/binsListsMode"
+    "pages/binsListsMode/binsListsMode",
+    "pages/billPage/billPage",
+    "pages/walletPage/walletPage",
+    "pages/sharePage/sharePage",
+    "pages/aboutUs/aboutUs",
+    "pages/helpCenter/helpCenter"
   ],
   "permission": {
     "scope.userLocation": {

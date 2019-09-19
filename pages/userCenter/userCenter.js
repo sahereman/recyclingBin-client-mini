@@ -1,75 +1,74 @@
-import { TOKEN, VALIDTIME } from '../../common/const.js'
-import { sendVerification, bindPhone } from '../../service/api/user.js'
+import { TOKEN, USERINFO } from '../../common/const.js'
+import { userInfoShow, updateToken } from '../../service/api/user.js'
+import { sub, isTokenFailure } from '../../util/util.js'
 
 Page({
   data: {
-    userPhone: "",
-    verification_code: "",
-    verification_key: "",
     token: "",
-    isHashead: false
+    avatar_url: "../../assets/images/user/default_user.png",
+    userName: "工蚁森林",
+    money: "0",  //累计奖励金
+    orderCount: 0, //参与投递次数
+    orderMoney: '0', //当前奖励金
+    phone: '',
   },
   onLoad: function (options) {
     const token = wx.getStorageSync(TOKEN);
-    this.data.token = token;
-    if (token && token.length != 0) {
-      // 验证token是否过期
-      const validTime = wx.getStorageSync(VALIDTIME)
-      let timestamp = Date.parse(new Date()) / 1000;
-      // timestamp = timestamp / 1000;
-      if (timestamp >= validTime) {
-        // 如果超时则获取新的token
-        // updateToken(token)
+    const userInfo = wx.getStorageSync(USERINFO);
+    if (isTokenFailure()) {
+      // token有效
+      this.data.token = token;
+      if (userInfo && userInfo.length != 0) {
+        this.setData({
+          avatar_url: userInfo.avatar_url,
+          userName: userInfo.name,
+          money: userInfo.money,
+          orderCount: userInfo.total_client_order_count,
+          orderMoney: userInfo.total_client_order_money,
+          phone: sub(userInfo.phone, 3, 4),
+        })
+      } else {
+        this._getData()
       }
-      // 判断时间戳
     } else {
-      // app.login()
+      // token无效
+      if (token && token.length != 0) {
+        // 当token存在只需要进行更新
+        // 刷新token
+        updateToken(token, this);
+      } else {
+
+      }
     }
   },
-  // ===================网络请求
-  // 发送验证码
-  sendVerification(){
-    console.log(this.data.userPhone)
+  // ----------------网络请求------------
+  _getData(){
+    this._getUserInfo()
+  },
+  // 获取个人信息
+  _getUserInfo(){
     const requestData = {
-      token: this.data.token,
-      phone: this.data.userPhone
+      token: this.data.token
     }
-    sendVerification(requestData).then(res => {
-      console.log(res)
+    userInfoShow(requestData).then(res => {
       this.setData({
-        verification_key: res.data.verification_key
+        avatar_url: res.data.avatar_url,
+        userName:  res.data.name,
+        money:  res.data.money,
+        orderCount:  res.data.total_client_order_count,
+        orderMoney:  res.data.total_client_order_money,
+        phone: sub(res.data.phone,3,4),
+        realAuthenticated: res.data.real_authenticated_at
+      })
+      wx.setStorage({
+        key: USERINFO,
+        data: res.data
       })
     }).catch(res => {
       console.log(res)
     })
   },
-  // 绑定手机号
-  bindUserPhone(){
-    const requestData = {
-      token: this.data.token,
-      phone: this.data.userPhone,
-      verification_key: this.data.verification_key,
-      verification_code: this.data.verification_code
-    }
-    bindPhone(requestData).then(res => {
-      console.log(res)
-    }).catch(res => {
-      console.log(res)
-    })
-  },
-  // =====================事件操作
-  // 获取手机号
-  getPhoneNum (e){
-    this.setData({
-      userPhone: e.detail.value
-    })
-  },
-  // 获取短信验证码
-  getPhoneCode(e){
-    this.setData({
-      verification_code: e.detail.value
-    })
-  },
+  // ---------------事件监听及操作----------------
   // 跳转到订单列表页
   showOrderList(){
     wx.navigateTo({

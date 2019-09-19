@@ -1,0 +1,54 @@
+<view class="container">
+  <!-- 头部信息 -->
+  <view class="header">
+    <image class="header-bg" src="../../assets/images/user/user_bg.png" />
+    <view class="header-content container-inner">
+      <view class="header-top">
+        <view class="header-title">当前奖励金</view>
+        <view class="header-count">￥{{orderMoney}}</view>
+      </view>
+      <view class="header-bottom">
+        <view class="bootom-item">
+          <view class="header-title">当前奖励金</view>
+          <view class="header-count">{{orderCount}}次</view>
+        </view>
+        <view class="bootom-item">
+          <view class="header-title">累计奖励金</view>
+          <view class="header-count">￥{{money}}</view>
+        </view>
+      </view>
+    </view>
+  </view>
+  <!-- 账单列表 -->
+  <view class="container-inner bill-content">
+    <view class="bill-title">
+      <view class="bill-title-item">全部奖励金类型
+        <image src="../../assets/images/user/arrow_down.png" mode="widthFix" />
+      </view>
+      <view class="bill-title-item">全部月份
+        <image src="../../assets/images/user/arrow_down.png" mode="widthFix" />
+      </view>
+    </view>
+    <view class="bill-lists">
+      <view wx:if="{{billArr.length}}">
+        <block wx:for="{{billArr}}" wx:key="{{item.id}}">
+          <view class="bill-list border-circle">
+            <view class="bill-list-date">{{item.created_at}}</view>
+            <view class="bill-list-type">
+              <view class="list-type-left">
+                <view class="list-type">{{item.type_text}}</view>
+                <view class="list-description">{{item.description}}</view>
+              </view>
+              <view class="list-type-right">
+                <image src="../../assets/images/deliver/dollar_icon.png" />
+                <text>{{item.operator}}{{item.number}}</text>
+              </view>
+            </view>
+          </view>
+        </block>
+        <view class="last-tips" wx:if="{{isLast}}">到底啦，没有更多内容喽~~</view>
+      </view>
+      <view wx:else class="bill-empty">还没有账单哦,快去投递吧~~</view>
+    </view>
+  </view>
+</view>

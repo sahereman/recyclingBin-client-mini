@@ -1,9 +1,8 @@
-import { TOKEN, LAT, LNG, VALIDTIME } from '../../common/const.js'
-import { getToken, updateToken} from '../../service/api/user.js'
+import { TOKEN, NEARBYBIN, USERINFO, VALIDTIME } from '../../common/const.js'
+import { getToken, updateToken, userInfoShow} from '../../service/api/user.js'
 import {getBanners} from '../../service/api/banner.js'
-import { isTokenFailure } from '../../util/util.js'
 import { getNearbyBin, getBinLists } from '../../service/api/recyclingBins.js'
-import { examineToken } from '../../util/util.js'
+import { examineToken, isTokenFailure } from '../../util/util.js'
 
 //获取应用实例
 const app = getApp()
@@ -15,28 +14,46 @@ Page({
     token:"",
     lat: null,
     lng: null,
-    showModal: false, // 显示modal弹窗
+    showModal: false, // 显示绑定手机号弹窗modal弹窗
     single: false, // false 只显示一个按钮，如果想显示两个改为true即可
-    nearBybininfo:{}
+    nearBybininfo:{},
+    money: "0",  //累计奖励金
+    orderCount: 0, //投递次数
+    orderMoney: "0",  //当前奖励金
+    inphone: null, // 用户输入的手机号
   },
   onLoad: function () {
-    // 判断token，刷新token
-    isTokenFailure();
     const token = wx.getStorageSync(TOKEN);
-    if (token && token.length != 0) {
-      this.setData({ 
-        show: false,
-        token: token
+    if (isTokenFailure()) {
+      // token有效
+      this.data.token = token;
+      this.setData({
+        show: false
       })
+      this._getData()
+    }else {
+      // token无效
+      if (token && token.length != 0) {
+        // 当token存在只需要进行更新
+        this.setData({
+          show: false
+        })
+        // 刷新token
+        updateToken(token, this);
+      }else {
+        // token不存在需用户重新登录
+        app.login()
+        this.setData({
+          show: true
+        })
+      }
     }
-  },
-  onShow: function () {
-    this._getData();
   },
   // ------------------网络请求相关方法----------
   _getData(){
     this._getBanners()
     this.getLocation()
+    this._getUserInfo()
   },
   // 获取token
   _getToken(requestData){
@@ -80,6 +97,11 @@ Page({
       lng: app.globalData.lng
     }
     getNearbyBin(requestData).then(res => {
+      // wx.setStorage(NEARBYBIN, res.data)
+      wx.setStorage({
+        key: NEARBYBIN,
+        data: res.data
+      })
       this.setData({
         nearBybininfo: res.data
       })
@@ -124,14 +146,57 @@ Page({
       }
     })
   },
-  // 点击取消按钮的回调函数
-  modalCancel(e) {
-    // 这里面处理点击取消按钮业务逻辑
-    console.log('点击了取消')
+  // 获取个人信息
+  _getUserInfo() {
+    const requestData = {
+      token: this.data.token
+    }
+    userInfoShow(requestData).then(res => {
+      // 将个人信息存入缓存在个人中心进行调用
+      this.setData({
+        money: res.data.money,
+        orderCount: res.data.total_client_order_count,
+        orderMoney: res.data.total_client_order_money
+      })
+      if(!res.data.phone) {
+        this.setData({
+          // showModal: true
+        })
+      }else {
+        this.setData({
+          showModal: false
+        })
+      }
+      wx.setStorage({
+        key: USERINFO,
+        data: res.data
+      })
+    }).catch(res => {
+      console.log(res)
+    })
   },
-  // 点击确定按钮的回调函数
-  modalConfirm(e) {
-    // 这里面处理点击确定按钮业务逻辑
-    console.log('点击了确定')
+  // 获取验证码
+  _sendVerification(){
+    const requestData = {
+      token: this.data.token,
+      phone: this.data.inphone
+    }
+    sendVerification(requestData).then(res => {
+      console.log(res);
+    }).catch(res => {
+      console.log(res);
+    })
+  },
+  // 绑定手机号
+  _bindPhone(){
+    const requestData = {
+      token: this.data.token,
+      phone: this.data.phone
+    }
+    bindPhone(requestData).then(res => {
+      console.log(res);
+    }).catch(res => {
+      console.log(res);
+    })
   }
 })

@@ -7,7 +7,6 @@
 .content-bg image {
   width: 100%;
   height: 100%;
-  margin-top: -10rpx;
 }
 .user-content {
   position: absolute;
@@ -37,13 +36,21 @@
   margin-bottom: 25rpx;
   font-size: 35rpx;
 }
+.user-info-name text {
+  margin-right: 10rpx;
+}
 .user-info-phone {
-  font-size: 19rpx;
+  font-size: 24rpx;
 }
 .user-info-head image {
   width: 100%;
   height: 100%;
   border-radius: 50%;
+}
+.user-info-name navigator {
+  display: inline-block;
+  width: 25rpx;
+  height: 25rpx;
 }
 .user-info-name image {
   width: 25rpx;
@@ -59,11 +66,51 @@
   background: #fff;
   margin: 28rpx auto;
 }
+.reward-head {
+  display: flex;
+  justify-content: space-between;
+  margin: 30rpx 24rpx;
+  margin-bottom: 20rpx;
+}
+.reward-head text {
+  font-size: 30rpx;
+  color: #333;
+  font-weight: bold;
+}
+.more-detail {
+  color: #999;
+  font-size: 28rpx;
+}
+.more-detail-hover {
+  color: #5adb9e;
+}
+.reward-content {
+  display: flex;
+}
+.reward-content-item {
+  flex: 1;
+  text-align: center;
+  border-right: 1px dashed #e5e5e5;
+}
+.reward-content-item:last-of-type {
+  border: 0;
+}
+.content-item-title {
+  margin-bottom: 25rpx;
+  font-size: 28rpx;
+  color: #333;
+}
+.content-item-value {
+  font-size: 30rpx;
+  color: #5adb9e;
+  font-weight: bold;
+}
+
 /* 操作区 */
 .operating-item {
   display: flex;
   justify-content: space-between;
-  padding: 0 25rpx;
+  /* padding: 0 25rpx; */
   height: 90rpx;
   background: #fff;
   margin-bottom: 8rpx;
@@ -73,9 +120,30 @@
   color: #666;
   font-weight: bold;
 }
+.operating-item navigator {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  padding: 0 25rpx;
+  justify-content: space-between;
+}
+.operating-click {
+  background: transparent;
+  color: #5adb9e;
+}
+.item-left {
+  display: flex;
+}
 .item-left image{
-  width: 35rpx;
-  height: 35rpx;
+  width: 70rpx;
+  height: 70rpx;
+  margin: auto;
+}
+.item-left .help-icon,
+.item-left .about-icon {
+  padding: 0 10rpx;
+  width: 50rpx;
+  height: 50rpx;
 }
 .item-right image {
   width: 11rpx;
