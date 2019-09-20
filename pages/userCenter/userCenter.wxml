@@ -12,7 +12,7 @@
         <view class="user-info-edit">
           <view class="user-info-name">
             <text>{{userName}}</text>
-            <navigator url="../../pages/billPage/billPage">
+            <navigator url="../../pages/userInfo/userInfo" hover-class="more-detail-hover">
               <image src="../../assets/images/user/edit.png" />
             </navigator>
           </view>
@@ -46,7 +46,7 @@
     </view>
     <!-- 链接区域 -->
     <view class="operating-space">
-      <view class="operating-item border-circle">
+      <view class="operating-item">
         <navigator url="/pages/order/order" open-type="switchTab" hover-class="operating-click">
           <view class="item-left">
             <image src="../../assets/images/user/my_order.png"/>
@@ -57,7 +57,7 @@
           </view>
         </navigator>
       </view>
-      <view class="operating-item border-circle">
+      <view class="operating-item">
         <navigator url="../../pages/walletPage/walletPage" hover-class="operating-click">
           <view class="item-left">
             <image src="../../assets/images/user/wallet.png"/>
@@ -68,7 +68,7 @@
           </view>
         </navigator>
       </view>
-      <view class="operating-item border-circle">
+      <view class="operating-item">
         <navigator url="../../pages/sharePage/sharePage" hover-class="operating-click">
           <view class="item-left">
             <image src="../../assets/images/user/share.png"/>
@@ -79,7 +79,7 @@
           </view>
         </navigator>
       </view>
-      <view class="operating-item border-circle">
+      <view class="operating-item">
         <navigator url="../../pages/helpCenter/helpCenter" hover-class="operating-click">
           <view class="item-left">
             <image class="help-icon" src="../../assets/images/user/help.png"/>
@@ -90,7 +90,7 @@
           </view>
         </navigator>
       </view>
-      <view class="operating-item border-circle">
+      <view class="operating-item">
         <navigator url="../../pages/aboutUs/aboutUs" hover-class="operating-click">
           <view class="item-left">
             <image class="about-icon" src="../../assets/images/user/about.png"/>

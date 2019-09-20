@@ -4,10 +4,10 @@ import request from '../network.js'
 // 获取订单列表
 export function getTopicCategories(requestData) {
   return request({
-    url: 'orders',
+    url: 'orders?page=' + requestData.page,
     method: "GET",
     header: {
-      Authorization: requestData
+      Authorization: requestData.token
     }
   })
 } 

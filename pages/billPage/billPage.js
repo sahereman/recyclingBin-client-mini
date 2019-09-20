@@ -12,6 +12,7 @@ Page({
     currentPage: 1,  // 当前页
     totalPages: 0,  // 总页数
     isLast: false,  //是否有更多数据
+    token:''
   },
 
   onLoad: function (options) {
@@ -59,7 +60,6 @@ Page({
       page: this.data.currentPage
     }
     getBillList(requestData).then(res => {
-      console.log(res)
       const list = res.data.data;
       let page_num;
       this.data.billArrData.push(...list);

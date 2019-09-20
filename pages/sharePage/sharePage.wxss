@@ -1,1 +1,7 @@
-/* pages/sharePage/sharePage.wxss */
+.share-content {
+  width: 652rpx;
+  height: 854rpx;
+  margin: auto;
+  border-radius: 28rpx;
+  background: #fff;
+}

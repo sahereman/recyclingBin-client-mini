@@ -49,8 +49,10 @@
 }
 .user-info-name navigator {
   display: inline-block;
-  width: 25rpx;
-  height: 25rpx;
+  width: 40rpx;
+  height: 40rpx;
+  text-align: center;
+  line-height: 40rpx;
 }
 .user-info-name image {
   width: 25rpx;
@@ -110,7 +112,6 @@
 .operating-item {
   display: flex;
   justify-content: space-between;
-  /* padding: 0 25rpx; */
   height: 90rpx;
   background: #fff;
   margin-bottom: 8rpx;
@@ -119,6 +120,7 @@
   font-size: 26rpx;
   color: #666;
   font-weight: bold;
+  border-radius: 6rpx;
 }
 .operating-item navigator {
   width: 100%;

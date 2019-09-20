@@ -1,8 +1,4 @@
-//app.js
-// 封装的数据请求方法
-import request from '/service/network.js'
 import { isTokenFailure } from '/util/util.js'
-import { getToken } from '/service/api/user.js'
 import { TOKEN } from '/common/const.js'
 
 App({
@@ -20,9 +16,10 @@ App({
     if (!token && token.length == 0) {
       // 登陆
       this.login();
-    }else {
-      isTokenFailure();
     }
+    // else {
+    //   isTokenFailure();
+    // }
   },
   // 登录
   login(){

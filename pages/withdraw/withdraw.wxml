@@ -1,0 +1,42 @@
+<!--提现-->
+<view class="container">
+  <view class="withdraw-content container-inner withdraw">
+    <form bindsubmit="formSubmit">
+      <view class="form-area">
+        <view>
+          <text>户名</text>
+          <input name="name" placeholder-class="placeholder-class" placeholder="请输入收款人户名" />
+          <image class="name-image" src="../../assets/images/user/mine.png" />
+        </view>
+        <view>
+          <text>账号</text>
+          <input name="account" 
+                 type="idcard" 
+                 placeholder-class="placeholder-class" 
+                 placeholder="请输入收款人账号" 
+          />
+          <image wx:if="{{image_show}}" src="../../assets/images/user/right_finish.png" />
+          <image class="bankcard-image" src="../../assets/images/user/bankcard-icon.png" />
+        </view>
+        <view>
+          <text>银行</text>
+          <input name="bank" hidden />
+          <image class="unionpay-image" src="../../assets/images/user/unionpay.png" />
+          <image class="arrow-image" src="../../assets/images/user/arrow.png" />
+        </view>
+        <view>
+          <image class="money-symbol" src="../../assets/images/user/dollar.png" />
+          <input name="money" 
+                 type="digit" 
+                 class="money-num" 
+                 placeholder="可提现到卡{{money}}元" 
+                 placeholder-class="placeholder-class" 
+                 value="{{total_money}}"
+          />
+          <text class="get-total" bindtap="getTotalMoney">全部</text>
+        </view>
+      </view>
+      <button class="sub-btn" formType="submit">确认提现</button>
+    </form>
+  </view>
+</view>

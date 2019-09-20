@@ -1,0 +1,25 @@
+<view class="container">
+  <view class="container-inner border-circle userInfo">
+    <view>
+      <text>头像</text>
+      <image class="avatar-image" src="{{avatar_url}}" />
+    </view>
+    <view>
+      <text>昵称</text>
+      <text>{{userName}}</text>
+    </view>
+    <view bindtap="realAuthentication">
+      <text>实名认证</text>
+      <text wx:if="{{real_authenticated_at}}">{{real_name}}</text>
+      <image class="arrow-image" wx:else src="../../assets/images/user/arrow.png" />
+    </view>
+    <view>
+      <text>手机号</text>
+      <text>{{phone}}</text>
+    </view>
+    <view>
+      <text>微信</text>
+      <text>已授权</text>
+    </view>
+  </view>
+</view>

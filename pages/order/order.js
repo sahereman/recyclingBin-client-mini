@@ -1,16 +1,38 @@
-import { TOKEN, VALIDTIME } from '../../common/const.js'
+import { TOKEN } from '../../common/const.js'
 import { getTopicCategories } from '../../service/api/order.js'
+import { updateToken } from '../../service/api/user.js'
 import { isTokenFailure } from '../../util/util.js'
 
 Page({
   data: {
-    orderLists:[]
+    orderLists:[],
+    orderListsData: [],  //临时存储数据
+    currentPage: 1,  // 当前页
+    totalPages: 0,  // 总页数
+    isLast: false,  //是否有更多数据
+    token: ''
   },
   onLoad: function (options) {
-    // 判断token，刷新token
-    isTokenFailure();
-    // 发送网络请求
-    this._getData();
+    const token = wx.getStorageSync(TOKEN);
+    if (isTokenFailure()) {
+      // token有效
+      this.data.token = token;
+      this._getData()
+    } else {
+      // token无效
+      if (token && token.length != 0) {
+        updateToken(token, this);
+      } else {}
+    }
+  },
+  onReachBottom: function () {
+    if (this.data.currentPage < this.data.totalPages) {
+      this._getTopicCategories()
+    } else {
+      this.setData({
+        isLast: true
+      })
+    }
   },
   // 网络请求
   _getData(){
@@ -18,17 +40,30 @@ Page({
   },
   // 获取订单列表
   _getTopicCategories(){
-    const token = wx.getStorageSync(TOKEN);
-    getTopicCategories(token).then(res => {
-      console.log(res);
-      if (res.data.data ||res.data.data.length>0){
-        this.setData({
-          hasData: true,
-          orderLists: res.data.data
-        })
+    const requestData = {
+      token: this.data.token,
+      page: this.data.currentPage
+    }
+    getTopicCategories(requestData).then(res => {
+      const list = res.data.data;
+      let page_num;
+      this.data.orderListsData.push(...list);
+      if (res.data.meta.pagination.links.next) {
+        let splitArr = res.data.meta.pagination.links.next.split("=")
+        page_num = splitArr[splitArr.length - 1]
+      } else {
+        page_num = 1;
       }
+      this.setData({
+        orderLists: this.data.orderListsData,
+        currentPage: page_num,
+        totalPages: res.data.meta.pagination.total_pages
+      })
     }).catch(res => {
       console.log(res)
+      this.setData({
+        orderLists: []
+      })
     })
   }
 })

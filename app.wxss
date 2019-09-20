@@ -1,8 +1,8 @@
 /* weui组件样式 */
 /* @import './components/weui-miniprogram/weui-wxss/dist/style/weui.wxss'; */
-
 page {
   height: 100%;
+  font-size: 14px;
 }
 .container {
   position: relative;
@@ -25,4 +25,8 @@ page {
   width: 100%;
   text-align: center;
   margin: 20rpx auto;
+}
+.data-empty {
+  text-align: center;
+  margin: 50% auto;
 }

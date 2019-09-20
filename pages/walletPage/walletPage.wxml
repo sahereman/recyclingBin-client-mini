@@ -1,2 +1,25 @@
-<!--pages/walletPage/walletPage.wxml-->
-<text>pages/walletPage/walletPage.wxml</text>
+<view class="container">
+  <view class="header">
+    <image class="header-bg" src="../../assets/images/user/user_bg.png" />
+    <view class="header-content container-inner">
+      <view class="money-title">当前奖励金</view>
+      <view class="money-content">
+        <text class="money-symbol">￥</text>
+        <text class="money-num">{{money}}</text>
+      </view>
+    </view>
+  </view>
+  <view class="container-inner wallet">
+    <view class="operating-item">
+      <navigator url="../../pages/withdraw/withdraw" hover-class="operating-click">
+        <view class="item-left">
+          <image src="../../assets/images/user/deposit.png"/>
+          <text>提现</text>
+        </view>
+        <view class="item-right">
+          <image src="../../assets/images/user/arrow.png"/>
+        </view>
+      </navigator>
+    </view>
+  </view>
+</view>

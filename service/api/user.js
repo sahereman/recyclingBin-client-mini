@@ -116,7 +116,7 @@ export function realAuthentication(requestData) {
     url: 'users/real_authentication',
     method: "PUT",
     header: {
-      Authorization: requestData
+      Authorization: requestData.token
     },
     data: {
       real_name: requestData.real_name,

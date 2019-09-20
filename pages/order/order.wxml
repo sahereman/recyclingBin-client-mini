@@ -1,9 +1,6 @@
 <view class="container">
   <view class="orderLists container-inner">
-    <view wx:if="{{!orderLists.length}}">
-      暂无订单列表
-    </view>
-    <view wx:else>
+    <view wx:if="{{orderLists.length}}">
       <block wx:for="{{orderLists}}" wx:key="{{index}}">
         <view class="order-list">
           <view class="list-time-status">
@@ -29,6 +26,8 @@
           </view>
         </view>
       </block>
+      <view class="last-tips" wx:if="{{isLast}}">到底啦，没有更多内容喽~~</view>
     </view>
+    <view wx:else  class="data-empty">还没有订单哦,快去投递吧~~</view>
   </view>
 </view>

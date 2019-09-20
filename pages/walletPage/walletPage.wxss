@@ -1,1 +1,74 @@
-/* pages/walletPage/walletPage.wxss */
+.header {
+  position: relative;
+  margin-bottom: 18rpx;
+  width: 100%;
+  height: 180rpx
+}
+.header-bg {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+}
+.header-content {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  color: #fff;
+}
+.money-title {
+  margin: 30rpx 0;
+  color: #d9f3e6;
+  font-weight: bold;
+}
+.money-symbol {
+  font-size: 16px;
+}
+.money-num {
+  font-size: 24px;
+  font-weight: bold;
+}
+/* 操作区 */
+.operating-item {
+  display: flex;
+  justify-content: space-between;
+  height: 90rpx;
+  background: #fff;
+  margin-bottom: 8rpx;
+  box-shadow:0px 1px 24px 0px rgba(240,240,240,0.75);
+  line-height: 90rpx;
+  color: #666;
+  font-weight: bold;
+  border-radius: 6rpx;
+}
+.operating-item navigator {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  padding: 0 25rpx;
+  justify-content: space-between;
+}
+.operating-click {
+  background: transparent;
+  color: #5adb9e;
+}
+.item-left {
+  display: flex;
+}
+.item-left image{
+  width: 70rpx;
+  height: 70rpx;
+  margin: auto;
+}
+.item-left .help-icon,
+.item-left .about-icon {
+  padding: 0 10rpx;
+  width: 50rpx;
+  height: 50rpx;
+}
+.item-right image {
+  width: 11rpx;
+  height: 23rpx;
+}

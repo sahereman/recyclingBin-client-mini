@@ -1,7 +1,4 @@
 <view class="category-lists">
-<!-- 正式扫码方式 -->
-  <!-- <view class="category-list-item" bindtap="getScanCode"> -->
-  <!-- 开发测试跳转 -->
   <view class="category-list-item" bindtap="getScanCode">
     <image src="../../../../assets/images/home_nav/sweepCode.png" mode='widthFix'/>
     <text>扫码回收</text>
@@ -14,6 +11,4 @@
     <image src="../../../../assets/images/home_nav/deliveryGuide.png" mode='widthFix'/>
     <text>投递指南</text>
   </view>
-  <!-- <navigator class="category-list-item" url="../categroies/categroies">回收分类</navigator>
-  <navigator class="category-list-item" url="../deliveryGuide/deliveryGuide">投递指南</navigator> -->
 </view>

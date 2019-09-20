@@ -1,2 +1,14 @@
-<!--pages/sharePage/sharePage.wxml-->
-<text>pages/sharePage/sharePage.wxml</text>
+<!-- 用于将页面生成图片转发或者保存的画布 -->
+<canvas canvas-id='share' style='width:375px;height:580px'  hidden='{{canvasHidden}}'></canvas>
+<view class="container">
+  <view class="share-content">
+    <view>
+      <image src="{{avatar_url}}" />
+      <view>
+        <text>{{userName}}</text>
+        <image src="../../assets/images/user/grade.png" />
+      </view>
+    </view>
+    <image src="../../assets/images/user/qr-code.jpg" />
+  </view>
+</view>

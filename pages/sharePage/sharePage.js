@@ -1,66 +1,64 @@
-// pages/sharePage/sharePage.js
+import { TOKEN, USERINFO } from '../../common/const.js'
+import { userInfoShow, updateToken } from '../../service/api/user.js'
+import { isTokenFailure } from '../../util/util.js'
+
 Page({
-
-  /**
-   * 页面的初始数据
-   */
   data: {
-
+    canvasHidden: true,
+    token: "",
+    avatar_url: "../../assets/images/user/default_user.png",
+    userName: "工蚁森林",
+    money: '0'
   },
-
-  /**
-   * 生命周期函数--监听页面加载
-   */
   onLoad: function (options) {
+    const token = wx.getStorageSync(TOKEN);
+    const userInfo = wx.getStorageSync(USERINFO);
+    if (isTokenFailure()) {
+      this.data.token = token;
+      if (userInfo && userInfo.length != 0) {
+        this.setData({
+          avatar_url: userInfo.avatar_url,
+          userName: userInfo.name,
+          money: userInfo.money,
+        })
+      } else {
+        this._getData()
+      }
+    } else {
+      if (token && token.length != 0) {
+        updateToken(token, this);
+      } else {
 
+      }
+    }
   },
-
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-
+  onShareAppMessage: function (options) {
+    return {
+      title: '分享测试',
+      path: '/pages/index/index',
+    }
   },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
-
+  // ----------------网络请求------------
+  _getData() {
+    this._getUserInfo()
   },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-
+  // 获取个人信息
+  _getUserInfo() {
+    const requestData = {
+      token: this.data.token
+    }
+    userInfoShow(requestData).then(res => {
+      this.setData({
+        avatar_url: res.data.avatar_url,
+        userName: res.data.name,
+        money: res.data.money,
+      })
+      wx.setStorage({
+        key: USERINFO,
+        data: res.data
+      })
+    }).catch(res => {
+      console.log(res)
+    })
   }
 })
