@@ -29,3 +29,39 @@ export function getBinLists(requestData) {
     }
   })
 } 
+// 扫码开箱
+export function scanSuccess(requestData) {
+  return request({
+    url: 'bins/qrLogin',
+    method: "PUT",
+    header: {
+      Authorization: requestData.token
+    },
+    data: {
+      token: requestData.resultToken,
+    }
+  })
+}
+
+// 判读投递是否成功
+export function checkscanSuccess(requestData) {
+  return request({
+    url: 'bins/orderCheck/' + requestData.token_id,
+    method: "GET",
+    header: {
+      Authorization: requestData.token
+    },
+    showloading:1
+  })
+}
+
+// 获取订单详情
+export function getOrderDetail(requestData) {
+  return request({
+    url: 'orders/' + requestData.order_id,
+    method: "GET",
+    header: {
+      Authorization: requestData.token
+    }
+  })
+}

@@ -1,7 +1,10 @@
 // pages/deliver/childCons/deliver-complete/deliver-complete.js
 Component({
   properties: {
-
+    finishInfo:{
+      type:Object,
+      value:{}
+    }
   },
   data: {
     totalPrice: "8.88",
@@ -17,6 +20,6 @@ Component({
    * 组件的方法列表
    */
   methods: {
-
+    
   }
 })

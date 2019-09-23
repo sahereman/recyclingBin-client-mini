@@ -2,7 +2,7 @@
   <!-- 轮播图 -->
   <w-swiper class="container-inner swiper-box border-circle" images="{{ banners }}" />
   <!-- 扫码导航 -->
-  <category-nav class="container-inner" />
+  <category-nav class="container-inner" comToken="{{token}}" />
   <!-- 距离最近的回收箱 -->
   <nearby-bin class="container-inner nearby-bin" nearByInfo="{{nearBybininfo}}" />
   <!-- 我的奖励金 -->

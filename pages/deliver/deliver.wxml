@@ -1,5 +1,5 @@
 <!-- 判断是否投递完成 -->
 <view>
   <deliver-underway class="container-inner" wx:if="{{!isComplete}}" />
-  <deliver-complete class="container-inner" wx:else />
+  <deliver-complete class="container-inner" finishInfo="{{userItems}}" wx:else />
 </view>
