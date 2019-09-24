@@ -1,6 +1,10 @@
 // pages/deliver/deliver.js
 import { checkscanSuccess, getOrderDetail } from '../../service/api/recyclingBins.js'
 import { TOKEN } from '../../common/const.js'
+import { isTokenFailure } from '../../util/util.js'
+import { updateToken } from '../../service/api/user.js'
+//获取应用实例
+const app = getApp()
 Page({
   data: {
     isComplete: false,
@@ -27,20 +31,32 @@ Page({
     var that = this;
     that.data.timer = setInterval(function () {
       const token = wx.getStorageSync(TOKEN);
+      if (isTokenFailure()) {
+        // token有效
+        that.data.token = token;
+      } else {
+        // token无效
+        if (token && token.length != 0) {
+          // 当token存在只需要进行更新
+          // 刷新token
+          updateToken(token, that);
+        } else {
+          // token不存在需用户重新登录
+          app.login()
+        }
+      }
       const requestData = {
         token: token,
         token_id: that.data.token_id 
       }
       checkscanSuccess(requestData).then(res => {
         if (res.data.related_id){
-          console.log("成功了");
           clearInterval(that.data.timer); 
           var orderParams = {
             token: token,
             order_id:res.data.related_id
           }
           getOrderDetail(orderParams).then(response => {
-            console.log(response);
             if (response.statusCode == 200){
               
               that.setData({

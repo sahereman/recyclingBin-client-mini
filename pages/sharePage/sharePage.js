@@ -8,7 +8,8 @@ Page({
     token: "",
     avatar_url: "../../assets/images/user/default_user.png",
     userName: "工蚁森林",
-    money: '0'
+    money: '0',
+    amount:'32.00'
   },
   onLoad: function (options) {
     const token = wx.getStorageSync(TOKEN);
@@ -36,6 +37,7 @@ Page({
     return {
       title: '分享测试',
       path: '/pages/index/index',
+      imageUrl:'../../assets/images/user/_ad.jpg'
     }
   },
   // ----------------网络请求------------

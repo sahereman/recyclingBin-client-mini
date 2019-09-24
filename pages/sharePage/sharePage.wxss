@@ -1,7 +1,136 @@
 .share-content {
   width: 652rpx;
-  height: 854rpx;
+  height:993rpx;
   margin: auto;
-  border-radius: 28rpx;
-  background: #fff;
 }
+.share-content .share_con{
+  background: #fff;
+   border-radius: 28rpx;
+   padding:68rpx 57rpx 0 57rpx;
+  box-sizing:border-box;
+}
+.share-content .userinfo{
+  height:85rpx;
+  margin-bottom:37rpx;
+}
+.share-content .userinfo .head_img{
+  height:85rpx;
+  width:85rpx;
+  border-radius:50%;
+  box-shadow:0px 5rpx 5rpx 0px rgba(0, 0, 0, 0.5);
+  float:left;
+}
+.share-content .userinfo .wordinfo{
+  float:left;
+  margin-left:25rpx;
+}
+.share-content .userinfo ._name{
+  height:52rpx;
+  line-height:52rpx;
+  font-size:28rpx;
+  color:#666;
+}
+.share-content .userinfo ._sign{
+  height:23rpx;
+  width:99rpx;
+}
+.share-content .mymoney{
+  height:175rpx;
+}
+.share-content .mymoney ._sign{
+  width:176rpx;
+  height:175rpx;
+  float:left;
+  border-radius:8rpx;
+  overflow:hidden;
+  box-shadow:0px 5rpx 5rpx 0px rgba(0, 0, 0, 0.1);
+}
+.share-content .mymoney ._sign ._sign_img{
+  width:100%;
+  height:131rpx;
+}
+.share-content .mymoney ._sign .sign_name{
+  text-align:center;
+  color:#74e1ad;
+  font-size:20rpx;
+  height:46rpx;
+}
+.share-content .mymoney .amount_con{
+  float:left;
+  padding-left:25rpx;
+}
+.mymoney .amount_con ._my{
+  line-height:109rpx;
+  color:#333;
+  font-size:28rpx;
+}
+.mymoney .amount_con ._amount{
+  color:#666;
+  font-size:24rpx;
+  line-height:30rpx;
+}
+.mymoney .amount_con ._amount text{
+  color:#59db9d;
+  font-size:40rpx;
+  font-weight:bold;
+}
+.code_part{
+  padding-top:61rpx;
+  text-align:center;
+}
+.code_part image{
+  width:330rpx;
+  height:330rpx;
+}
+.code_part view{
+  font-size:24rpx;
+  line-height:98rpx;
+  color:#999;
+}
+.shareBtnPart{
+  padding-top:53rpx;
+  text-align:center;
+}
+.shareBtnPart button{
+  background:#59db9d;
+  color:#fff;
+  width:279rpx;
+  height:88rpx;
+  text-align:center;
+  line-height:88rpx;
+  border-radius:50rpx;
+  border:0;
+  outline: none;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

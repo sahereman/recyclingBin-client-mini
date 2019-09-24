@@ -21,7 +21,21 @@ Page({
     }
   },
   onShow: function () {
-    this._getData();
+    var that = this;
+    const eventChannel = this.getOpenerEventChannel()
+    // 监听acceptDataFromOpenerPage事件，获取上一页面通过eventChannel传送到当前页面的数据
+    eventChannel.on('acceptDataFromOpenerPage', function (data) {
+      console.log(data);
+      if (data.data.lat && data.data.lng){
+        that.setData({
+          lat: data.data.lat,
+          lng: data.data.lng
+        })
+        that._getNearbyBin();
+      }else{
+        that._getData();
+      }
+    })
   },
   // ------------------网络请求-------------------
   _getData() {
@@ -63,7 +77,7 @@ Page({
   },
   // -----------------事件监听及操作---------------------
   changeShowModule(){
-    wx.navigateTo({
+    wx.redirectTo({
       url: '../binsListsMode/binsListsMode',
     })
   }

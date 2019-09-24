@@ -1,6 +1,6 @@
 <!-- 用于将页面生成图片转发或者保存的画布 -->
-<canvas canvas-id='share' style='width:375px;height:580px'  hidden='{{canvasHidden}}'></canvas>
-<view class="container">
+<!-- <canvas canvas-id='share' style='width:375px;height:580px'  hidden='{{canvasHidden}}'></canvas> -->
+<!-- <view class="container">
   <view class="share-content">
     <view>
       <image src="{{avatar_url}}" />
@@ -10,5 +10,36 @@
       </view>
     </view>
     <image src="../../assets/images/user/qr-code.jpg" />
+  </view>
+</view> -->
+<view class="container">
+  <view class="share-content">
+    <view class="share_con">
+      <view class="userinfo">
+        <image class="head_img" src="{{avatar_url}}" />
+        <view class="wordinfo">
+          <view class="_name">{{userName}}</view>
+          <image class="_sign" src="../../assets/images/user/grade.png" />
+        </view>
+      </view>
+      <view class="mymoney">
+        <view class="_sign">
+          <image class="_sign_img" src="../../assets/images/user/_ad.jpg" />
+          <view class="sign_name">工蚁回收</view> >
+        </view>
+
+        <view class="amount_con">
+          <view class="_my">我的奖励金</view>
+          <view class="_amount">共获得奖励金 <text style='font-size:28rpx;font-weight:500;'>￥</text><text>{{amount}}</text></view>
+        </view>
+      </view>
+      <view class="code_part">
+          <image src="../../assets/images/user/qr-code.jpg" />
+          <view>长按识别微信太阳码</view>
+        </view>
+    </view>
+    <view class="shareBtnPart">
+      <button open-type='share'>分享微信</button>
+    </view>
   </view>
 </view>

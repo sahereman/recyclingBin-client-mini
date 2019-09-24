@@ -1,6 +1,9 @@
 import { scanSuccess } from '../../../../service/api/recyclingBins.js'
 import { TOKEN } from '../../../../common/const.js'
-
+import { isTokenFailure } from '../../../../util/util.js'
+import { updateToken } from '../../../../service/api/user.js'
+//获取应用实例
+const app = getApp()
 Component({
   properties: {
     comToken: {
@@ -18,20 +21,30 @@ Component({
       wx.scanCode({
         onlyFromCamera: true,
         success(res) {
-          console.log(res.result);
           if (res.result){
             const token = wx.getStorageSync(TOKEN);
+            if (isTokenFailure()) {
+              // token有效
+              that.data.token = token;
+            } else {
+              // token无效
+              if (token && token.length != 0) {
+                // 当token存在只需要进行更新
+                // 刷新token
+                updateToken(token, that);
+              } else {
+                // token不存在需用户重新登录
+                app.login()
+              }
+            }
             const requestData = {
               token: token,
               resultToken: res.result.split("?")[1].split('=')[1]
             }
-            console.log(requestData)
             scanSuccess(requestData).then(res => {
-              console.log(res)
               wx.navigateTo({
                 url: '../deliver/deliver',
                 success: function (rel) {
-                  console.log(res)
                   // 通过eventChannel向被打开页面传送数据
                   rel.eventChannel.emit('acceptDataFromOpenerPage', { data: res.data.id })
                 },

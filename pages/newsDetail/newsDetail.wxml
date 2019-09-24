@@ -1,3 +1,11 @@
 <view class="container-inner">
-  <rich-text nodes="{{nodes}}"></rich-text>  
+  <view class="_header">
+    <view class="_title">{{title}}</view>
+    <!-- <view class="_desc"><text>· </text>{{desc}}</view> -->
+    <view class="view_count">
+      <image src="../../assets/images/search/search_eye.png"></image>
+      <text> {{view_count}}</text>
+    </view>
+  </view>
+  <rich-text class="news_deatil" nodes="{{nodes}}"></rich-text>  
 </view>

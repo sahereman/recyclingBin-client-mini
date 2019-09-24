@@ -33,16 +33,17 @@ Page({
         // 刷新token
         updateToken(token, this);
       } else {
+
       }
     }
   },
   onReachBottom: function () {
     if (this.data.category_page < this.data.total_pages) {
-      this._getTopicLists()
+      this._getBinsLists()
     }
   },
   _getData(){
-    this._getBinsLists()
+    this.getLocation()
   },
   // 获取位置信息
   getLocation() {
@@ -64,6 +65,7 @@ Page({
   },
   // 获取回收箱列表
   _getBinsLists() {
+    console.log(this.data);
     const requestData = {
       page: this.data.category_page,
       token: this.data.token,
@@ -71,6 +73,7 @@ Page({
       lng: this.data.lng
     }
     getBinLists(requestData).then(res => {
+      console.log(res);
       const list = res.data.data;
       let page_num;
       this.data.dataList.push(...list);
@@ -160,6 +163,22 @@ Page({
       },
       complete: function (res) {
         console.log(res);
+      }
+    })
+  },
+  //
+  gomappage:function(e){
+    console.log("111111111111");
+    console.log(e);
+    var temp = {
+      lat: e.currentTarget.dataset.lat,
+      lng: e.currentTarget.dataset.lng,
+    }
+    wx.navigateTo({
+      url: '../binsLists/binsLists',
+      success: function (res) {
+        // 通过eventChannel向被打开页面传送数据
+        res.eventChannel.emit('acceptDataFromOpenerPage', { data:temp })
       }
     })
   },
