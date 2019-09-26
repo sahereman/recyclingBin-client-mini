@@ -66,6 +66,8 @@ map{
     font-size:26rpx;
     font-weight:300;
     color:rgba(0,0,0,1);
+    overflow:hidden;
+    height:50rpx;
   }
   .nearby-address {
     display: inline-block;

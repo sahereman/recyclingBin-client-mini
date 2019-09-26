@@ -6,7 +6,7 @@ Component({
   properties: {
     bounty:{
       type: String,
-      value: "0"
+      value: "0.00"
     },
     deliveryTimes: {
       type: Number,
@@ -14,7 +14,7 @@ Component({
     },
     totalBounty: {
       type: String,
-      value: 0
+      value:'0.00'
     }
   },
   data: {

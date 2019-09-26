@@ -56,6 +56,11 @@
     line-height:45rpx;
     font-weight:400;
   }
+  .location-status.error-status{
+    border: 1px solid #e6bd41;
+    color:#e6bd41;
+    margin-right:15rpx;
+  }
   .normal-location {
     position: fixed;
     display: flex;
@@ -73,6 +78,11 @@
     display: flex;
     justify-content: flex-start;
     margin: auto 0;
+    width:100%;
+  }
+  .normal-location-info .local-info-part{
+    width:570rpx;
+    text-overflow:ellipsis;
   }
   .normal-location-img {
     width: 34rpx;

@@ -9,7 +9,7 @@
           <view class="item-content">
             <view class="item-title">{{item.title}}</view>
             <view class="content-simple">{{item.content_simple}}</view>
-            <view class="item-update-time">{{item.updated_at}}</view>
+            <view class="item-update-time">{{item.created_at}}</view>
           </view>
     </view>
   </block>

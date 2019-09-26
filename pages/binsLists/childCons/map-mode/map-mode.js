@@ -1,5 +1,5 @@
 import {
-  getBinLists
+  getBinLists, getNearbyBin
 } from '../../../../service/api/recyclingBins.js'
 Component({
   options: {
@@ -55,8 +55,12 @@ Component({
     ],
     markers: []
   },
+  created(){
+    //this.mapCtx = wx.createMapContext("map");
+  },
   ready() {
     this._getBinsLists();
+    
   },
   methods: {
     openMapChoose() {
@@ -74,10 +78,12 @@ Component({
         page: 1,
         token: this.data.token,
         lat: this.data.latitude,
-        lng: this.data.longitude
+        lng: this.data.longitude,
+        count:20
       }
-      var arealist = that.data.markers;
+      var arealist = [];
       getBinLists(requestData).then(res => {
+        console.log(res);
         for (var i = 0; i < res.data.data.length; i++) {
           var temp = {
             iconPath: "../../../../assets/images/map/bars_icon.png",
@@ -89,6 +95,7 @@ Component({
           }
           arealist.push(temp);
         }
+
         console.log(arealist);
         that.setData({
           markers: arealist
@@ -97,44 +104,68 @@ Component({
 
       })
     },
-    regionchange(e) {
-      console.log("11111111111111");
-      console.log(e.type)
-    },
-    markertap(e) {
-      console.log("2222222222");
-      console.log(e.markerId)
-    },
-    controltap(e) {
-      console.log("33333333333");
-      console.log(e.controlId)
-    },
     mapViewchange(e) {
       console.log(e)
+      var that = this;
       // 地图发生变化的时候，获取中间点，也就是用户选择的位置toFixed
       if (e.type == 'end' && (e.causedBy == 'scale' || e.causedBy == 'drag')) {
-        console.log(e)
-        var that = this;
-        var mapCtx = wx.createMapContext("map");
+        console.log("00000000");
+        var mapCtx = wx.createMapContext("map",that);
         mapCtx.getCenterLocation({
-          type: 'gcj02',
+          type:'gcj02',
           success: function(res) {
             console.log(res)
             that.setData({
-              latitude: res.latitude,
-              longitude: res.longitude,
-              circles: [{
-                latitude: res.latitude,
-                longitude: res.longitude,
-                color: '#FF0000DD',
-                fillColor: '#d1edff88',
-                radius: 3000, //定位点半径
-                strokeWidth: 1
-              }]
+              latitude:res.latitude,
+              longitude: res.longitude
             })
+            that._getBinsLists();
+            that._getNearbyBin()
           }
         })
       }
     },
+    gotohere: function (res) {
+      console.log(res);
+      let lat = ''; // 获取点击的markers经纬度
+      let lon = ''; // 获取点击的markers经纬度
+      let name = ''; // 获取点击的markers名称
+      let markerId = res.markerId;// 获取点击的markers  id
+      let markers = res.currentTarget.dataset.markers;// 获取markers列表
+
+      for (let item of markers) {
+        if (item.id === markerId) {
+          lat = Number(item.latitude);
+          lon = Number(item.longitude);
+          wx.openLocation({ // 打开微信内置地图，实现导航功能（在内置地图里面打开地图软件）
+            latitude: lat,
+            longitude: lon,
+            name: name,
+            success: function (res) {
+              console.log(res);
+            },
+            fail: function (res) {
+              console.log(res);
+            }
+          })
+          break;
+        }
+      }
+    },
+    _getNearbyBin() {
+      const requestData = {
+        token: this.data.token,
+        lat: this.data.latitude,
+        lng: this.data.longitude
+      }
+      getNearbyBin(requestData).then(res => {
+        console.log(res)
+        this.setData({
+          nearByArr: res.data
+        })
+      }).catch(res => {
+        console.log(res)
+      })
+    }
   }
 })

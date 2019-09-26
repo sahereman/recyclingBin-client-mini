@@ -10,13 +10,17 @@ Component({
   },
   methods: {
     onItemClick(e) {
+      var that = this;
       // 1.改变当前的currentIndex
       const currentIndex = e.currentTarget.dataset.index;
-      this.setData({
-        currentIndex
-      })
-      // 2.将最新的currentIndex传递到分类页面
-      this.triggerEvent('menuclick', { currentIndex }, {})
+      if (currentIndex != that.data.currentIndex){
+        that.setData({
+          currentIndex
+        })
+        // 2.将最新的currentIndex传递到分类页面
+        that.triggerEvent('menuclick', { currentIndex }, {})
+      }
+      
     }
   }
 })

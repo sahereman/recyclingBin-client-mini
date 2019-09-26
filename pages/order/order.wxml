@@ -28,6 +28,12 @@
       </block>
       <view class="last-tips" wx:if="{{isLast}}">到底啦，没有更多内容喽~~</view>
     </view>
-    <view wx:else  class="data-empty">还没有订单哦,快去投递吧~~</view>
+    <view wx:else  class="data-empty">
+      <view class="noOrder_con">
+        <image src="../../assets/images/order/no_order.jpg"></image>
+        <view class="noorder_text">暂无订单</view>
+        <view class="golist" bindtap="binsListShow">查看附近回收机</view>
+      </view>
+    </view>
   </view>
 </view>

@@ -1,16 +1,19 @@
 <view class="module-square">
   <view class="module-title">
-    <image src="../../../../assets/images/home_nav/address.png"/>
+    <image src="../../../../assets/images/home_nav/address.png" />
     <text>{{title}}</text>
   </view>
   <view class="nearby-bin-content border-circle" bindtap="binsListShow">
-    <view class="bg-image">
-      <image src="../../../../assets/images/home_nav/address_phone.png" mode='widthFix'/>
+    <view wx:if="{{nearByInfo.address}}">
+      <view class="bg-image">
+        <image src="../../../../assets/images/home_nav/address_phone.png" mode='widthFix' />
+      </view>
+      <view class="model-content">
+        <view class="module-content-title">{{nearByInfo.name}}</view>
+        <view class="module-content-info">{{nearByInfo.address}}</view>
+        <view class="model-content-btn">{{content_btn}}</view>
+      </view>
     </view>
-    <view class="model-content">
-      <view class="module-content-title">{{nearByInfo.name}}</view>
-      <view class="module-content-info">{{nearByInfo.address}}</view>
-      <view class="model-content-btn">{{content_btn}}</view>
-    </view>
-  </view>  
+    <image class="nonearbin" wx:else src="../../../../assets/images/home_nav/nonearbin.jpg"></image>
+  </view>
 </view>

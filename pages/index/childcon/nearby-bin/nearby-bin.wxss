@@ -75,3 +75,7 @@
   line-height:45rpx;
   text-align: center;
 }
+.nonearbin{
+  width:100%;
+  height:233rpx;
+}

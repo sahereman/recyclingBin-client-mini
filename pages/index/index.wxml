@@ -6,32 +6,30 @@
   <!-- 距离最近的回收箱 -->
   <nearby-bin class="container-inner nearby-bin" nearByInfo="{{nearBybininfo}}" />
   <!-- 我的奖励金 -->
-  <my-reward class="container-inner my-reward" 
-             bounty="{{orderMoney}}" deliveryTimes="{{orderCount}}" 
-             totalBounty="{{money}}"/>
+  <my-reward class="container-inner my-reward" bounty="{{orderMoney}}" deliveryTimes="{{orderCount}}" totalBounty="{{money}}" />
   <!-- 授权登陆弹窗 -->
   <w-dialog show="{{show}}">
     <view slot="content" class='main-content'>
-      <view>您还未登录，登录后可获得完整体验</view>
+      <view class="dialog_title">微信授权</view>
+      <view class="authorization_con">
+        <view class="_desc">
+          <text>申请获得以下权限</text>
+          <view class="_bg"></view>
+        </view>
+        <view class="detail_desc">
+          <view class="getYorsinfo"><text>· </text> 获得你的昵称、头像、地区及性别</view>
+          <view class="infoUse">
+            <text>你的地理位置信息</text>
+            <text>将用于向您推荐附近的工蚁回收机</text>
+          </view>
+        </view>
+      </view>
+      <!-- <view>您还未登录，登录后可获得完整体验</view> -->
     </view>
-    <view slot="operation" class="main-footer">
+    <view slot="operation" class="main-footer btn_part">
       <view wx:if='{{!canIUse}}' class='cancel-btn' bindtap='cancel'>请升级微信版本</view>
-      <button wx:else class='confirm-btn' open-type="getUserInfo" bindgetuserinfo="getUserInfo">授权登陆</button>
+      <button wx:else class='confirm-btn' open-type="getUserInfo" bindgetuserinfo="getUserInfo">授权</button>
     </view>
   </w-dialog>
-  <!-- 绑定手机号弹窗 -->
-  <w-dialog show="{{showModal}}">
-      <view slot="content" class='main-content'>
-        <view class="content-row">
-          <input placeholder="请输入手机号" />
-          <view class="security">获取验证码</view>
-        </view>
-        <view class="content-row">
-          <input placeholder="输入验证码" />
-        </view>
-      </view>
-      <view slot="operation" class="main-footer">
-        <view class="bindPhone">绑定</view>
-      </view>
-  </w-dialog>
+  
 </view>

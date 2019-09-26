@@ -1,31 +1,39 @@
 .container {
   background: #fff;
 }
+
 /*左侧栏主盒子*/
-.nav_left{
+
+.nav_left {
   display: inline-block;
   width: 25%;
   height: 100%;
   text-align: center;
 }
+
 /*左侧栏list的item*/
-.nav_left .nav_left_items{
+
+.nav_left .nav_left_items {
   height: 96rpx;
   line-height: 96rpx;
   padding: 12rpx 0;
   font-size: 14px;
-  border-left: 3px solid transparent; 
+  border-left: 3px solid transparent;
   background: #f9f9fa;
-  color: #dfdfdf
+  color: #dfdfdf;
 }
+
 /*左侧栏list的item被选中时*/
-.nav_left .nav_left_items.active{
+
+.nav_left .nav_left_items.active {
   background: #fff;
-  color: #59DB9D;
-  border-left-color: #59DB9D; 
+  color: #59db9d;
+  border-left-color: #59db9d;
 }
+
 /*右侧栏主盒子*/
-.nav_right{
+
+.nav_right {
   position: absolute;
   top: 0;
   right: 0;
@@ -36,23 +44,40 @@
   box-sizing: border-box;
   background: #fff;
 }
+
 /*右侧栏list的item*/
-.nav_right .nav_right_items{
+
+.nav_right .nav_right_items {
   margin-bottom: 10rpx;
   float: left;
   width: 33.33%;
-  height: 160rpx;
   text-align: center;
 }
-.nav_right .nav_right_items image{
-  width: 100rpx;
-  height: 100rpx;
+
+.nav_right .nav_right_items image {
+  width:99rpx;
+  height: 105rpx;
 }
-.nav_right .nav_right_items text{
+
+.nav_right .nav_right_items text {
   display: block;
   margin-top: 10rpx;
   font-size: 14px;
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
+  line-height:56rpx;
+}
+
+.nav_right .childName {
+  text-align: center;
+  color: #59db9d;
+  font-size:32rpx;
+  line-height:80rpx;
+  display:block;
+  width:100%;
+  margin-bottom:20rpx;
+}
+.nav_right .cha_deac{
+  height:56rpx;
 }

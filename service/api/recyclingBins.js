@@ -25,7 +25,8 @@ export function getBinLists(requestData) {
     },
     data: {
       lat: requestData.lat,
-      lng: requestData.lng
+      lng: requestData.lng,
+      count: requestData.count
     }
   })
 } 
@@ -62,6 +63,21 @@ export function getOrderDetail(requestData) {
     method: "GET",
     header: {
       Authorization: requestData.token
+    }
+  })
+}
+
+// 解密手机号
+export function getPhoneNumberajax(requestData) {
+  return request({
+    url: 'wechats/decryptedData',
+    method: "POST",
+    header: {
+      Authorization: requestData.token
+    },
+    data: {
+      encryptedData: requestData.encryptedData,
+      iv: requestData.iv
     }
   })
 }

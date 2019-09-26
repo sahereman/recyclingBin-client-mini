@@ -29,7 +29,7 @@
     "navigationBarBackgroundColor": "#fff",
     "navigationBarTitleText": "工蚁回收",
     "navigationBarTextStyle": "black",
-    "enablePullDownRefresh": false,
+    "enablePullDownRefresh": true,
     "backgroundColor": "#eeeeee"
   },
   "tabBar": {

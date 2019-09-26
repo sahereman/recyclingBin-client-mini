@@ -1,6 +1,6 @@
 <!-- 地图模式 -->
   <map id="map" longitude="{{longitude}}" latitude="{{latitude}}"  
-       show-location markers="{{markers}}" bindregionchange="mapViewchange" scale="14">
+       show-location markers="{{markers}}" bindregionchange="mapViewchange" bindmarkertap='gotohere' data-markers="{{markers}}" scale="14">
     <cover-image class="moverarea" src="../../../../assets/images/map/location_icon.png"></cover-image>
   </map>
   <view class="map-element">
@@ -16,7 +16,7 @@
         <view class="info-top-part">
           <image src="../../../../assets/images/map/place_icon.png" mode='widthFix'/>
           <view wx:if="{{nearByArr.distance>1000}}">
-            <text>{{nearByArr.distance/1000}}km |</text>
+            <text>{{nearByArr.distance/1000}}km </text> | 
             <text class="nearby-address"> {{nearByArr.address}}</text>
           </view>
           <view wx:else>

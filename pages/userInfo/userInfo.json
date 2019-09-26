@@ -1,4 +1,6 @@
 {
-  "usingComponents": {},
+  "usingComponents": {
+    "w-dialog": "/components/w-dialog/w-dialog"
+  },
   "navigationBarTitleText": "个人信息"
 }

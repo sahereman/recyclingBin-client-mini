@@ -4,8 +4,6 @@ import {
 
 // 数据请求封装
 export default function request(options) {
-  console.log("====================");
-  console.log(options)
   if (!options.showloading){
     wx.showLoading({
       title: '数据加载中ing',

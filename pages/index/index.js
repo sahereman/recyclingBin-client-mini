@@ -1,8 +1,28 @@
-import { TOKEN, NEARBYBIN, USERINFO, VALIDTIME } from '../../common/const.js'
-import { getToken, updateToken, userInfoShow} from '../../service/api/user.js'
-import {getBanners} from '../../service/api/banner.js'
-import { getNearbyBin, getBinLists } from '../../service/api/recyclingBins.js'
-import { examineToken, isTokenFailure } from '../../util/util.js'
+import {
+  TOKEN,
+  NEARBYBIN,
+  USERINFO,
+  VALIDTIME
+} from '../../common/const.js'
+import {
+  getToken,
+  updateToken,
+  userInfoShow,
+  bindPhone,
+  sendVerification
+} from '../../service/api/user.js'
+import {
+  getBanners
+} from '../../service/api/banner.js'
+import {
+  getNearbyBin,
+  getBinLists,
+  getPhoneNumberajax
+} from '../../service/api/recyclingBins.js'
+import {
+  examineToken,
+  isTokenFailure
+} from '../../util/util.js'
 
 //获取应用实例
 const app = getApp()
@@ -11,18 +31,29 @@ Page({
     banners: [],
     show: true,
     canIUse: wx.canIUse('button.open-type.getUserInfo'),
-    token:"",
+    token: "",
     lat: null,
     lng: null,
     showModal: false, // 显示绑定手机号弹窗modal弹窗
     single: false, // false 只显示一个按钮，如果想显示两个改为true即可
-    nearBybininfo:{},
-    money: "0",  //累计奖励金
+    nearBybininfo: {},
+    money: "0.00", //累计奖励金
     orderCount: 0, //投递次数
-    orderMoney: "0",  //当前奖励金
+    orderMoney: "0.00", //当前奖励金
     inphone: null, // 用户输入的手机号
+    vCode: null, //验证码
+    weChatShow: true,
+    ajxtrue: false, //手机号码格式
+    verification_key: '', //短信验证码key
+    vcodeSate: false, //验证码验证
+    timerNum: 10, //倒计时
+    closeTimerNum: true,
+    timer: null //定时器
   },
-  onLoad: function () {
+  onShow:function(){
+    this._getBanners()
+  },
+  onLoad: function() {
     const token = wx.getStorageSync(TOKEN);
     if (isTokenFailure()) {
       // token有效
@@ -31,7 +62,7 @@ Page({
         show: false
       })
       this._getData()
-    }else {
+    } else {
       // token无效
       if (token && token.length != 0) {
         // 当token存在只需要进行更新
@@ -40,7 +71,7 @@ Page({
         })
         // 刷新token
         updateToken(token, this);
-      }else {
+      } else {
         // token不存在需用户重新登录
         app.login()
         this.setData({
@@ -50,13 +81,13 @@ Page({
     }
   },
   // ------------------网络请求相关方法----------
-  _getData(){
-    this._getBanners()
+  _getData() {
+    
     this.getLocation()
     this._getUserInfo()
   },
   // 获取token
-  _getToken(requestData){
+  _getToken(requestData) {
     getToken(requestData).then(res => {
       // 存储到本地缓存
       const token = res.data.token_type + " " + res.data.access_token
@@ -64,7 +95,7 @@ Page({
       // token和有效期存入缓存
       wx.setStorageSync(TOKEN, token)
       examineToken(validTime)
-      this.setData({ 
+      this.setData({
         show: false,
         token: token
       })
@@ -74,7 +105,7 @@ Page({
     })
   },
   // 获取banner图数组
-  _getBanners(){
+  _getBanners() {
     const requestData = {
       pageName: 'mini-index'
     }
@@ -85,12 +116,12 @@ Page({
       this.setData({
         banners: banners
       })
-    }).catch(res =>{
+    }).catch(res => {
       console.log(res)
     })
   },
   // 获取距离最近的回收箱
-  _getNearbyBin(){
+  _getNearbyBin() {
     const requestData = {
       token: this.data.token,
       lat: app.globalData.lat,
@@ -111,8 +142,8 @@ Page({
   },
   // -------------------------------事件监听及操作----------
   // 获取用户信息
-  getUserInfo(e){
-    if(app.globalData.code){
+  getUserInfo(e) {
+    if (app.globalData.code) {
       if (e.detail.errMsg == "getUserInfo:ok") {
         app.globalData.userInfo = e.detail.userInfo
         const requestData = {
@@ -123,7 +154,7 @@ Page({
         // 获取token
         this._getToken(requestData)
       }
-    }else {
+    } else {
       // app.login()
     }
   },
@@ -152,21 +183,22 @@ Page({
       token: this.data.token
     }
     userInfoShow(requestData).then(res => {
+
       // 将个人信息存入缓存在个人中心进行调用
       this.setData({
         money: res.data.money,
         orderCount: res.data.total_client_order_count,
         orderMoney: res.data.total_client_order_money
       })
-      if(!res.data.phone) {
-        this.setData({
-          // showModal: true
-        })
-      }else {
-        this.setData({
-          showModal: false
-        })
-      }
+      // if(!res.data.phone) {
+      //   this.setData({
+      //     showModal: true
+      //   })
+      // }else {
+      //   this.setData({
+      //     showModal: false
+      //   })
+      // }
       wx.setStorage({
         key: USERINFO,
         data: res.data
@@ -176,27 +208,162 @@ Page({
     })
   },
   // 获取验证码
-  _sendVerification(){
-    const requestData = {
-      token: this.data.token,
-      phone: this.data.inphone
+  _sendVerification() {
+    var that = this;
+    if (that.data.ajxtrue == true) {
+      const requestData = {
+        token: that.data.token,
+        phone: that.data.inphone
+      }
+      that.setData({
+        closeTimerNum: false
+      })
+      var timerNumtemp = that.data.timerNum;
+
+      that.data.timer = setInterval(function() {
+        timerNumtemp--;
+        that.setData({
+          timerNum: timerNumtemp
+        })
+        if (timerNumtemp <= 0) {
+          clearInterval(that.data.timer);
+          that.setData({
+            closeTimerNum: true
+          })
+        }
+
+      }, 1000)
+
+      sendVerification(requestData).then(res => {
+        that.setData({
+          verification_key: res.data.verification_key
+        })
+      }).catch(res => {
+        console.log(res);
+      })
+    } else {
+      wx.showToast({
+        title: '请输入手机号',
+        icon: 'none',
+        duration: 2000
+      })
     }
-    sendVerification(requestData).then(res => {
+  },
+  // 绑定手机号
+  _bindPhone() {
+    var that = this;
+    if (that.data.ajxtrue == true) {
+      if (that.data.verification_key) {
+        if (that.data.vcodeSate == false) {
+          wx.showToast({
+            title: '验证码不正确',
+            icon: 'none',
+            duration: 2000
+          })
+        } else {
+          const requestData = {
+            token: that.data.token,
+            phone: that.data.inphone,
+            verification_key: that.data.verification_key,
+            verification_code: that.data.vCode
+          }
+          bindPhone(requestData).then(res => {
+            console.log(res);
+            if (res.statusCode == 200) {
+              wx.showToast({
+                title: '绑定成功',
+                icon: 'success',
+                duration: 2000
+              })
+              that.setData({
+                showModal: false
+              })
+              that._getUserInfo();
+            } else {
+              wx.showToast({
+                title: '绑定失败，请稍后重试',
+                icon: 'none',
+                duration: 2000
+              })
+            }
+          }).catch(res => {
+            console.log(res);
+          })
+        }
+      } else {
+        wx.showToast({
+          title: '请先获取验证码',
+          icon: 'none',
+          duration: 2000
+        })
+      }
+    } else {
+      wx.showToast({
+        title: '请输入正确的手机号',
+        icon: 'none',
+        duration: 2000
+      })
+    }
+
+  },
+  onPullDownRefresh() { //下拉刷新
+    wx.stopPullDownRefresh();
+  },
+  blurPhone: function(e) { //验证手机号
+    var phone = e.detail.value;
+    let that = this
+    if (!(/^1[34578]\d{9}$/.test(phone))) {
+      this.setData({
+        ajxtrue: false
+      })
+      if (phone.length >= 11) {
+        wx.showToast({
+          title: '手机号有误',
+          icon: 'none',
+          duration: 2000
+        })
+      }
+    } else {
+      that.setData({
+        ajxtrue: true,
+        inphone: phone
+      })
+
+    }
+  },
+  //一键获取手机号
+  getPhoneNumber(e) {
+    var that = this;
+    const requestData = {
+      token: that.data.token,
+      encryptedData: e.detail.encryptedData,
+      iv: e.detail.iv
+    }
+    getPhoneNumberajax(requestData).then(res => {
+      console.log(res.data.phoneNumber);
       console.log(res);
+      that.setData({
+        inphone: res.data.phoneNumber,
+        ajxtrue: true
+      })
     }).catch(res => {
       console.log(res);
     })
   },
-  // 绑定手机号
-  _bindPhone(){
-    const requestData = {
-      token: this.data.token,
-      phone: this.data.phone
-    }
-    bindPhone(requestData).then(res => {
-      console.log(res);
-    }).catch(res => {
-      console.log(res);
+  blurCode: function(e) { //验证验证码
+    var vCode = e.detail.value;
+    let that = this
+    that.setData({
+      vcodeSate: false
     })
-  }
+    if (vCode.length == 4) {
+      that.setData({
+        vcodeSate: true,
+        vCode: vCode
+      })
+    }
+  },
+  onUnload: function() {
+    clearInterval(this.data.timer);
+  },
 })

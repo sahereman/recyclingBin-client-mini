@@ -14,9 +14,10 @@
   <view class="nav_right">
     <!--如果有数据，才遍历项-->
     <view wx:if="{{cateItems[curIndex].ishaveChild}}">
-      <block wx:for="{{cateItems[curIndex].children}}" wx:key="id">
+    <block wx:for="{{cateItems[curIndex].listdata}}" wx:key="id" wx:for-item="list">
+      <view class="childName" wx:if="{{list.name}}"> - {{list.name}} - </view>
+      <view class="childCon" wx:for="{{list.children}}" wx:key="id">
         <view class="nav_right_items">
-          <navigator url="">
             <!--用view包裹图片组合，如果有图片就用，无图片提供就使用默认图片-->
             <view>              
               <block wx:if="{{item.image}}">
@@ -27,15 +28,16 @@
               </block>
             </view>
             <!--如果有文字，就用文字；无文字就用其他-->
-            <view wx:if="{{item.name}}">
+            <view wx:if="{{item.name}}" class="cha_deac">
               <text>{{item.name}}</text>
             </view>
-            <view wx:else>
+            <view wx:else class="cha_deac">
               <text></text>
             </view>
-          </navigator>
         </view>
-      </block>
+      </view>
+    </block>
+      
     </view>
     <!--如果无数据，则显示数据-->
     <view wx:else>暂无数据</view>

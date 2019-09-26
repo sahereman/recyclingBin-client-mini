@@ -20,7 +20,7 @@
   width: 80%;
   background-color: #fff;
   border-radius: 10rpx;
-  padding: 20rpx;
+  padding:0 0;
   text-align: center;
 }
 /*中间内容*/
@@ -35,10 +35,10 @@
   width: 100%;
   display: flex;
   flex-direction: row;
-  height: 80rpx;
+  /* height: 80rpx;
   line-height: 80rpx;
   border-top: 2rpx solid #D2D3D5;
-  margin-top: 30rpx;
+  margin-top: 30rpx; */
 }
 .cancel-btn, .confirm-btn{
   flex: 1;

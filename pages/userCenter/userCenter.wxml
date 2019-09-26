@@ -16,7 +16,8 @@
               <image src="../../assets/images/user/edit.png" />
             </navigator>
           </view>
-          <view class="user-info-phone">{{phone}}</view>
+          <view wx:if="phone" class="user-info-phone">{{phone}}</view>
+          <view wx:else class="user-info-phone"></view>
         </view>
       </view>
       <view class="user-notification">

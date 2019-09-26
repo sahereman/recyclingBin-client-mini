@@ -61,29 +61,30 @@ Page({
   },
   // 获取话题列表
   _getTopicLists(){
+    var that = this;
     let requestData = {}
-    if (this.data.category_page == 1) {
+    if (that.data.category_page == 1) {
       requestData = {
-        category_id: this.data.category_id,
-        token: this.data.token
+        category_id: that.data.category_id,
+        token: that.data.token
       }
     }else {
       requestData = {
-        category_id: this.data.category_id +"?page="+ this.data.category_page,
-        token: this.data.token
+        category_id: that.data.category_id + "?page=" + that.data.category_page,
+        token: that.data.token
       }
     }
     getTopicLists(requestData).then(res => {
+      wx.stopPullDownRefresh();
       const list = res.data.data;
       let page_num;
-      this.data.dataList.push(...list);
+      that.data.dataList.push(...list);
       if (res.data.meta.pagination.links.next){
         page_num = res.data.meta.pagination.links.next.split("=")[1]
-      }else {
-        page_num = 1;
       }
-      this.setData({
-        categoryLists: this.data.dataList,
+      console.log(that.data.dataList);
+      that.setData({
+        categoryLists: that.data.dataList,
         category_page: page_num,
         total_pages: res.data.meta.pagination.total_pages
       })
@@ -99,7 +100,8 @@ Page({
     // 获取点击的menu的按钮的id，通过id获取分类下的列表
     this.setData({
       category_id: maitkey,
-      dataList: []
+      dataList: [],
+      category_page:1
     })
     this._getTopicLists()
   },
@@ -115,5 +117,12 @@ Page({
         res.eventChannel.emit('acceptDataFromOpenerPage', { data: dataObj})
       }
     })
-  }
+  },
+  onPullDownRefresh() {
+    this.setData({
+      category_page:1,
+      categoryLists:[]
+    })
+    this._getTopicLists();
+  } 
 })

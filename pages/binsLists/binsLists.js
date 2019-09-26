@@ -1,7 +1,9 @@
 import { TOKEN, VALIDTIME } from '../../common/const.js'
 import { isTokenFailure } from '../../util/util.js'
 import { getNearbyBin, getBinLists } from '../../service/api/recyclingBins.js'
-
+import { updateToken } from '../../service/api/user.js'
+//获取应用实例
+const app = getApp()
 Page({
   data: {
     ismap: true,
@@ -11,13 +13,19 @@ Page({
     bearByArr: {}
   },
   onLoad: function (options) {
-    // 判断token，刷新token
-    isTokenFailure();
     const token = wx.getStorageSync(TOKEN);
-    if (token && token.length != 0) {
-      this.setData({
-        token: token
-      })
+    if (isTokenFailure()) {
+      // token有效
+      this.data.token = token;
+    } else {
+      // token无效
+      if (token && token.length != 0) {
+        // 刷新token
+        updateToken(token, this);
+      } else {
+        // token不存在需用户重新登录
+        app.login()
+      }
     }
   },
   onShow: function () {
