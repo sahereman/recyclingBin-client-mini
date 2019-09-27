@@ -1,0 +1,60 @@
+/* pages/messageCenter/messageCenter.wxss */
+
+page {
+  background: #f3f4f5;
+}
+
+.msgCenter {
+  padding: 23rpx;
+}
+
+.msgCenter .msg_item {
+  background: #fff;
+  border-radius: 10rpx;
+  margin-bottom: 23rpx;
+  box-shadow: 0px 5rpx 5rpx 0px rgba(0, 0, 0, 0.1);
+  padding:0 24rpx;
+}
+
+.msgCenter .msg_item .bt {
+  padding: 17rpx 0;
+  line-height: 45rpx;
+}
+
+.msgCenter .msg_item .bt .t_con {
+  color: rgba(0, 0, 0, 0.8);
+  font-size:28rpx;
+}
+.msgCenter .msg_item .bt .t_con text{
+  color:#d82b21;
+  font-weight:600;
+}
+.msgCenter .msg_item .bt ._time {
+  float:right;
+  color:rgba(0, 0, 0, 0.3);
+  padding-left:10rpx;
+}
+.msgCenter .msg_item .bd{
+  color: rgba(0, 0, 0, 0.4);
+  font-size:24rpx;
+  line-height:39rpx;
+  padding-bottom:20rpx;
+}
+
+.goDetail{
+  line-height:72rpx;
+  text-align:right;
+  position:relative;
+  padding-right:20rpx;
+  border-top:2px solid rgba(0, 0, 0, 0.03);
+  color:#979797;
+}
+.goDetail image{
+  width:11rpx;
+  height:24rpx;
+  position:absolute;
+  right:0;
+  top:0;
+  bottom:0;
+  margin:auto;
+}

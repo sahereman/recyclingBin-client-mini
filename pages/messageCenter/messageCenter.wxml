@@ -1,0 +1,23 @@
+<view class="msgCenter">
+  <!-- <view class="msg_item">
+    <view class="bt">
+      <view class="_time">2019-09-24 10:35:12</view>
+      <view class="t_con">新一期活动已上线</view>
+    </view>
+    <view class="bd">感谢您注册工蚁回收小程序，欢迎体验新型环保回收箱。更多回报等着你。</view>
+  </view> -->
+  <view class="msg_item" wx:for="{{msgList}}" wx:key="{{item}}">
+    <view class="bt">
+      <view class="_time">{{item.created_at}}</view>
+      <view class="t_con">
+        <text wx:if="{{!item.read_at}}"> · </text>{{item.title}}</view>
+    </view>
+    <view class="bd">{{item.info}}</view>
+    <view class="goDetail" wx:if="{{item.relation_model == 'App\Models\ClientOrder'}}">
+      <navigator url="../../pages/order/order" open-type="switchTab" hover-class="other-navigator-hover">
+        <text>查看详情</text>
+        <image class="go_detail_icon close_icon" src="../../assets/images/about/right_icon.png" />
+      </navigator>
+    </view>
+  </view>
+</view>
