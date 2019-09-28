@@ -1,2 +1,73 @@
-<!--pages/aboutUs/aboutUs.wxml-->
-<text>pages/aboutUs/aboutUs.wxml</text>
+<view class="container about_page">
+  <!-- 导图 -->
+  <view class="menu_tab">
+    <view class='{{currentIndex == 1 ? "cur": ""}}' bindtap="changetab" data-index="1">公司介绍</view>
+    <view class='{{currentIndex == 2 ? "cur": ""}}' bindtap="changetab" data-index="2">联系我们</view>
+  </view>
+  <view wx:if="{{currentIndex == 1}}" class="about_con">
+    <view class="page-banner container-inner">
+      <image src="../../assets/images/about/about_banner.png" mode="widthFix" />
+    </view>
+    <view class="_con">
+      <view class="_title">
+        <text>关于我们</text>
+      </view>
+      <view class="_introl">
+        <view>济南新生派环保科技有限公司成立于2019年08月09日。</view>
+        <view>公司自创立以来一直专业致力环保型推广。经营范围包括环保技术开发、技术咨询、技术转让、技术服务；再生物资回收。</view>
+        <image src="../../assets/images/about/about_footer.png" mode="widthFix"></image>
+        <view>始终坚持发扬”专业、专注”为企业宗旨，以”技术、服务”为立业之本的团体精神，并形成一完整的服务体系。</view>
+      </view>
+    </view>
+  </view>
+  <view wx:else class="about_con" class="contact_part">
+    <view class="contact_con">
+      <view class="contact_t">济南新生派环保科技有限公司</view>
+      <image class="_left" src="../../assets/images/about/contact_t_bg.png" mode="widthFix"></image>
+      <view class="main_con">
+        <view class="item">
+          <view class="top_sign">
+            <image src="../../assets/images/about/contact1.png" mode="widthFix"></image>
+          </view>
+          <view class="_title">
+            <text>公司地址</text>
+          </view>
+          <view class="word_con_no">暂无</view>
+        </view>
+        <view class="item">
+          <view class="top_sign">
+            <image src="../../assets/images/about/contact2.png" mode="widthFix"></image>
+          </view>
+          <view class="_title">
+            <text>服务电话</text>
+          </view>
+          <view class="word_tell">
+            <image src="../../assets/images/about/tell.png" mode="widthFix"></image>
+            <view>周一至周日9:00-18:00</view>
+          </view>
+        </view>
+        <view class="item">
+          <view class="top_sign">
+            <image src="../../assets/images/about/contact3.png" mode="widthFix"></image>
+          </view>
+          <view class="_title">
+            <text>官方微信</text>
+          </view>
+          <view class="word_tell _wechat">
+            <view>微信搜索框输入“工蚁回收”，点击搜一搜，关注工蚁回收公众号。</view>
+          </view>
+        </view>
+        <view class="item">
+          <view class="top_sign">
+            <image src="../../assets/images/about/contact4.png" mode="widthFix"></image>
+          </view>
+          <view class="_title">
+            <text>品牌合作</text>
+          </view>
+          <view class="word_con_no">暂无</view>
+        </view>
+      </view>
+    </view>
+    <image class="contact_footer" src="../../assets/images/about/contact_footer.png" mode="widthFix"></image>
+  </view>
+</view>

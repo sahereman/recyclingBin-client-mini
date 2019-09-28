@@ -263,5 +263,8 @@ Page({
       curNav: id,
       curIndex: index
     })
+  },
+  onPullDownRefresh() { //下拉刷新
+    wx.stopPullDownRefresh();
   }
 })

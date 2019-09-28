@@ -1,6 +1,6 @@
 <view class="container user-home">
   <view class="content-bg">
-    <image src="../../assets/images/user/user_bg.png"/>
+    <image src="../../assets/images/user/user_bg.png" />
   </view>
   <view class="container-inner user-content">
     <!-- 个人信息区 -->
@@ -16,12 +16,16 @@
               <image src="../../assets/images/user/edit.png" />
             </navigator>
           </view>
-          <view wx:if="phone" class="user-info-phone">{{phone}}</view>
-          <view wx:else class="user-info-phone"></view>
+          <view wx:if="{{phone}}" class="user-info-phone">{{phone}}</view>
+          <navigator wx:else url="../../pages/userInfo/userInfo" hover-class="more-detail-hover">
+            <view class="user-info-phone">绑定手机号</view>
+          </navigator>
         </view>
       </view>
       <view class="user-notification">
-        <image src="../../assets/images/user/notification.png" />
+        <navigator url="../../pages/messageCenter/messageCenter" hover-class="more-detail-hover">
+          <image src="../../assets/images/user/notification.png" />
+        </navigator>
       </view>
     </view>
     <!-- 奖励金显示区 -->
@@ -50,55 +54,56 @@
       <view class="operating-item">
         <navigator url="/pages/order/order" open-type="switchTab" hover-class="operating-click">
           <view class="item-left">
-            <image src="../../assets/images/user/my_order.png"/>
+            <image src="../../assets/images/user/my_order.png" />
             <text>我的订单</text>
           </view>
           <view class="item-right">
-            <image src="../../assets/images/user/arrow.png"/>
+            <image src="../../assets/images/user/arrow.png" />
           </view>
         </navigator>
       </view>
       <view class="operating-item">
         <navigator url="../../pages/walletPage/walletPage" hover-class="operating-click">
           <view class="item-left">
-            <image src="../../assets/images/user/wallet.png"/>
+            <image src="../../assets/images/user/wallet.png" />
             <text>钱包</text>
           </view>
           <view class="item-right">
-            <image src="../../assets/images/user/arrow.png"/>
+            <image src="../../assets/images/user/arrow.png" />
           </view>
         </navigator>
       </view>
       <view class="operating-item">
         <navigator url="../../pages/sharePage/sharePage" hover-class="operating-click">
           <view class="item-left">
-            <image src="../../assets/images/user/share.png"/>
+            <image src="../../assets/images/user/share.png" />
             <text>分享给好友</text>
           </view>
           <view class="item-right">
-            <image src="../../assets/images/user/arrow.png"/>
+            <image src="../../assets/images/user/arrow.png" />
           </view>
         </navigator>
       </view>
       <view class="operating-item">
         <navigator url="../../pages/helpCenter/helpCenter" hover-class="operating-click">
           <view class="item-left">
-            <image class="help-icon" src="../../assets/images/user/help.png"/>
+            <image class="help-icon" src="../../assets/images/user/help.png" />
             <text>帮助中心</text>
           </view>
           <view class="item-right">
-            <image src="../../assets/images/user/arrow.png"/>
+            <text class="item-right_tip">周一至周日9:00-21:00</text>
+            <image src="../../assets/images/user/arrow.png" />
           </view>
         </navigator>
       </view>
       <view class="operating-item">
         <navigator url="../../pages/aboutUs/aboutUs" hover-class="operating-click">
           <view class="item-left">
-            <image class="about-icon" src="../../assets/images/user/about.png"/>
+            <image class="about-icon" src="../../assets/images/user/about.png" />
             <text>关于我们</text>
           </view>
           <view class="item-right">
-            <image src="../../assets/images/user/arrow.png"/>
+            <image src="../../assets/images/user/arrow.png" />
           </view>
         </navigator>
       </view>

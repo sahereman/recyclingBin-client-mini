@@ -50,10 +50,8 @@ Page({
     closeTimerNum: true,
     timer: null //定时器
   },
-  onShow:function(){
+  onShow: function() {
     this._getBanners()
-  },
-  onLoad: function() {
     const token = wx.getStorageSync(TOKEN);
     if (isTokenFailure()) {
       // token有效
@@ -152,7 +150,11 @@ Page({
           encryptedData: e.detail.encryptedData
         }
         // 获取token
-        this._getToken(requestData)
+        this._getToken(requestData);
+      }else{
+        this.setData({
+          show: true
+        })
       }
     } else {
       // app.login()
@@ -164,6 +166,7 @@ Page({
     wx.getLocation({
       type: 'wgs84',
       success: res => {
+        wx.stopPullDownRefresh();
         this.setData({
           lat: res.latitude,
           lng: res.longitude
@@ -173,7 +176,7 @@ Page({
         this._getNearbyBin()
       },
       fail: res => {
-        console.log(res)
+        
       }
     })
   },
@@ -183,7 +186,7 @@ Page({
       token: this.data.token
     }
     userInfoShow(requestData).then(res => {
-
+      wx.stopPullDownRefresh();
       // 将个人信息存入缓存在个人中心进行调用
       this.setData({
         money: res.data.money,
@@ -307,7 +310,8 @@ Page({
 
   },
   onPullDownRefresh() { //下拉刷新
-    wx.stopPullDownRefresh();
+    this.getLocation()
+    this._getUserInfo()
   },
   blurPhone: function(e) { //验证手机号
     var phone = e.detail.value;
@@ -365,5 +369,5 @@ Page({
   },
   onUnload: function() {
     clearInterval(this.data.timer);
-  },
+  }
 })

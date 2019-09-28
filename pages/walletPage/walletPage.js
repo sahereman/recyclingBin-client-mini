@@ -41,6 +41,7 @@ Page({
       token: this.data.token
     }
     userInfoShow(requestData).then(res => {
+      wx.stopPullDownRefresh();s
       this.setData({
         money: res.data.money,
       })
@@ -52,4 +53,8 @@ Page({
       console.log(res)
     })
   },
+  //下拉刷新
+  onPullDownRefresh() {
+    this._getUserInfo();
+  }
 })

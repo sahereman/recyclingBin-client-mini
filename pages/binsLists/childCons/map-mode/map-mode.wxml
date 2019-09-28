@@ -1,6 +1,5 @@
 <!-- 地图模式 -->
-  <map id="map" longitude="{{longitude}}" latitude="{{latitude}}"  
-       show-location markers="{{markers}}" bindregionchange="mapViewchange" bindmarkertap='gotohere' data-markers="{{markers}}" scale="14">
+  <map id="map" longitude="{{longitude}}" latitude="{{latitude}}" markers="{{markers}}" bindregionchange="mapViewchange" bindmarkertap='gotohere' data-markers="{{markers}}" scale="14">
     <cover-image class="moverarea" src="../../../../assets/images/map/location_icon.png"></cover-image>
   </map>
   <view class="map-element">

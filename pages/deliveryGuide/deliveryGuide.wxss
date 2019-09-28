@@ -1,1 +1,124 @@
 /* pages/deliveryGuide/deliveryGuide.wxss */
+page{
+  background:#f3f4f5;
+  
+}
+.giude_page .page-banner image{
+  width:100%;
+}
+.about_con{
+  padding-bottom:50rpx;
+}
+.about_con .about_item{
+  display:flex;
+  padding-top:41rpx;
+}
+.about_con .about_item .word_part{
+  width:50%;
+  position:relative;
+  padding:37rpx 0 0 48rpx;
+}
+.about_con .about_item .word_part .step_sign{
+  position:absolute;
+  width: 119rpx;
+  right:-5rpx;
+  top:108rpx;
+}
+.about_con .word_part .step_t{
+  width: 182rpx;
+  margin-bottom:25rpx;
+}
+.about_con .word_part ._bd1{
+  font-size:34rpx;
+  color:rgba(0,0,0,.8);
+  line-height:55rpx;
+  margin-bottom:10rpx;
+}
+.about_con .word_part ._bd2{
+  font-size:26rpx;
+  color:rgba(0,0,0,.6);
+  line-height:35rpx;
+  width:290rpx;
+}
+.about_con .about_item .sign_img{
+  width:50%;
+  box-sizing:border-box;
+  padding-left:10rpx;
+  padding-top:15rpx;
+}
+.about_con .about_item .sign_img image{
+  width:322rpx;
+ 
+}
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

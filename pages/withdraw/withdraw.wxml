@@ -6,7 +6,7 @@
         <view>
           <text>户名</text>
           <input name="name" placeholder-class="placeholder-class" placeholder="请输入收款人户名" />
-          <image class="name-image" src="../../assets/images/user/mine.png" />
+          <image class="name-image" src="../../assets/images/user/cash_iocn1.png" />
         </view>
         <view>
           <text>账号</text>
@@ -16,13 +16,23 @@
                  placeholder="请输入收款人账号" 
           />
           <image wx:if="{{image_show}}" src="../../assets/images/user/right_finish.png" />
-          <image class="bankcard-image" src="../../assets/images/user/bankcard-icon.png" />
+          <image class="bankcard-image" src="../../assets/images/user/cash_iocn2.png" />
         </view>
-        <view>
+        <!-- <view>
           <text>银行</text>
           <input name="bank" hidden />
           <image class="unionpay-image" src="../../assets/images/user/unionpay.png" />
           <image class="arrow-image" src="../../assets/images/user/arrow.png" />
+        </view> -->
+        <view>
+          <text>银行</text>
+          <input name="bank" placeholder-class="placeholder-class" placeholder="请输入银行名称" />
+          <image class="name-image" src="../../assets/images/user/cash_iocn3.png" />
+        </view>
+        <view>
+          <text style="width:150rpx;">开户银行</text>
+          <input name="bankname" placeholder-class="placeholder-class" placeholder="请输入开户银行" />
+          <image class="name-image" src="../../assets/images/user/cash_iocn4.png" />
         </view>
         <view>
           <image class="money-symbol" src="../../assets/images/user/dollar.png" />

@@ -43,6 +43,7 @@ Page({
       token: this.data.token
     }
     userInfoShow(requestData).then(res => {
+      wx.stopPullDownRefresh();
       this.setData({
         money: res.data.money,
       })
@@ -55,23 +56,85 @@ Page({
     })
   },
   formSubmit(e) {
-    console.log(e.detail.value)
-    const requestData = {
-      token: this.data.token,
-      name: e.detail.value.name,
-      bank: e.detail.value.bank,
-      account: e.detail.value.account,
-      money: e.detail.value.money
+    var that = this;
+    if (!e.detail.value.name){
+      wx.showToast({
+        title: '请输入收款人户名',
+        icon: 'none',
+        duration: 2000
+      })
+    } else if (!e.detail.value.account){
+      wx.showToast({
+        title: '请输入收款人账号',
+        icon: 'none',
+        duration: 2000
+      })
+    } else if (!e.detail.value.bank){
+      wx.showToast({
+        title: '请输入银行名称',
+        icon: 'none',
+        duration: 2000
+      })
+    } else if (!e.detail.value.bankname) {
+      wx.showToast({
+        title: '请输入开户银行',
+        icon: 'none',
+        duration: 2000
+      })
+    } else if (!e.detail.value.money) {
+      wx.showToast({
+        title: '请输入提现金额',
+        icon: 'none',
+        duration: 2000
+      })
+    }else{
+      const requestData = {
+        token: that.data.token,
+        name: e.detail.value.name,
+        bank: e.detail.value.bank,
+        account: e.detail.value.account,
+        money: e.detail.value.money,
+        bank_name:e.detail.value.bankname
+      }
+      withdrawal(requestData).then(res => {
+        console.log(res);
+        if (res.statusCode == 201){
+          var timer = setTimeout(function () {
+            wx.switchTab({
+              url: '../../pages/userCenter/userCenter'
+            })
+            clearTimeout(timer);
+          }, 1500);
+          wx.showToast({
+            title: '已申请，待审核',
+            icon: 'success',
+            duration: 2000
+          })
+        }else{
+          wx.showToast({
+            title: '提交失败，请稍后重试',
+            icon: 'none',
+            duration: 2000
+          })
+        }
+      }).catch(res => {
+        wx.showToast({
+          title: '提交失败，请稍后重试',
+          icon: 'none',
+          duration: 2000
+        })
+      })
     }
-    withdrawal().then(res => {
-      console.log(res)
-    }).catch(res => {
-      console.log(res)
-    })
+
+    
   },
   getTotalMoney (){
     this.setData({
       total_money: this.data.money
     })
+  },
+  //下拉刷新
+  onPullDownRefresh() {
+    this._getUserInfo();
   }
 })

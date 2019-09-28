@@ -1,11 +1,4 @@
-<view class="msgCenter">
-  <!-- <view class="msg_item">
-    <view class="bt">
-      <view class="_time">2019-09-24 10:35:12</view>
-      <view class="t_con">新一期活动已上线</view>
-    </view>
-    <view class="bd">感谢您注册工蚁回收小程序，欢迎体验新型环保回收箱。更多回报等着你。</view>
-  </view> -->
+<view class="msgCenter" wx:if="{{msgList.length}}">
   <view class="msg_item" wx:for="{{msgList}}" wx:key="{{item}}">
     <view class="bt">
       <view class="_time">{{item.created_at}}</view>
@@ -19,5 +12,12 @@
         <image class="go_detail_icon close_icon" src="../../assets/images/about/right_icon.png" />
       </navigator>
     </view>
+  </view>
+
+</view>
+<view wx:else class="data-empty">
+  <view class="noOrder_con">
+    <image src="../../assets/images/order/no_order.jpg"></image>
+    <view class="noorder_text">暂无数据</view>
   </view>
 </view>

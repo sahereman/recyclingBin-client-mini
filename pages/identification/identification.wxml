@@ -11,10 +11,10 @@
             <input name="idCard" type="idcard" bindinput="bindKeyInput" maxlength='18' placeholder="请输入身份证号码" />
             <image wx:if="{{image_show}}" src="../../assets/images/user/right_finish.png" />
           </view>
-          <view>
+          <!-- <view>
             <text>手机号</text>
             <input type="number" placeholder="请输入手机号" value="{{phone}}" />
-          </view>
+          </view> -->
       </view>
       <view>
         <button class="sub-btn border-circle" formType="submit">立即绑定</button>

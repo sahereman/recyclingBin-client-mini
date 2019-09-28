@@ -22,6 +22,7 @@
   margin: auto;
   margin-right: 26rpx;
   text-align: right;
+  width:450rpx;
 }
 .form-area view .money-num {
   margin: auto;

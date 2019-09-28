@@ -1,2 +1,24 @@
-<!--pages/helpCenter/helpCenter.wxml-->
-<text>pages/helpCenter/helpCenter.wxml</text>
+<view class="container about_page">
+  <!-- 导图 -->
+  <view class="page-banner container-inner">
+    <image src="../../assets/images/user/help_banner.png" mode="widthFix" />
+  </view>
+  <view class="help_con">
+    <view class="module-title">
+      <image src="../../assets/images/user/help_icon.png" mode="aspectFit" />
+      <text>常见问题</text>
+    </view>
+    <view class="question_part">
+      <view class="itempart" wx:for="{{questionData}}" wx:key="{{item}}" wx:for-index="index">
+        <view class="ques_title" bindtap="openDetail" data-index="{{index}}">
+          <view>{{item.ques}}</view>
+          <image class="go_detail_icon" wx:if="{{item.isOpen}}" src="../../assets/images/user/open_icon.png" />
+          <image class="go_detail_icon close_icon" wx:else src="../../assets/images/user/close_icon.png" />
+        </view>
+        <view class="ques_con" wx:if="{{item.isOpen}}" wx:for="{{item.answer}}" wx:for-item="list" wx:key="{{list}}">
+          <view>{{list}}</view>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>

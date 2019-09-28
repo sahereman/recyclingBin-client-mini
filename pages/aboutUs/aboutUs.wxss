@@ -1,1 +1,211 @@
 /* pages/aboutUs/aboutUs.wxss */
+
+.about_page {
+  padding: 21rpx 0;
+  box-sizing:border-box;
+}
+
+.about_page .menu_tab {
+  padding: 14rpx 0 25rpx;
+  line-height: 54rpx;
+  display: flex;
+  color: rgba(0, 0, 0, 0.6);
+  font-size: 28rpx;
+  text-align: center;
+  justify-content: center;
+}
+
+.about_page .menu_tab view {
+  margin: 0 65rpx;
+}
+
+.about_page .menu_tab view.cur {
+  color: #42c884;
+  border-bottom: 2px solid #42c884;
+}
+
+/* 公司介绍 */
+.about_con{
+  padding-bottom:50rpx;
+}
+.about_con .page-banner image {
+  width: 100%;
+}
+
+.about_con ._con ._title {
+  line-height: 60rpx;
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  color: #42c884;
+  position: relative;
+}
+
+.about_con ._con ._title text {
+  font-size: 30rpx;
+  border-bottom: 1px solid rgba(66,200,132,.3);
+}
+
+.about_con ._con ._title text::after {
+  content: " ";
+  width: 23rpx;
+  height: 3px;
+  background: #42c884;
+  position: absolute;
+  left: 0;
+  bottom:0px;
+  right: 0;
+  margin: auto;
+}
+.about_con ._con ._introl{
+  padding:20rpx;
+  color:rgba(17,17,17,.4);
+  line-height:40rpx;
+  font-size:28rpx;
+}
+.about_con ._con ._introl view{
+  padding:15rpx;
+}
+.about_con ._con ._introl image{
+  width:100%;
+}
+
+
+/* 联系我们 */
+.contact_part{
+  padding:0 20rpx 160rpx;
+}
+.contact_con{
+  background:rgba(255,255,255,.9);
+  position:relative;
+  overflow:hidden;
+}
+
+.contact_con .contact_t{
+  line-height:126rpx;
+  text-align:center;
+  color: #5adb9e;
+  font-size:34rpx;
+}
+.contact_con ._left{
+  position:absolute;
+  left:20rpx;
+  top:-10rpx;
+  width:188rpx;
+}
+.contact_con .contact_t::after{
+  position:absolute;
+  right:110rpx;
+  top:30rpx;
+  content: " ";
+  width:17rpx;
+  height:17rpx;
+  background:rgba(115,223,172,.1);
+
+}
+
+.contact_con .main_con{
+  display: flex;
+  justify-content: center;
+  padding-top:50rpx;
+  flex-wrap:wrap;
+}
+.contact_con .main_con .item{
+  width:288rpx;
+  height:272rpx;
+  border:1px solid #6ed5a1;
+  position: relative;
+  margin:0 24rpx 95rpx;
+  padding-top:47rpx;
+  box-sizing:border-box;
+}
+.contact_con .main_con .item .top_sign{
+  position:absolute;
+  left:0;
+  right:0;
+  top:-47rpx;
+  margin:auto;
+  width:94rpx;
+  height:94rpx;
+  border-radius:50%;
+  border:1rpx solid #6ed5a1;
+  box-sizing:border-box;
+  background:rgba(255,255,255,.9);
+}
+.contact_con .main_con .item .top_sign image{
+  width:74rpx;
+  position:absolute;
+  left:0;
+  right:0;
+  top:0;
+  bottom:0;
+  margin:auto;
+}
+
+.contact_con .item ._title {
+  line-height: 60rpx;
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  color: #42c884;
+  position: relative;
+}
+
+.contact_con .item ._title text {
+  font-size: 30rpx;
+  border-bottom: 1px solid rgba(66,200,132,.3);
+}
+
+.contact_con .item ._title text::after {
+  content: " ";
+  width: 23rpx;
+  height: 3px;
+  background: #42c884;
+  position: absolute;
+  left: 0;
+  bottom:0px;
+  right: 0;
+  margin: auto;
+}
+.contact_con .item .word_con_no{
+  text-align:center;
+  line-height:105rpx;
+  color:rgba(17,17,17,.44);
+}
+
+.contact_con .item .word_tell{
+  line-height:77rpx;
+  text-align:center;
+  color:rgba(17,17,17,.44);
+  padding-top:40rpx;
+  font-size:26rpx;
+}
+.contact_con .item .word_tell image{
+  width:220rpx;
+  display:block;
+  margin:0 auto;
+}
+
+.contact_con .item .word_tell._wechat{
+  line-height:44rpx;
+  padding-top:10rpx;
+}
+
+.contact_part .contact_footer{
+  position:absolute;
+  width:100%;
+  left:0;
+  bottom:0;
+}
+
+
+
+
+
+
+
+
+
+
+
+

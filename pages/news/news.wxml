@@ -3,12 +3,16 @@
   <view class="page-banner container-inner">
     <image src="../../assets/images/search/search_banner.png" mode="widthFix" />
   </view>
-  <view class="container-inner page-content">
+  <view wx:if="{{categories.length}}" class="container-inner page-content">
     <!-- 分类菜单 -->
-    <w-menu  categories="{{categories}}"
-            bind:menuclick="menuClick"/>
+    <w-menu categories="{{categories}}" bind:menuclick="menuClick" />
     <!-- 分类列表 -->
-    <w-content categoryLists="{{categoryLists}}" 
-               bind:listsclick="listsClick"/>
+    <w-content categoryLists="{{categoryLists}}" bind:listsclick="listsClick" />
+  </view>
+  <view wx:else class="data-empty">
+    <view class="noOrder_con">
+      <image src="../../assets/images/order/no_order.jpg"></image>
+      <view class="noorder_text">暂无话题</view>
+    </view>
   </view>
 </view>

@@ -1,5 +1,6 @@
 {
-  "pages": [
+  "pages": [ 
+    
     "pages/index/index",
     "pages/news/news",
     "pages/userCenter/userCenter",
@@ -17,7 +18,8 @@
     "pages/helpCenter/helpCenter",
     "pages/userInfo/userInfo",
     "pages/identification/identification",
-    "pages/withdraw/withdraw"
+    "pages/withdraw/withdraw",
+    "pages/messageCenter/messageCenter"
   ],
   "permission": {
     "scope.userLocation": {

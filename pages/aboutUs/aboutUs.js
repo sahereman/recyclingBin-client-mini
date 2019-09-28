@@ -5,7 +5,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-
+    currentIndex:1
   },
 
   /**
@@ -46,8 +46,8 @@ Page({
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
-  onPullDownRefresh: function () {
-
+  onPullDownRefresh() {
+    wx.stopPullDownRefresh();
   },
 
   /**
@@ -62,5 +62,12 @@ Page({
    */
   onShareAppMessage: function () {
 
+  },
+  changetab:function(e){//展开
+    var index = e.currentTarget.dataset.index;
+    var that = this;
+    that.setData({
+      currentIndex: index
+    })
   }
 })

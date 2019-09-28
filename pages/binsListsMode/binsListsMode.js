@@ -14,7 +14,8 @@ Page({
     total_pages: 0,
     lat: null,
     lng: null,
-    token: ""
+    token: "",
+    bearByArr: {}
   },
   onLoad: function () {
     // 腾讯地图初始化
@@ -37,12 +38,24 @@ Page({
       }
     }
   },
+  onShow: function () {
+    var that = this;
+    const eventChannel = this.getOpenerEventChannel()
+    // 监听acceptDataFromOpenerPage事件，获取上一页面通过eventChannel传送到当前页面的数据
+    eventChannel.on('acceptDataFromOpenerPage', function (data) {
+      if (data.data) {
+        that.setData({
+          bearByArr: data.data
+        })
+      }
+    })
+  },
   onReachBottom: function () {
     if (this.data.category_page < this.data.total_pages) {
       this._getBinsLists()
     }
   },
-  _getData(){
+  _getData() {
     this.getLocation()
   },
   // 获取位置信息
@@ -80,7 +93,7 @@ Page({
       this.data.dataList.push(...list);
       if (res.data.meta.pagination.links.next) {
         let splitArr = res.data.meta.pagination.links.next.split("=")
-        page_num = splitArr[splitArr.length-1]
+        page_num = splitArr[splitArr.length - 1]
       } else {
         page_num = 1;
       }
@@ -98,11 +111,11 @@ Page({
     })
   },
   // 获取当前位置的详细描述
-  getLocalInfo(){
+  getLocalInfo() {
     let that = this;
     qqmapsdk.reverseGeocoder({
       location: {
-        latitude:that.data.lat,
+        latitude: that.data.lat,
         longitude: that.data.lng
       },
       success: function (res) {
@@ -119,16 +132,17 @@ Page({
     })
   },
   //
-  gomappage:function(e){
-    var temp = {
-      lat: e.currentTarget.dataset.lat,
-      lng: e.currentTarget.dataset.lng,
-    }
+  gomappage: function (e) {
+    var bearByArr = this.data.bearByArr;
+    bearByArr.name = e.currentTarget.dataset.name;
+    bearByArr.address = e.currentTarget.dataset.address;
+    bearByArr.no = e.currentTarget.dataset.no;
+    bearByArr.distance = e.currentTarget.dataset.distance;
     wx.navigateTo({
       url: '../binsLists/binsLists',
       success: function (res) {
         // 通过eventChannel向被打开页面传送数据
-        res.eventChannel.emit('acceptDataFromOpenerPage', { data:temp })
+        res.eventChannel.emit('acceptDataFromOpenerPage', { data: bearByArr })
       }
     })
   },
@@ -147,8 +161,8 @@ Page({
     this.setData({
       category_page: 1,
       listsArr: [],
-      dataList:[]
+      dataList: []
     });
     this._getBinsLists();
-  } 
+  }
 })

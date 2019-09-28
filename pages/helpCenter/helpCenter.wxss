@@ -1,1 +1,109 @@
-/* pages/helpCenter/helpCenter.wxss */
+/* pages/aboutUs/aboutUs.wxss */
+.about_page{
+  padding:21rpx 0;
+}
+.about_page .page-banner image{
+  width:100%;
+}
+.module-title {
+  display: flex;
+  justify-content: flex-start;
+  text-align: left;
+  margin: 22rpx 0;
+  margin-top: 0;
+}
+.module-title image {
+  width:35rpx;
+  height:35rpx;
+  margin-right: 12rpx;
+}
+.module-title text {
+  font-size: 30rpx;
+  font-weight:400;
+  color:rgba(0,0,0,1);
+  line-height:30rpx;
+  opacity:0.6;
+}
+.help_con{
+  padding:10rpx 20rpx;
+}
+.help_con .question_part{
+  background:#fff;
+  border-radius:10rpx;
+  box-shadow:0px 5rpx 5rpx 0px rgba(0, 0, 0, 0.1);
+}
+.help_con .question_part .itempart{
+  border-bottom:1px solid rgba(0,0,0,0.03);
+}
+.help_con .question_part .ques_title{
+  line-height:45rpx;
+  font-size:30rpx;
+  color:rgba(16,16,16,.6);
+  padding:15rpx 55rpx 15rpx 25rpx;
+  position:relative;
+  box-sizing:border-box;
+  text-align:justify;
+}
+.help_con .question_part .go_detail_icon{
+  position:absolute;
+  right:25rpx;
+  top:30rpx;
+  width:25rpx;
+  height:13rpx;
+}
+.help_con .question_part .close_icon{
+  width:13rpx;
+  height:22rpx;
+}
+.help_con .question_part .ques_con{
+  padding:0 20rpx;
+  color: rgba(16,16,16,0.5);
+  line-height:45rpx;
+  text-align:justify;
+  font-size:26rpx;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

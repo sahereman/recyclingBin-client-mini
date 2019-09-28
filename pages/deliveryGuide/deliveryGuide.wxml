@@ -1,1 +1,71 @@
-<text>投递指南</text>
+<view class="giude_page">
+  <!-- 导图 -->
+  <view class="page-banner">
+    <image src="../../assets/images/home_nav/guide_banner.png" mode="widthFix" />
+  </view>
+  <view class="about_con">
+    <view class="about_item">
+      <view class="word_part">
+        <image class="step_t" src="../../assets/images/home_nav/step1_t.png" mode="widthFix"></image>
+        <view class="_bd1">找到工蚁回收箱</view>
+        <view class="_bd2">打开微信小程序首页,点击距离最近的回收箱,并前往投递。</view>
+        <image class="step_sign" src="../../assets/images/home_nav/step_sign.png" mode="widthFix"></image>
+      </view>
+      <view class="sign_img">
+       <image class="sign_img" src="../../assets/images/home_nav/step1.png" mode="widthFix"></image>
+      </view>
+    </view>
+    <view class="about_item _right">
+      <view class="sign_img">
+       <image class="sign_img" src="../../assets/images/home_nav/step2.png" mode="widthFix"></image>
+      </view>
+      <view class="word_part">
+        <image class="step_t" src="../../assets/images/home_nav/step2_t.png" mode="widthFix"></image>
+        <view class="_bd1">选择投递品类</view>
+        <view class="_bd2">点击回收屏幕，选择您要投递的物品品类。</view>
+      </view>
+    </view>
+    <view class="about_item">
+      <view class="word_part">
+        <image class="step_t" src="../../assets/images/home_nav/step3_t.png" mode="widthFix"></image>
+        <view class="_bd1">扫码开箱门</view>
+        <view class="_bd2">使用微信扫一扫，扫描屏幕二维码登录小程序，或者在箱门屏幕上输入手机号打开箱门。</view>
+        <image class="step_sign" src="../../assets/images/home_nav/step_sign.png" mode="widthFix"></image>
+      </view>
+      <view class="sign_img">
+       <image class="sign_img" src="../../assets/images/home_nav/step3.png" mode="widthFix"></image>
+      </view>
+    </view>
+    <view class="about_item _right">
+      <view class="sign_img">
+       <image class="sign_img" src="../../assets/images/home_nav/step4.png" mode="widthFix"></image>
+      </view>
+      <view class="word_part">
+        <image class="step_t" src="../../assets/images/home_nav/step4_t.png" mode="widthFix"></image>
+        <view class="_bd1">投放物品并关闭箱门</view>
+        <view class="_bd2">将物品分品类投入回收箱，投递完成之后关闭箱门。</view>
+      </view>
+    </view>
+    <view class="about_item">
+      <view class="word_part">
+        <image class="step_t" src="../../assets/images/home_nav/step5_t.png" mode="widthFix"></image>
+        <view class="_bd1">完成投递</view>
+        <view class="_bd2">投递完成之后，回收机将会自动统计您所投递物品的数量、重量及奖励金。</view>
+        <image class="step_sign" src="../../assets/images/home_nav/step_sign.png" mode="widthFix"></image>
+      </view>
+      <view class="sign_img">
+       <image class="sign_img" src="../../assets/images/home_nav/step5.png" mode="widthFix"></image>
+      </view>
+    </view>
+    <view class="about_item _right">
+      <view class="sign_img">
+       <image class="sign_img" src="../../assets/images/home_nav/step6.png" mode="widthFix"></image>
+      </view>
+      <view class="word_part">
+        <image class="step_t" src="../../assets/images/home_nav/step6_t.png" mode="widthFix"></image>
+        <view class="_bd1">查看奖励金</view>
+        <view class="_bd2">打开微信小程序，您可以在该页面查看投递详情。</view>
+      </view>
+    </view>
+  </view>
+</view>

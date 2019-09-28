@@ -92,12 +92,16 @@ export function getBillList(requestData) {
     header: {
       Authorization: requestData.token
     },
+    data:{
+      type: requestData.type,
+      date: requestData.date
+    }
   })
 }
 // 用户银联提现
 export function withdrawal(requestData) {
   return request({
-    url: 'susers/withdraw/unionPay',
+    url: 'users/withdraw/unionPay',
     method: "POST",
     header: {
       Authorization: requestData.token
@@ -106,7 +110,8 @@ export function withdrawal(requestData) {
       name: requestData.name,
       bank: requestData.bank,
       account: requestData.account,
-      money: requestData.money
+      money: requestData.money,
+      bank_name: requestData.bank_name
     }
   })
 }
@@ -121,6 +126,17 @@ export function realAuthentication(requestData) {
     data: {
       real_name: requestData.real_name,
       real_id: requestData.real_id
+    }
+  })
+}
+
+// 获取消息提醒列表
+export function getMessageData(requestData) {
+  return request({
+    url: 'users/notifications?page=' + requestData.page,
+    method: "GET",
+    header: {
+      Authorization: requestData.token
     }
   })
 }

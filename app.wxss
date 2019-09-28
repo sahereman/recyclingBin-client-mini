@@ -44,6 +44,15 @@ page {
   font-size:38rpx;
   border-bottom:2px solid rgba(223,223,224,.4);
   padding-top:20rpx;
+  position:relative;
+}
+.main-content .dialog_title image{
+  position:absolute;
+  right:25rpx;
+  top:0;
+  bottom:0;
+  margin:auto;
+  width:27rpx;
 }
 .main-footer.btn_part{
   height:92rpx;
@@ -126,15 +135,23 @@ page {
   position:relative;
 }
 .main-content .content-row image{
-  width:18rpx;
-  height:27rpx;
+  width:22rpx;
+  height:33rpx;
   position:absolute;
   left:5rpx;
   top:28rpx;
 }
+.main-content .content-row ._input{
+  font-size:30rpx;
+  color:rgba(0,0,0,.6);
+}
+.main-content .content-row .input{
+  font-size:30rpx;
+  color:rgba(0,0,0,.9);
+}
 .main-content .content-row.pwd_row image{
-  width:21rpx;
-  height:23rpx;
+  width:25rpx;
+  height:27rpx;
 }
 .main-content .content-row.pwd_row .security{
   background:#42c884;

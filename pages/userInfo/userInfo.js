@@ -18,7 +18,7 @@ Page({
     ajxtrue: false, //手机号码格式
     verification_key: '', //短信验证码key
     vcodeSate: false, //验证码验证
-    timerNum: 10, //倒计时
+    timerNum:60, //倒计时
     closeTimerNum: true,
     timer: null //定时器
   },
@@ -69,7 +69,6 @@ Page({
       token: this.data.token
     }
     userInfoShow(requestData).then(res => {
-      console.log("0000000000");
       this.setData({
         avatar_url: res.data.avatar_url,
         userName: res.data.name,
@@ -220,18 +219,27 @@ Page({
     }
   },
   //一键获取手机号
-  getPhoneNumber(e) {
+  _getPhoneNumber(e) {
     var that = this;
     const requestData = {
       token: that.data.token,
       encryptedData: e.detail.encryptedData,
       iv: e.detail.iv
     }
+    console.log(requestData);
     getPhoneNumberajax(requestData).then(res => {
-      that.setData({
-        inphone: res.data.phoneNumber,
-        ajxtrue: true
-      })
+      if (res.data.phoneNumber){
+        that.setData({
+          inphone: res.data.phoneNumber,
+          ajxtrue: true
+        })
+      }else{
+        wx.showToast({
+          title: '获取手机号失败，请稍后重试',
+          icon: 'none',
+          duration: 2000
+        })
+      }
     }).catch(res => {
       console.log(res);
     })
@@ -252,4 +260,14 @@ Page({
   onUnload: function () {
     clearInterval(this.data.timer);
   },
+  openPhonemodal:function(){//打开绑定手机弹窗
+    this.setData({
+      showModal:true
+    })
+  },
+  hideModal:function(){
+    this.setData({
+      showModal:false
+    })
+  }
 })

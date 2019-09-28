@@ -62,5 +62,8 @@ Page({
     }).catch(res => {
       console.log(res)
     })
+  },
+  onPullDownRefresh() {
+    wx.stopPullDownRefresh();
   }
 })

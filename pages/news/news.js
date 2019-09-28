@@ -7,7 +7,7 @@ import {
 import { updateToken } from '../../service/api/user.js'
 import { TOKEN } from '../../common/const.js'
 import { isTokenFailure } from '../../util/util.js'
-
+const app = getApp()
 Page({
   data: {
     category_id: 0,
@@ -20,7 +20,7 @@ Page({
     categoryLists: [],
     currentIndex: 0
   },
-  onLoad: function (options) {
+  onShow: function (options) {
     const token = wx.getStorageSync(TOKEN);
     if (isTokenFailure()) {
       // token有效
@@ -33,7 +33,10 @@ Page({
         // 刷新token
         updateToken(token, this);
       } else {
-
+        // token不存在需用户重新登录
+        wx.reLaunch({
+          url: '../../pages/index/index'
+        })
       }
     }
   },
@@ -82,7 +85,6 @@ Page({
       if (res.data.meta.pagination.links.next){
         page_num = res.data.meta.pagination.links.next.split("=")[1]
       }
-      console.log(that.data.dataList);
       that.setData({
         categoryLists: that.data.dataList,
         category_page: page_num,

@@ -22,7 +22,12 @@ Page({
       // token无效
       if (token && token.length != 0) {
         updateToken(token, this);
-      } else {}
+      } else {
+        // token不存在需用户重新登录
+        wx.reLaunch({
+          url: '../../pages/index/index'
+        })
+      }
     }
   },
   onReachBottom: function () {

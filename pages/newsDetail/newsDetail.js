@@ -30,7 +30,7 @@ Page({
         title: res.data.title
       })
       this.setData({
-        nodes: data,
+        nodes: res.data.content,
         title: res.data.title,
         view_count: res.data.view_count
       })

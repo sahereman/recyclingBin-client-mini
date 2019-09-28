@@ -33,13 +33,12 @@ Page({
     const eventChannel = this.getOpenerEventChannel()
     // 监听acceptDataFromOpenerPage事件，获取上一页面通过eventChannel传送到当前页面的数据
     eventChannel.on('acceptDataFromOpenerPage', function (data) {
-      console.log(data);
-      if (data.data.lat && data.data.lng){
+      if (data.data.distance){
         that.setData({
+          bearByArr: data.data,
           lat: data.data.lat,
           lng: data.data.lng
         })
-        that._getNearbyBin();
       }else{
         that._getData();
       }
@@ -85,8 +84,17 @@ Page({
   },
   // -----------------事件监听及操作---------------------
   changeShowModule(){
-    wx.redirectTo({
+    var bearByArr = this.data.bearByArr;
+    wx.navigateTo({
       url: '../binsListsMode/binsListsMode',
+      success: function (res) {
+        // 通过eventChannel向被打开页面传送数据
+        console.log('this.data.bearByArr');
+        res.eventChannel.emit('acceptDataFromOpenerPage', { data: bearByArr })
+      }
     })
+  },
+  onPullDownRefresh() { //下拉刷新
+    wx.stopPullDownRefresh();
   }
 })

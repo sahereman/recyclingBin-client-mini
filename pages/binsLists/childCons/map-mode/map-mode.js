@@ -59,8 +59,7 @@ Component({
     //this.mapCtx = wx.createMapContext("map");
   },
   ready() {
-    this._getBinsLists();
-    
+    //this._getBinsLists();
   },
   methods: {
     openMapChoose() {
@@ -83,7 +82,6 @@ Component({
       }
       var arealist = [];
       getBinLists(requestData).then(res => {
-        console.log(res);
         for (var i = 0; i < res.data.data.length; i++) {
           var temp = {
             iconPath: "../../../../assets/images/map/bars_icon.png",
@@ -95,8 +93,6 @@ Component({
           }
           arealist.push(temp);
         }
-
-        console.log(arealist);
         that.setData({
           markers: arealist
         })
@@ -105,16 +101,13 @@ Component({
       })
     },
     mapViewchange(e) {
-      console.log(e)
       var that = this;
       // 地图发生变化的时候，获取中间点，也就是用户选择的位置toFixed
-      if (e.type == 'end' && (e.causedBy == 'scale' || e.causedBy == 'drag')) {
-        console.log("00000000");
+      if (e.type == 'end' && e.causedBy == 'drag') {
         var mapCtx = wx.createMapContext("map",that);
         mapCtx.getCenterLocation({
           type:'gcj02',
           success: function(res) {
-            console.log(res)
             that.setData({
               latitude:res.latitude,
               longitude: res.longitude
@@ -126,7 +119,6 @@ Component({
       }
     },
     gotohere: function (res) {
-      console.log(res);
       let lat = ''; // 获取点击的markers经纬度
       let lon = ''; // 获取点击的markers经纬度
       let name = ''; // 获取点击的markers名称
@@ -159,7 +151,6 @@ Component({
         lng: this.data.longitude
       }
       getNearbyBin(requestData).then(res => {
-        console.log(res)
         this.setData({
           nearByArr: res.data
         })

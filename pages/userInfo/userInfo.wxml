@@ -13,9 +13,10 @@
       <text wx:if="{{real_authenticated_at}}">{{real_name}}</text>
       <image class="arrow-image" wx:else src="../../assets/images/user/arrow.png" />
     </view>
-    <view>
+    <view bindtap="openPhonemodal">
       <text>手机号</text>
-      <text>{{phone}}</text>
+      <text wx:if="{{phone}}">{{phone}}</text>
+      <image class="arrow-image" wx:else src="../../assets/images/user/arrow.png" />
     </view>
     <view>
       <text>微信</text>
@@ -25,14 +26,16 @@
   <!-- 绑定手机号弹窗 -->
 <w-dialog show="{{showModal}}">
   <view slot="content" class='main-content'>
-    <view class="dialog_title">微信手机绑定</view>
+    <view class="dialog_title">微信手机绑定 
+      <image bindtap="hideModal" src="../../assets/images/user/close_icon2.png" mode="widthFix"></image>
+    </view>
     <view class="content-row">
       <image src="../../assets/images/home_nav/phone_icon.png"></image>
-      <input type="number" placeholder-class="placeholderstyle" value="{{inphone}}" placeholder="请输入手机号" maxlength="11" bindinput='blurPhone' />
+      <input type="number" placeholder-class="_input" value="{{inphone}}" placeholder="请输入手机号" maxlength="11" bindinput='blurPhone' />
     </view>
     <view class="content-row pwd_row">
       <image src="../../assets/images/home_nav/pwd_icon.png"></image>
-      <input type="number" placeholder-class="placeholderstyle" value="{{vCode}}" bindinput='blurCode' placeholder="输入验证码" />
+      <input type="number" placeholder-class="_input" value="{{vCode}}" bindinput='blurCode' placeholder="输入验证码" />
       <!-- <view >获取验证码</view> -->
       <view class="security" wx:if="{{closeTimerNum}}" bindtap="_sendVerification">获取验证码</view>
       <view class="security" wx:else>{{timerNum}}</view>
@@ -40,7 +43,7 @@
   </view>
   <view slot="operation" class="main-footer bindWxPhone">
     <button class='confirm-btn' bindtap="_bindPhone">立即绑定</button>
-    <button open-type="getPhoneNumber" bindgetphonenumber="getPhoneNumber" class='confirm-btn fastBind'>一键绑定微信手机号</button>
+    <button open-type="getPhoneNumber" bindgetphonenumber="_getPhoneNumber" class='confirm-btn fastBind'>一键绑定微信手机号</button>
   </view>
   <!-- <view slot="operation" class="main-footer">
       <view class="bindPhone">绑定</view>
