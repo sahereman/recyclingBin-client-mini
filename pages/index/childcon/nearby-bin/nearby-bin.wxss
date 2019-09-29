@@ -8,7 +8,7 @@
 .bg-image {
   position: absolute;
   right: 27rpx;
-  top: 22rpx;
+  top: 30rpx;
   width: 188rpx;
 }
 .bg-image image {

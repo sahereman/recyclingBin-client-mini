@@ -51,7 +51,7 @@ Page({
     })
   },
   onReachBottom: function () {
-    if (this.data.category_page < this.data.total_pages) {
+    if (this.data.category_page <= this.data.total_pages) {
       this._getBinsLists()
     }
   },
@@ -89,14 +89,15 @@ Page({
     getBinLists(requestData).then(res => {
       wx.stopPullDownRefresh();
       const list = res.data.data;
-      let page_num;
+      let page_num = this.data.category_page;
+      page_num++
       this.data.dataList.push(...list);
-      if (res.data.meta.pagination.links.next) {
-        let splitArr = res.data.meta.pagination.links.next.split("=")
-        page_num = splitArr[splitArr.length - 1]
-      } else {
-        page_num = 1;
-      }
+      // if (res.data.meta.pagination.links.next) {
+      //   let splitArr = res.data.meta.pagination.links.next.split("=")
+      //   page_num = splitArr[splitArr.length - 1]
+      // } else {
+      //   page_num = 1;
+      // }
       this.setData({
         listsArr: this.data.dataList,
         category_page: page_num,

@@ -69,6 +69,8 @@ Page({
   },
   onReachBottom: function () {
     if (this.data.currentPage <= this.data.totalPages) {
+      console.log(this.data.currentPage);
+      console.log(this.data.totalPages);
       this._getBillList()
     }else {
       this.setData({
@@ -92,19 +94,15 @@ Page({
       console.log(res)
       wx.stopPullDownRefresh();
       const list = res.data.data;
-      let page_num = 1;
+      let page_num = this.data.currentPage;
+      page_num++
       this.data.billArrData.push(...list);
-      if (res.data.meta.pagination.links) {
-        if (res.data.meta.pagination.links.next){
-          let splitArr = res.data.meta.pagination.links.next.split("=")
-          page_num = splitArr[splitArr.length - 1]
-        }
-      } 
       this.setData({
         billArr: this.data.billArrData,
         currentPage: page_num,
         totalPages: res.data.meta.pagination.total_pages
       })
+      console.log(this.data.currentPage)
     }).catch(res => {
       console.log(res)
       this.setData({
@@ -166,7 +164,8 @@ Page({
       totalPages: 0,  // 总页数
       isLast: false,  //是否有更多数据
       ordertype: ordertype,
-      ordertypeName: ordertypeName
+      ordertypeName: ordertypeName,
+      //value: [that.data.year, this.data.month],
     })
     this._getBillList();
     this.hideModal();

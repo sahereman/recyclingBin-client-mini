@@ -80,13 +80,15 @@ Page({
     getTopicLists(requestData).then(res => {
       wx.stopPullDownRefresh();
       const list = res.data.data;
-      let page_num;
+      let page_num = this.data.currentPage;
+      page_num++;
       that.data.dataList.push(...list);
-      if (res.data.meta.pagination.links){
-        if (res.data.meta.pagination.links.next){
-          page_num = res.data.meta.pagination.links.next.split("=")[1]
-        }
-      }
+      // if (res.data.meta.pagination.links){
+      //   if (res.data.meta.pagination.links.next){
+      //     page_num = res.data.meta.pagination.links.next.split("=")[1]
+      //   }
+      // }
+      
       that.setData({
         categoryLists: that.data.dataList,
         category_page: page_num,
@@ -124,9 +126,11 @@ Page({
   },
   onPullDownRefresh() {
     this.setData({
+      category_id: 0,
+      categories:[],
       category_page:1,
       categoryLists:[]
     })
-    this._getTopicLists();
+    this._getTopicCategories(this.data.token);
   } 
 })

@@ -12,7 +12,7 @@
             <!-- <view class="location-status">{{item.site_id}}</view> -->
 
             <view wx:if="{{item.types_snapshot.type_fabric.status == 'normal' && item.types_snapshot.type_paper.status == 'normal'}}">
-              <view class="location-status">正常投递</view>
+              <view class="location-status" style="background:rgba(89,219,157,1);color:#fff;">正常投递</view>
             </view>
 
             <view wx:else>

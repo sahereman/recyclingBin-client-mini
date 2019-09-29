@@ -53,16 +53,17 @@ Page({
       console.log(res)
       wx.stopPullDownRefresh();
       const list = res.data.data;
-      let page_num;
+      let page_num = this.data.currentPage;
+      page_num++;
       this.data.orderListsData.push(...list);
-      if (res.data.meta.pagination.links) {
-        if (res.data.meta.pagination.links.next){
-          let splitArr = res.data.meta.pagination.links.next.split("=")
-          page_num = splitArr[splitArr.length - 1]
-        }
-      } else {
-        page_num = 1;
-      }
+      // if (res.data.meta.pagination.links) {
+      //   if (res.data.meta.pagination.links.next){
+      //     let splitArr = res.data.meta.pagination.links.next.split("=")
+      //     page_num = splitArr[splitArr.length - 1]
+      //   }
+      // } else {
+      //   page_num = 1;
+      // }
       this.setData({
         orderLists: this.data.orderListsData,
         currentPage: page_num,

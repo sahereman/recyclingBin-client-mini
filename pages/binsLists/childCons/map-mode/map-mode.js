@@ -103,7 +103,7 @@ Component({
     mapViewchange(e) {
       var that = this;
       // 地图发生变化的时候，获取中间点，也就是用户选择的位置toFixed
-      if (e.type == 'end' && e.causedBy == 'drag') {
+      if (e.type == 'end' && (e.causedBy == 'drag' || e.causedBy == 'scale')) {
         var mapCtx = wx.createMapContext("map",that);
         mapCtx.getCenterLocation({
           type:'gcj02',
@@ -113,7 +113,7 @@ Component({
               longitude: res.longitude
             })
             that._getBinsLists();
-            that._getNearbyBin()
+            //that._getNearbyBin()
           }
         })
       }

@@ -5,6 +5,7 @@
   </view>
   <view class="nearby-bin-content border-circle" bindtap="binsListShow">
     <view wx:if="{{nearByInfo.address}}">
+      <image class="hasnearbin_bg" src="../../../../assets/images/home_nav/hasnearbin.png" mode='widthFix'></image>
       <view class="bg-image">
         <image src="../../../../assets/images/home_nav/address_phone.png" mode='widthFix' />
       </view>

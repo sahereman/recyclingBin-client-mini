@@ -16,10 +16,10 @@
             <block wx:for="{{item.items}}" wx:for-index="idx" wx:for-item="childItem" wx:key="{{idx}}">
               <view class="child_list">
                 <view class="type-name">{{childItem.type_name}}</view>
-                <view class="type-weight">{{childItem.subtotal}}{{childItem.unit}}</view>
+                <view class="type-weight">{{childItem.number}}{{childItem.unit}}</view>
                 <view class="type-price">
                   <image class="price-image" src="../../assets/images/deliver/dollar_icon.png" />
-                  <text>{{childItem.number}}</text>
+                  <text>{{childItem.subtotal}}</text>
                 </view>
               </view>
             </block>

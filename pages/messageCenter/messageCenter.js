@@ -42,13 +42,14 @@ Page({
       wx.stopPullDownRefresh();
       const list = res.data.data;
       const msgList = that.data.msgList;
-      let page_num;
+      let page_num = this.data.category_page;
+      page_num++;
       msgList.push(...list);
-      if (res.data.meta.pagination.links) {
-        if (res.data.meta.pagination.links.next){
-          page_num = res.data.meta.pagination.links.next.split("=")[1]
-        }
-      }
+      // if (res.data.meta.pagination.links) {
+      //   if (res.data.meta.pagination.links.next){
+      //     page_num = res.data.meta.pagination.links.next.split("=")[1]
+      //   }
+      // }
       console.log(page_num);
       that.setData({
         msgList: msgList,
