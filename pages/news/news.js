@@ -52,12 +52,15 @@ Page({
   // 获取话题分类
   _getTopicCategories(requestData){
     getTopicCategories(requestData).then(res => {
-      this.setData({
-        categories: res.data.data,
-        category_id: res.data.data[0].id
-      })
-      // 默认获取第一个分类列表
-      this._getTopicLists();
+      wx.stopPullDownRefresh();
+      if (res.data.data.length != 0){
+        this.setData({
+          categories: res.data.data,
+          category_id: res.data.data[0].id
+        })
+        // 默认获取第一个分类列表
+        this._getTopicLists();
+      }
     }).catch(res => {
       console.log(res)
     })

@@ -5,7 +5,7 @@
     <view class="header-content container-inner">
       <view class="header-top">
         <view class="header-title">当前奖励金</view>
-        <view class="header-count">￥{{orderMoney}}</view>
+        <view class="header-count">￥{{money}}</view>
       </view>
       <view class="header-bottom">
         <view class="bootom-item">
@@ -14,7 +14,7 @@
         </view>
         <view class="bootom-item">
           <view class="header-title">累计奖励金</view>
-          <view class="header-count">￥{{money}}</view>
+          <view class="header-count">￥{{orderMoney}}</view>
         </view>
       </view>
     </view>
