@@ -53,7 +53,7 @@ Page({
   getLocation() {
     // 获取位置信息
     wx.getLocation({
-      type: 'wgs84',
+      type: 'gcj02',
       success: res => {
         this.setData({
           lat: res.latitude,

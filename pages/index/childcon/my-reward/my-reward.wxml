@@ -8,7 +8,7 @@
     <view class="model-content-item">
       <image class="reward-image" src="../../../../assets/images/home_nav/bounty.png" mode="aspectFit"/>
       <view class="item-title">当前奖励金</view>
-      <view class="item-num">￥{{bounty}}</view>
+      <view class="item-num">￥{{totalBounty}}</view>
     </view>
     <view class="model-content-item">
       <image class="time-image" src="../../../../assets/images/home_nav/deliveryTimes.png" mode="aspectFit"/>
@@ -18,7 +18,7 @@
     <view class="model-content-item">
       <image class="num-image" src="../../../../assets/images/home_nav/totalBounty.png" mode="aspectFit"/>
       <view class="item-title">累计奖励金</view>
-      <view class="item-num">￥{{totalBounty}}</view>
+      <view class="item-num">￥{{bounty}}</view>
     </view>
   </view>
 </view>

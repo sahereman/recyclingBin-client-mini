@@ -93,7 +93,7 @@ Page({
       const list = res.data.data;
       let page_num;
       this.data.billArrData.push(...list);
-      if (res.data.meta.pagination.links.next) {
+      if (res.data.meta.pagination.links) {
         let splitArr = res.data.meta.pagination.links.next.split("=")
         page_num = splitArr[splitArr.length - 1]
       } else {

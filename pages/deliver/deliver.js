@@ -57,6 +57,7 @@ Page({
             order_id:res.data.related_id
           }
           getOrderDetail(orderParams).then(response => {
+            console.log(response)
             if (response.statusCode == 200){
               
               that.setData({

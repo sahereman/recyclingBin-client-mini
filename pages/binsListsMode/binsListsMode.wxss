@@ -94,7 +94,7 @@
     height: 100%;
   }
   .change-module-btn {
-    position: absolute;
+    position: fixed;
     top: 97rpx;
     right: 29rpx;
     padding: 15rpx 30rpx;

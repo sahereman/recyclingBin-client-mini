@@ -42,15 +42,23 @@ Component({
               resultToken: res.result.split("?")[1].split('=')[1]
             }
             scanSuccess(requestData).then(res => {
-              wx.navigateTo({
-                url: '../deliver/deliver',
-                success: function (rel) {
-                  // 通过eventChannel向被打开页面传送数据
-                  rel.eventChannel.emit('acceptDataFromOpenerPage', { data: res.data.id })
-                },
+              console.log(res);
+              if (res.statusCode == 422){
+                wx.showToast({
+                  title: res.data.errors.token[0],
+                  icon: 'none',
+                  duration: 2000
+                })
+              }else{
+                wx.navigateTo({
+                  url: '../deliver/deliver',
+                  success: function (rel) {
+                    // 通过eventChannel向被打开页面传送数据
+                    rel.eventChannel.emit('acceptDataFromOpenerPage', { data: res.data.id })
+                  },
 
-              })
-              
+                })
+              }
             }).catch(res => {
               console.log(res)
             })

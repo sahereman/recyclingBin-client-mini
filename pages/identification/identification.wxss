@@ -16,7 +16,7 @@
   color: #8d8d8d;
 }
 .form-area view text {
-  width: 113rpx;
+  width: 150rpx;
   margin-left: 27rpx;
 }
 .form-area view input {

@@ -51,33 +51,39 @@ Page({
     timer: null //定时器
   },
   onShow: function() {
-    this._getBanners()
+    this._getBanners()  
     const token = wx.getStorageSync(TOKEN);
+    var that = this;
     if (isTokenFailure()) {
       // token有效
-      this.data.token = token;
-      this.setData({
+      that.data.token = token;
+      that.setData({
         show: false
       })
-      this._getData()
+      that._getData()
     } else {
       // token无效
       if (token && token.length != 0) {
         // 当token存在只需要进行更新
-        this.setData({
+        that.setData({
           show: false
         })
         // 刷新token
-        updateToken(token, this);
+        updateToken(token, that);
+        that._getData()
       } else {
         // token不存在需用户重新登录
         app.login()
-        this.setData({
+        that.setData({
           show: true
         })
       }
     }
   },
+  onLoad:function(){
+    
+  },
+
   // ------------------网络请求相关方法----------
   _getData() {
     
@@ -164,7 +170,7 @@ Page({
   getLocation() {
     // 获取位置信息
     wx.getLocation({
-      type: 'wgs84',
+      type: 'gcj02',
       success: res => {
         wx.stopPullDownRefresh();
         this.setData({
