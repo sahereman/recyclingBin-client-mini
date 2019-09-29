@@ -79,6 +79,7 @@ Page({
   },
   // 获取回收箱列表
   _getBinsLists() {
+    console.log(this.data.category_page);
     const requestData = {
       page: this.data.category_page,
       token: this.data.token,
@@ -103,7 +104,7 @@ Page({
         category_page: page_num,
         total_pages: res.data.meta.pagination.total_pages
       })
-      console.log(this.data.dataList);
+      console.log(res);
     }).catch(res => {
       console.log(res)
       this.setData({

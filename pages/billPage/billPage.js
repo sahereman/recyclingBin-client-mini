@@ -165,10 +165,11 @@ Page({
       isLast: false,  //是否有更多数据
       ordertype: ordertype,
       ordertypeName: ordertypeName,
-      //value: [that.data.year, this.data.month],
+      month: that.data.month
     })
     this._getBillList();
     this.hideModal();
+    console.log(that.data.value);
   },
   bindChange: function (e) {//选取月份
     const val = e.detail.value

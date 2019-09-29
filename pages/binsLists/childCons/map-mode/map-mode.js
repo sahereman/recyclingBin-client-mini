@@ -59,7 +59,7 @@ Component({
     //this.mapCtx = wx.createMapContext("map");
   },
   ready() {
-    //this._getBinsLists();
+    this._getBinsLists();
   },
   methods: {
     openMapChoose() {
