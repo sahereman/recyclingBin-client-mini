@@ -1,6 +1,7 @@
 .swiper-box {
   margin: 25rpx auto;
   box-shadow:0rpx 3rpx 8rpx 0rpx rgba(86,135,233,0.61);
+  overflow: hidden;
 }
 .nearby-bin {
   margin: 36rpx auto;
