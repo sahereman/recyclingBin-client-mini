@@ -42,7 +42,7 @@ Page({
   },
   onReachBottom: function () {
     // 监听用户上拉触底事件
-    if (this.data.category_page < this.data.total_pages){
+    if (this.data.category_page <= this.data.total_pages){
       this._getTopicLists()
     }
   },
@@ -82,8 +82,10 @@ Page({
       const list = res.data.data;
       let page_num;
       that.data.dataList.push(...list);
-      if (res.data.meta.pagination.links.next){
-        page_num = res.data.meta.pagination.links.next.split("=")[1]
+      if (res.data.meta.pagination.links){
+        if (res.data.meta.pagination.links.next){
+          page_num = res.data.meta.pagination.links.next.split("=")[1]
+        }
       }
       that.setData({
         categoryLists: that.data.dataList,

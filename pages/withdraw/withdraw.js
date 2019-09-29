@@ -63,9 +63,9 @@ Page({
         icon: 'none',
         duration: 2000
       })
-    } else if (!e.detail.value.account){
+    } else if (e.detail.value.account.length < 16 || e.detail.value.account.length >19){
       wx.showToast({
-        title: '请输入收款人账号',
+        title: '请输入有效的收款人账号',
         icon: 'none',
         duration: 2000
       })
@@ -81,9 +81,9 @@ Page({
         icon: 'none',
         duration: 2000
       })
-    } else if (!e.detail.value.money) {
+    } else if (e.detail.value.money<10) {
       wx.showToast({
-        title: '请输入提现金额',
+        title: '提现金额必须大于等于10',
         icon: 'none',
         duration: 2000
       })
@@ -110,9 +110,9 @@ Page({
             icon: 'success',
             duration: 2000
           })
-        }else{
+        } else if (res.statusCode == 422){
           wx.showToast({
-            title: '提交失败，请稍后重试',
+            title: res.data.errors.money[0],
             icon: 'none',
             duration: 2000
           })

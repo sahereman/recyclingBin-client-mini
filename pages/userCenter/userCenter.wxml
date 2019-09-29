@@ -37,7 +37,7 @@
       <view class="reward-content">
         <view class="reward-content-item">
           <view class="content-item-title">当前奖励金</view>
-          <view class="content-item-value">￥{{orderMoney}}</view>
+          <view class="content-item-value">￥{{money}}</view>
         </view>
         <view class="reward-content-item">
           <view class="content-item-title">参与投递次数</view>
@@ -45,7 +45,7 @@
         </view>
         <view class="reward-content-item">
           <view class="content-item-title">累计奖励金</view>
-          <view class="content-item-value">￥{{money}}</view>
+          <view class="content-item-value">￥{{orderMoney}}</view>
         </view>
       </view>
     </view>

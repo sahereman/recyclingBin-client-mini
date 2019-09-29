@@ -37,32 +37,55 @@ Component({
                 app.login()
               }
             }
-            const requestData = {
-              token: token,
-              resultToken: res.result.split("?")[1].split('=')[1]
-            }
-            scanSuccess(requestData).then(res => {
-              console.log(res);
-              if (res.statusCode == 422){
-                wx.showToast({
-                  title: res.data.errors.token[0],
-                  icon: 'none',
-                  duration: 2000
-                })
-              }else{
-                wx.navigateTo({
-                  url: '../deliver/deliver',
-                  success: function (rel) {
-                    // 通过eventChannel向被打开页面传送数据
-                    rel.eventChannel.emit('acceptDataFromOpenerPage', { data: res.data.id })
-                  },
-
-                })
+            console.log(res.result);
+            console.log(res.result.split('/')[2])
+            if (res.result.split('/')[2] != 'www.gongyihuishou.com'){
+              wx.showModal({
+                title: '二维码识别识别',
+                content: '请扫描工蚁回收相关二维码',
+                confirmText: '重新扫描',
+                success(res) {
+                  if (res.confirm) {
+                    that.getScanCode();
+                  } else if (res.cancel) {
+                    console.log('用户点击取消')
+                  }
+                }
+              })
+            }else{
+              const requestData = {
+                token: token,
+                resultToken: res.result.split("?")[1].split('=')[1]
               }
-            }).catch(res => {
-              console.log(res)
-            })
-            
+              scanSuccess(requestData).then(res => {
+                console.log(res);
+                if (res.statusCode == 422) {
+                  wx.showModal({
+                    title: '二维码识别识别',
+                    content: '请扫描工蚁回收相关二维码',
+                    confirmText: '重新扫描',
+                    success(res) {
+                      if (res.confirm) {
+                        that.getScanCode();
+                      } else if (res.cancel) {
+                        console.log('用户点击取消')
+                      }
+                    }
+                  })
+                } else {
+                  wx.navigateTo({
+                    url: '../deliver/deliver',
+                    success: function (rel) {
+                      // 通过eventChannel向被打开页面传送数据
+                      rel.eventChannel.emit('acceptDataFromOpenerPage', { data: res.data.id })
+                    },
+
+                  })
+                }
+              }).catch(res => {
+                console.log(res)
+              })
+            }
           }
         }
       })

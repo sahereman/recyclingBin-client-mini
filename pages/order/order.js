@@ -31,7 +31,7 @@ Page({
     }
   },
   onReachBottom: function () {
-    if (this.data.currentPage < this.data.totalPages) {
+    if (this.data.currentPage <= this.data.totalPages) {
       this._getTopicCategories()
     } else {
       this.setData({
@@ -56,8 +56,10 @@ Page({
       let page_num;
       this.data.orderListsData.push(...list);
       if (res.data.meta.pagination.links) {
-        let splitArr = res.data.meta.pagination.links.next.split("=")
-        page_num = splitArr[splitArr.length - 1]
+        if (res.data.meta.pagination.links.next){
+          let splitArr = res.data.meta.pagination.links.next.split("=")
+          page_num = splitArr[splitArr.length - 1]
+        }
       } else {
         page_num = 1;
       }

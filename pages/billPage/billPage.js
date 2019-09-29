@@ -68,7 +68,7 @@ Page({
     }
   },
   onReachBottom: function () {
-    if (this.data.currentPage < this.data.totalPages) {
+    if (this.data.currentPage <= this.data.totalPages) {
       this._getBillList()
     }else {
       this.setData({
@@ -89,16 +89,17 @@ Page({
       date: this.data.searchDate
     }
     getBillList(requestData).then(res => {
+      console.log(res)
       wx.stopPullDownRefresh();
       const list = res.data.data;
-      let page_num;
+      let page_num = 1;
       this.data.billArrData.push(...list);
       if (res.data.meta.pagination.links) {
-        let splitArr = res.data.meta.pagination.links.next.split("=")
-        page_num = splitArr[splitArr.length - 1]
-      } else {
-        page_num = 1;
-      }
+        if (res.data.meta.pagination.links.next){
+          let splitArr = res.data.meta.pagination.links.next.split("=")
+          page_num = splitArr[splitArr.length - 1]
+        }
+      } 
       this.setData({
         billArr: this.data.billArrData,
         currentPage: page_num,

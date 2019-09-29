@@ -51,7 +51,8 @@ Page({
     timer: null //定时器
   },
   onShow: function() {
-    this._getBanners()  
+    this._getBanners() 
+    
     const token = wx.getStorageSync(TOKEN);
     var that = this;
     if (isTokenFailure()) {
@@ -62,6 +63,7 @@ Page({
       })
       that._getData()
     } else {
+      
       // token无效
       if (token && token.length != 0) {
         // 当token存在只需要进行更新
@@ -72,6 +74,7 @@ Page({
         updateToken(token, that);
         that._getData()
       } else {
+        //wx.hideTabBar(); 
         // token不存在需用户重新登录
         app.login()
         that.setData({
@@ -98,7 +101,8 @@ Page({
       const validTime = res.data.expires_in
       // token和有效期存入缓存
       wx.setStorageSync(TOKEN, token)
-      examineToken(validTime)
+      examineToken(validTime);
+      // wx.showTabBar({})
       this.setData({
         show: false,
         token: token

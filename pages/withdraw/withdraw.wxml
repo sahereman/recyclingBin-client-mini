@@ -11,7 +11,7 @@
         <view>
           <text>账号</text>
           <input name="account" 
-                 type="idcard" 
+                 type="number" 
                  placeholder-class="placeholder-class" 
                  placeholder="请输入收款人账号" 
           />
