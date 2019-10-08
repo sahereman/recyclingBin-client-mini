@@ -17,7 +17,7 @@ Page({
     token: "",
     bearByArr: {}
   },
-  onLoad: function () {
+  onLoad: function (options) {
     // 腾讯地图初始化
     qqmapsdk = new QQMapWX({
       key: 'OUTBZ-V6R3O-A7AW2-SLGR3-IF27F-VOFTS'
@@ -39,16 +39,6 @@ Page({
     }
   },
   onShow: function () {
-    var that = this;
-    const eventChannel = this.getOpenerEventChannel()
-    // 监听acceptDataFromOpenerPage事件，获取上一页面通过eventChannel传送到当前页面的数据
-    eventChannel.on('acceptDataFromOpenerPage', function (data) {
-      if (data.data) {
-        that.setData({
-          bearByArr: data.data
-        })
-      }
-    })
   },
   onReachBottom: function () {
     if (this.data.category_page <= this.data.total_pages) {
@@ -64,7 +54,6 @@ Page({
     wx.getLocation({
       type: 'gcj02',
       success: res => {
-        console.log(res)
         this.setData({
           lat: res.latitude,
           lng: res.longitude
@@ -79,7 +68,6 @@ Page({
   },
   // 获取回收箱列表
   _getBinsLists() {
-    console.log(this.data.category_page);
     const requestData = {
       page: this.data.category_page,
       token: this.data.token,
@@ -88,23 +76,17 @@ Page({
       count: 10
     }
     getBinLists(requestData).then(res => {
+      console.log(res);
       wx.stopPullDownRefresh();
       const list = res.data.data;
       let page_num = this.data.category_page;
       page_num++
       this.data.dataList.push(...list);
-      // if (res.data.meta.pagination.links.next) {
-      //   let splitArr = res.data.meta.pagination.links.next.split("=")
-      //   page_num = splitArr[splitArr.length - 1]
-      // } else {
-      //   page_num = 1;
-      // }
       this.setData({
         listsArr: this.data.dataList,
         category_page: page_num,
         total_pages: res.data.meta.pagination.total_pages
       })
-      console.log(res);
     }).catch(res => {
       console.log(res)
       this.setData({
@@ -135,27 +117,19 @@ Page({
   },
   //
   gomappage: function (e) {
-    var bearByArr = this.data.bearByArr;
-    bearByArr.name = e.currentTarget.dataset.name;
-    bearByArr.address = e.currentTarget.dataset.address;
-    bearByArr.no = e.currentTarget.dataset.no;
-    bearByArr.distance = e.currentTarget.dataset.distance;
+    console.log(e)
+    const name = e.currentTarget.dataset.name;
+    const address = e.currentTarget.dataset.address;
+    const no = e.currentTarget.dataset.no;
+    const distance = e.currentTarget.dataset.distance;
     wx.navigateTo({
-      url: '../binsLists/binsLists',
-      success: function (res) {
-        // 通过eventChannel向被打开页面传送数据
-        res.eventChannel.emit('acceptDataFromOpenerPage', { data: bearByArr })
-      }
+      url: '../binsLists/binsLists?name=' + name + "&address=" + address + "&no=" + no + "&distance=" + distance,
     })
   },
   // -----------------事件监听及操作---------------------
   changeShowModule() {
-    const dataObj = { lat: this.data.lat, lng: this.data.lng }
     wx.navigateTo({
       url: '../binsLists/binsLists',
-      success: function (res) {
-        res.eventChannel.emit('acceptDataFromOpenerPage', { data: dataObj })
-      }
     })
   },
   //下拉刷新

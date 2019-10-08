@@ -2,5 +2,6 @@
   "usingComponents": {
     "map-mode": "childCons/map-mode/map-mode"
   },
-  "navigationBarTitleText": "附近回收机"
+  "navigationBarTitleText": "附近回收机",
+  "enablePullDownRefresh": false
 }

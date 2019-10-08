@@ -4,7 +4,7 @@
       <block wx:for="{{orderLists}}" wx:key="{{index}}">
         <view class="order-list">
           <view class="list-time-status">
-            <view class="list-time">2019-09-06 14:20</view>
+            <view class="list-time">{{item.created_at}}</view>
             <!-- <view class="list-status">{{item.status_text}}</view> -->
             <view class="list-total">共收入<text>{{item.total}}</text>奖励金</view>
           </view>

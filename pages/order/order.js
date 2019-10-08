@@ -50,7 +50,6 @@ Page({
       page: this.data.currentPage
     }
     getTopicCategories(requestData).then(res => {
-      console.log(res)
       wx.stopPullDownRefresh();
       const list = res.data.data;
       let page_num = this.data.currentPage;
@@ -69,7 +68,6 @@ Page({
         currentPage: page_num,
         totalPages: res.data.meta.pagination.total_pages
       })
-      console.log(this.data.orderLists)
     }).catch(res => {
       console.log(res)
       this.setData({

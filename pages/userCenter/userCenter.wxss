@@ -59,8 +59,8 @@
   height: 25rpx;
 }
 .user-notification image {
-  width: 47rpx;
-  height: 47rpx;
+  width: 63rpx;
+  height: 60rpx;
 }
 /* 奖励金 */
 .my-reward {

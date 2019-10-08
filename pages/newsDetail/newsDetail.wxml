@@ -7,5 +7,5 @@
       <text> {{view_count}}</text>
     </view>
   </view>
-  <rich-text class="news_deatil" nodes="{{nodes}}"></rich-text>  
+  <rich-text class="news_deatil" nodes="{{nodes}}"></rich-text>
 </view>

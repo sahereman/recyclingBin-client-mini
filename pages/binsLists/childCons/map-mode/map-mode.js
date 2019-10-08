@@ -113,7 +113,7 @@ Component({
               longitude: res.longitude
             })
             that._getBinsLists();
-            //that._getNearbyBin()
+            that._getNearbyBin()
           }
         })
       }

@@ -10,13 +10,22 @@ Page({
     token: "",
     lat: null,
     lng: null,
-    bearByArr: {}
+    bearByArr: {},
+    fromListMode: false,
+    getOptions: {}
   },
   onLoad: function (options) {
     const token = wx.getStorageSync(TOKEN);
     if (isTokenFailure()) {
       // token有效
       this.data.token = token;
+      if (options.name) {
+        this.data.getOptions = options;
+        this.data.fromListMode = true;
+      }else {
+        this.data.fromListMode = false;
+      }
+      this._getData();
     } else {
       // token无效
       if (token && token.length != 0) {
@@ -27,22 +36,6 @@ Page({
         app.login()
       }
     }
-  },
-  onShow: function () {
-    var that = this;
-    const eventChannel = this.getOpenerEventChannel()
-    // 监听acceptDataFromOpenerPage事件，获取上一页面通过eventChannel传送到当前页面的数据
-    eventChannel.on('acceptDataFromOpenerPage', function (data) {
-      if (data.data.distance){
-        that.setData({
-          bearByArr: data.data,
-          lat: data.data.lat,
-          lng: data.data.lng
-        })
-      }else{
-        that._getData();
-      }
-    })
   },
   // ------------------网络请求-------------------
   _getData() {
@@ -74,10 +67,17 @@ Page({
       lng: this.data.lng
     }
     getNearbyBin(requestData).then(res => {
-      console.log(res)
       this.setData({
         bearByArr: res.data
       })
+      if (this.data.fromListMode){
+        this.setData({
+          'bearByArr.name': this.data.getOptions.name,
+          'bearByArr.address': this.data.getOptions.address,
+          'bearByArr.no': this.data.getOptions.no,
+          'bearByArr.distance': this.data.getOptions.distance,
+        })
+      }
     }).catch(res => {
       console.log(res)
     })
@@ -87,11 +87,6 @@ Page({
     var bearByArr = this.data.bearByArr;
     wx.navigateTo({
       url: '../binsListsMode/binsListsMode',
-      success: function (res) {
-        // 通过eventChannel向被打开页面传送数据
-        console.log('this.data.bearByArr');
-        res.eventChannel.emit('acceptDataFromOpenerPage', { data: bearByArr })
-      }
     })
   },
   onPullDownRefresh() { //下拉刷新

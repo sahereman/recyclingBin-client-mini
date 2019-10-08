@@ -18,7 +18,9 @@ Page({
     categories: [],
     dataList: [],
     categoryLists: [],
-    currentIndex: 0
+    currentIndex: 0,
+    categoryIndex: null,
+    isLast: false
   },
   onShow: function (options) {
     const token = wx.getStorageSync(TOKEN);
@@ -44,20 +46,33 @@ Page({
     // 监听用户上拉触底事件
     if (this.data.category_page <= this.data.total_pages){
       this._getTopicLists()
+    }else {
+      this.setData({
+        isLast: true
+      })
     }
   },
   _getData(){
-    this._getTopicCategories(this.data.token)
+    this._getTopicCategories()
   },
   // 获取话题分类
-  _getTopicCategories(requestData){
+  _getTopicCategories(){
+    const requestData = this.data.token;
     getTopicCategories(requestData).then(res => {
       wx.stopPullDownRefresh();
       if (res.data.data.length != 0){
-        this.setData({
-          categories: res.data.data,
-          category_id: res.data.data[0].id
-        })
+        if (this.data.categoryIndex != null){
+          const showCategory = this.data.categoryIndex;
+          this.setData({
+            categories: res.data.data,
+            category_id: res.data.data[showCategory].id
+          })
+        }else {
+          this.setData({
+            categories: res.data.data,
+            category_id: res.data.data[0].id
+          })
+        }
         // 默认获取第一个分类列表
         this._getTopicLists();
       }
@@ -83,15 +98,9 @@ Page({
     getTopicLists(requestData).then(res => {
       wx.stopPullDownRefresh();
       const list = res.data.data;
-      let page_num = this.data.currentPage;
+      let page_num = this.data.category_page;
       page_num++;
       that.data.dataList.push(...list);
-      // if (res.data.meta.pagination.links){
-      //   if (res.data.meta.pagination.links.next){
-      //     page_num = res.data.meta.pagination.links.next.split("=")[1]
-      //   }
-      // }
-      
       that.setData({
         categoryLists: that.data.dataList,
         category_page: page_num,
@@ -110,7 +119,8 @@ Page({
     this.setData({
       category_id: maitkey,
       dataList: [],
-      category_page:1
+      category_page:1,
+      categoryIndex: currentIndex
     })
     this._getTopicLists()
   },
@@ -120,11 +130,7 @@ Page({
     const dataObj = {currentId: currentId,token: this.data.token}
     // this._getTopicDetails(currentId)
     wx.navigateTo({
-      url: '../newsDetail/newsDetail',
-      success: function (res) {
-        // 通过eventChannel向被打开页面传送数据
-        res.eventChannel.emit('acceptDataFromOpenerPage', { data: dataObj})
-      }
+      url: '../newsDetail/newsDetail?currentId=' + currentId,
     })
   },
   onPullDownRefresh() {
@@ -132,8 +138,9 @@ Page({
       category_id: 0,
       categories:[],
       category_page:1,
+      dataList: [],
       categoryLists:[]
     })
-    this._getTopicCategories(this.data.token);
+    this._getTopicCategories();
   } 
 })

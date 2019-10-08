@@ -13,4 +13,5 @@
           </view>
     </view>
   </block>
+  <view class="last-tips" wx:if="{{isLast}}">到底啦，没有更多内容喽~~</view>
 </view>

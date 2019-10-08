@@ -3,10 +3,14 @@ Component({
   properties: {
     categories: {
       type: Array
-    }
+    },
+    categoryIndex: null
   },
   data: {
     currentIndex: 0
+  },
+  ready: function () { 
+    this.getData();
   },
   methods: {
     onItemClick(e) {
@@ -17,10 +21,17 @@ Component({
         that.setData({
           currentIndex
         })
-        // 2.将最新的currentIndex传递到分类页面
+        // 2.将最新的currentIndex传递到上层
         that.triggerEvent('menuclick', { currentIndex }, {})
       }
       
+    },
+    getData(){
+      if (this.properties.categoryIndex != null) {
+        this.setData({
+          currentIndex: this.properties.categoryIndex
+        })
+      }
     }
   }
 })

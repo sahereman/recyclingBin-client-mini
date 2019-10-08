@@ -9,6 +9,7 @@ map{
   width: 100%;
   height: 50%;
   background-color: #fff;
+  overflow: inherit;
 }
 .map-element:after{ 
   position:absolute; 
@@ -22,6 +23,16 @@ map{
   border-radius:50%; 
   background:#fff;
   }
+  /* .arc {
+    position:absolute; 
+    left:0; 
+    top:-45rpx; 
+    width: 100%;
+    height:120rpx; 
+    border-radius:50%; 
+    background:#fff; 
+    z-index: -1;
+  } */
   .nav_icon {
     position: absolute;
     width: 170rpx;
@@ -50,7 +61,11 @@ map{
     margin-top: 50rpx;
   }
   .local-name {
-    margin-bottom: 34rpx;
+    margin-bottom: 30rpx;
+    width: 100%;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
   }
   .community-info-top  image{
     margin-right: 24rpx;

@@ -1,7 +1,14 @@
 Component({
+  options: {
+    styleIsolation: 'apply-shared'
+  },
   properties: {
     categoryLists:{
       type: Array
+    },
+    isLast: {
+      type: Boolean,
+      value: false
     }
   },
   data: {
@@ -9,7 +16,6 @@ Component({
   },
   methods: {
     onItemClick(e){
-      console.log(e)
       const currentId = e.currentTarget.dataset.listid;
       this.setData({
         currentId

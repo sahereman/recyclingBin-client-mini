@@ -1,12 +1,14 @@
 <!-- 地图模式 -->
   <map id="map" longitude="{{longitude}}" latitude="{{latitude}}" markers="{{markers}}" bindregionchange="mapViewchange" bindmarkertap='gotohere' data-markers="{{markers}}" scale="14">
-    <cover-image class="moverarea" src="../../../../assets/images/map/location_icon.png"></cover-image>
+      <cover-image class="moverarea" src="../../../../assets/images/map/location_icon.png" />
   </map>
   <view class="map-element">
     <view class="nav_icon" bindtap="openMapChoose">
       <image src="../../../../assets/images/map/navigation_icon.png"/>
       <view class="nav_icon_text">导航</view>
     </view>
+    <!-- 圆弧 -->
+    <!-- <cover-view class="arc"></cover-view> -->
     <view class="community-info container-inner">
       <view class="community-info-top">
         <view class="bin-location-name">

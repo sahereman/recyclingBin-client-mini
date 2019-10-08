@@ -5,9 +5,9 @@
   </view>
   <view class="container-inner page-content">
     <!-- 分类菜单 -->
-    <w-menu wx:if="{{categories.length}}" categories="{{categories}}" bind:menuclick="menuClick" />
+    <w-menu wx:if="{{categories.length}}" categories="{{categories}}" categoryIndex="{{categoryIndex}}" bind:menuclick="menuClick" />
     <!-- 分类列表 -->
-    <w-content categoryLists="{{categoryLists}}" bind:listsclick="listsClick" />
+    <w-content categoryLists="{{categoryLists}}" isLast="{{isLast}}" bind:listsclick="listsClick" />
   </view>
   <view wx:if="{{!categoryLists.length}}" class="data-empty">
     <view class="noOrder_con">

@@ -6,16 +6,20 @@
     <!-- 个人信息区 -->
     <view class="user-info-part">
       <view class="user-info">
-        <view class="user-info-head">
-          <image src="{{avatar_url}}" />
-        </view>
+        <navigator url="../../pages/userInfo/userInfo" hover-class="more-detail-hover">
+          <view class="user-info-head">
+            <image src="{{avatar_url}}" />
+          </view>
+        </navigator>
         <view class="user-info-edit">
+        <navigator url="../../pages/userInfo/userInfo" hover-class="user-info-name">
           <view class="user-info-name">
             <text>{{userName}}</text>
-            <navigator url="../../pages/userInfo/userInfo" hover-class="more-detail-hover">
+            <!-- <navigator url="../../pages/userInfo/userInfo" hover-class="more-detail-hover"> -->
               <image src="../../assets/images/user/edit.png" />
-            </navigator>
+            <!-- </navigator> -->
           </view>
+          </navigator>
           <view wx:if="{{phone}}" class="user-info-phone">{{phone}}</view>
           <navigator wx:else url="../../pages/userInfo/userInfo" hover-class="more-detail-hover">
             <view class="user-info-phone">绑定手机号</view>

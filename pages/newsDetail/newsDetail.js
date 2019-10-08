@@ -1,31 +1,49 @@
 import { getTopicDetails } from '../../service/api/news.js'
+import { updateToken } from '../../service/api/user.js'
+import { TOKEN } from '../../common/const.js'
+import { isTokenFailure } from '../../util/util.js'
 
 Page({
   data: {
     nodes: '',
     title:'',
     desc:'',
-    view_count:0
+    view_count:0,
+    token: '',
+    currentId: null
   },
   onLoad: function (options) {
-    const eventChannel = this.getOpenerEventChannel()
-    const that = this;
-    // 监听acceptDataFromOpenerPage事件，获取上一页面通过eventChannel传送到当前页面的数据
-    eventChannel.on('acceptDataFromOpenerPage', function (data) {
-      const currentId = data.data.currentId;
-      const token = data.data.token;
-      that._getTopicDetails(currentId, token)
-    })
+    this.data.currentId = options.currentId;
+    const token = wx.getStorageSync(TOKEN);
+    if (isTokenFailure()) {
+      // token有效
+      this.data.token = token;
+      this._getData()
+    } else {
+      // token无效
+      if (token && token.length != 0) {
+        // 当token存在只需要进行更新
+        // 刷新token
+        updateToken(token, this);
+      } else {
+        // token不存在需用户重新登录
+        wx.reLaunch({
+          url: '../../pages/index/index'
+        })
+      }
+    }
+  },
+  // 网络请求
+  _getData(){
+    this._getTopicDetails()
   },
   // 获取话题详情
-  _getTopicDetails(topic_id,token) {
+  _getTopicDetails() {
     const requestData = {
-      topic_id: topic_id,
-      token: token
+      topic_id: this.data.currentId,
+      token: this.data.token
     }
     getTopicDetails(requestData).then(res => {
-      console.log(res);
-      let data = `<div><h3>javascript - <em>js同步编程</em>与异步编程的区别,异步有哪些优点,为什么...</h3><div><span>2016年5月20日 - </span>从编程方式来讲当然是<em>同步编程</em>的方式更为简单,但是同步有其局限性一是假如是单线程那么一旦遇到阻塞调用,会造成整个线程阻塞,导致cpu无法得到有效利用...</div><div><div></div><span ><span ></span></span> - 百度快照</div><div ><span>为您推荐：</span>js同步和异步ajax异步和同步的区别</div></div>`;
       wx.setNavigationBarTitle({
         title: res.data.title
       })
@@ -37,7 +55,7 @@ Page({
     }).catch(res => {
       console.log(res)
       this.setData({
-        nodes: "数据获取出错，请推出重进"
+        nodes: "数据获取出错，请退出重进"
       })
     })
   },
