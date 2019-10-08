@@ -3,10 +3,15 @@
       <cover-image class="moverarea" src="../../../../assets/images/map/location_icon.png" />
   </map>
   <view class="map-element">
-    <view class="nav_icon" bindtap="openMapChoose">
-      <image src="../../../../assets/images/map/navigation_icon.png"/>
+    <!-- <view class="nav_icon" bindtap="openMapChoose">
+      <image class="go_map_icon" src="../../../../assets/images/map/navigation_icon.png"/>
       <view class="nav_icon_text">导航</view>
-    </view>
+    </view> -->
+    <cover-view class="nav_icon" bindtap="openMapChoose">
+      <cover-image class="go_map_icon" src="../../../../assets/images/map/navigation_icon.png"></cover-image>
+      <cover-view class="nav_icon_text">导航</cover-view>
+    </cover-view>
+    <cover-view class="top_circle"></cover-view>
     <!-- 圆弧 -->
     <!-- <cover-view class="arc"></cover-view> -->
     <view class="community-info container-inner">

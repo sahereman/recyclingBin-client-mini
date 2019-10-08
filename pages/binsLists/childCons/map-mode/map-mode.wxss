@@ -44,7 +44,7 @@ map{
     top: -20%;
     z-index:999;
   }
-  .nav_icon image {
+  .nav_icon .go_map_icon {
     margin: auto;
     margin-top: 15%;
     width: 96rpx;
@@ -105,9 +105,18 @@ map{
     margin: 35rpx 28rpx;
     text-align: center;
   }
-  .community-bottom-part::after {
+  /* .community-bottom-part::after {
     position: absolute;
     content: '';
+    height: 100%;
+    width: 1px;
+    border: 0rpx;
+    border-right: 1px dashed #e5e5e5;
+    top: 0;
+    right: -16%;
+  } */
+  .top_circle{
+    position: absolute;
     height: 100%;
     width: 1px;
     border: 0rpx;
