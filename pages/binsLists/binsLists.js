@@ -14,7 +14,7 @@ Page({
     fromListMode: false,
     getOptions: {}
   },
-  onLoad: function (options) {
+  onShow: function (options) {
     const token = wx.getStorageSync(TOKEN);
     if (isTokenFailure()) {
       // token有效

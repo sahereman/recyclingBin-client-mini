@@ -24,13 +24,33 @@ export function updateToken(requestData,page) {
       Authorization: requestData
     }
   }).then(res => {
-    const token = res.data.token_type + " " + res.data.access_token
-    const validTime = res.data.expires_in
-    wx.setStorageSync(TOKEN, token)
-    examineToken(validTime)
-    page.data.token = token;
-    console.log("刷新了token")
-    page._getData()
+    if (res.statusCode == 403){
+      wx.showModal({
+        title: '提示',
+        content: '当前账号已被禁用,请联系管理员',
+        showCancel: false,
+        success(res) {
+          if (res.confirm) {
+            const token = wx.getStorageSync(TOKEN)
+            if (token) {
+              deleteToken(token)
+              wx.setStorageSync(TOKEN, "");
+            }
+            wx.reLaunch({
+              url: '../../pages/index/index'
+            })
+          }
+        }
+      })
+    }else {
+      const token = res.data.token_type + " " + res.data.access_token
+      const validTime = res.data.expires_in
+      wx.setStorageSync(TOKEN, token)
+      examineToken(validTime)
+      page.data.token = token;
+      console.log("刷新了token")
+      page._getData()
+    }
   }).catch(res => {
     wx.setStorageSync(TOKEN, "")
   })
@@ -43,6 +63,10 @@ export function deleteToken(requestData) {
     header: {
       Authorization: requestData
     }
+  }).then(res => {
+    console.log("token删除成功")
+  }).catch(res => {
+    console.log(res);
   })
 } 
 // 发送手机验证码

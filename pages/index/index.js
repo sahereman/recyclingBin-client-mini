@@ -2,7 +2,9 @@ import {
   TOKEN,
   NEARBYBIN,
   USERINFO,
-  VALIDTIME
+  VALIDTIME,
+  BANNER,
+  ISFORBIDDEN
 } from '../../common/const.js'
 import {
   getToken,
@@ -63,7 +65,6 @@ Page({
       })
       that._getData()
     } else {
-      
       // token无效
       if (token && token.length != 0) {
         // 当token存在只需要进行更新
@@ -72,7 +73,7 @@ Page({
         })
         // 刷新token
         updateToken(token, that);
-        that._getData()
+        // that._getData()
       } else {
         //wx.hideTabBar(); 
         // token不存在需用户重新登录
@@ -84,7 +85,6 @@ Page({
     }
   },
   onLoad:function(){
-    
   },
 
   // ------------------网络请求相关方法----------
@@ -95,18 +95,37 @@ Page({
   // 获取token
   _getToken(requestData) {
     getToken(requestData).then(res => {
-      // 存储到本地缓存
-      const token = res.data.token_type + " " + res.data.access_token
-      const validTime = res.data.expires_in
-      // token和有效期存入缓存
-      wx.setStorageSync(TOKEN, token)
-      examineToken(validTime);
-      // wx.showTabBar({})
-      this.setData({
-        show: false,
-        token: token
-      })
-      this._getData();
+      if (res.statusCode == 403){
+        this.setData({
+          show: false,
+        })
+        // 403表示用户被禁用
+        wx.showModal({
+          title: '提示',
+          content: '当前账号已被禁用,请联系管理员',
+          showCancel: false,
+          success(res) {
+            if (res.confirm) {
+              wx.reLaunch({
+                url: '../../pages/index/index'
+              })
+            } 
+          }
+        })
+      }else {
+        // 存储到本地缓存
+        const token = res.data.token_type + " " + res.data.access_token
+        const validTime = res.data.expires_in
+        // token和有效期存入缓存
+        wx.setStorageSync(TOKEN, token)
+        examineToken(validTime);
+        // wx.showTabBar({})
+        this.setData({
+          show: false,
+          token: token
+        })
+        this._getData();
+      }
     }).catch(err => {
       console.log(err)
     })

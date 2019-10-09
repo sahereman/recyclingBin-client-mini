@@ -1,5 +1,5 @@
 import { isTokenFailure } from '/util/util.js'
-import { TOKEN } from '/common/const.js'
+import { TOKEN, LISTBINTAP } from '/common/const.js'
 
 App({
   globalData: {
@@ -28,5 +28,13 @@ App({
         this.globalData.code = loginRes.code
       }
     })
+  },
+  onHide: function () {
+    const listbintap = wx.getStorageSync(LISTBINTAP);
+    if (listbintap) {
+      wx.removeStorage({
+        key: LISTBINTAP
+      })
+    }
   }
 })
