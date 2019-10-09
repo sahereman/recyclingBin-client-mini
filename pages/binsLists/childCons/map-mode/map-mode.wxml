@@ -1,75 +1,89 @@
+<wxs module="filters" src="../../../../util/filter.wxs"></wxs>
 <!-- 地图模式 -->
-  <map id="map" longitude="{{longitude}}" latitude="{{latitude}}" markers="{{markers}}" bindregionchange="mapViewchange" bindmarkertap='gotohere' data-markers="{{markers}}" scale="14">
-      <cover-image class="moverarea" src="../../../../assets/images/map/location_icon.png" />
-  </map>
-  <view class="map-element">
-    <!-- <view class="nav_icon" bindtap="openMapChoose">
-      <image class="go_map_icon" src="../../../../assets/images/map/navigation_icon.png"/>
-      <view class="nav_icon_text">导航</view>
-    </view> -->
-    <cover-view class="nav_icon" bindtap="openMapChoose">
-      <cover-image class="go_map_icon" src="../../../../assets/images/map/navigation_icon.png"></cover-image>
-      <cover-view class="nav_icon_text">导航</cover-view>
+<map id="map" longitude="{{longitude}}" latitude="{{latitude}}" 
+     markers="{{markers}}" bindregionchange="mapViewchange" 
+     bindmarkertap='gotohere' data-markers="{{markers}}" scale="14">
+  <cover-image class="moverarea" src="../../../../assets/images/map/location_icon.png" />
+</map>
+<cover-view class="map-element">
+  <cover-view class="arc">
+    <cover-image src="../../../../assets/images/map/map-cover-top.png"  mode='widthFix' />
+  </cover-view>
+  <cover-view class="nav_icon" bindtap="openMapChoose">
+    <cover-image class="go_map_icon" src="../../../../assets/images/map/navigation_icon.png" />
+    <cover-view class="nav_icon_text">导航</cover-view>
+  </cover-view>
+  <cover-view class="community-info container-inner">
+    <cover-view class="community-info-top">
+      <cover-view class="bin-location-name">
+        <cover-image src="../../../../assets/images/map/local_name_tip.png" mode='widthFix' />
+        <cover-view class="local-name">{{nearByArr.name}}</cover-view>
+      </cover-view>
+      <cover-view class="info-top-part">
+        <cover-image src="../../../../assets/images/map/place_icon.png" mode='widthFix' />
+        <cover-view wx:if="{{nearByArr.distance>1000}}">
+          <cover-view class="nearby-distance">{{filters.toFix(nearByArr.distance/1000)}}km |</cover-view> 
+          <cover-view class="nearby-address"> {{nearByArr.address}}</cover-view>
+        </cover-view>
+        <cover-view wx:else>
+          <cover-view class="nearby-distance">{{nearByArr.distance}}m |</cover-view>
+          <cover-view class="nearby-address"> {{nearByArr.address}}</cover-view>
+        </cover-view>
+      </cover-view>
+      <cover-view class="info-top-part">
+        <cover-image src="../../../../assets/images/map/time_icon.png" mode='widthFix' />
+        <cover-view>{{binTime}} | 编码：{{nearByArr.no}}</cover-view>
+      </cover-view>
     </cover-view>
-    <cover-view class="top_circle"></cover-view>
-    <!-- 圆弧 -->
-    <!-- <cover-view class="arc"></cover-view> -->
-    <view class="community-info container-inner">
-      <view class="community-info-top">
-        <view class="bin-location-name">
-          <view class="local-name">{{nearByArr.name}}</view>
-        </view>
-        <view class="info-top-part">
-          <image src="../../../../assets/images/map/place_icon.png" mode='widthFix'/>
-          <view wx:if="{{nearByArr.distance>1000}}">
-            <text>{{nearByArr.distance/1000}}km </text> | 
-            <text class="nearby-address"> {{nearByArr.address}}</text>
-          </view>
-          <view wx:else>
-            <text>{{nearByArr.distance}}m |</text>
-            <text class="nearby-address"> {{nearByArr.address}}</text>
-          </view>
-        </view>
-        <view class="info-top-part">
-          <image src="../../../../assets/images/map/time_icon.png" mode='widthFix'/>
-          <view>{{binTime}} | 编码：{{nearByArr.no}}</view>
-        </view>
-      </view>
-      <view class="community-info-bottom">
-        <view class="community-bottom-part">
-          <view class="bottom-img">
-            <block wx:for="{{fabricImages}}" wx:for-item="fabricItem" wx:key="{{fabricItem.child_id}}">
-              <view class="bottom-img-box">
-                <image src="{{fabricItem.image_url}}"/>
-                <view class="bottom-img-name">{{fabricItem.child_name}}</view>
-              </view>
-            </block>
-          </view>
-          <view class="bottom-info">
-            <!-- <image src="{{nearByArr.types_snapshot.type_fabric.status_text}}"/> -->
-            <view class="bottom-info-name">{{nearByArr.types_snapshot.type_fabric.name}}</view>
-            <view class="bottom-info-price">
-            {{nearByArr.types_snapshot.type_fabric.client_price.price}}{{nearByArr.types_snapshot.type_fabric.unit}}
-            </view>
-          </view>
-        </view>
-        <view class="community-bottom-part">
-          <view class="bottom-img">
-            <block wx:for="{{paperImages}}" wx:for-item="paperItem" wx:key="{{paperItem.child_id}}">
-              <view class="bottom-img-box">
-                <image src="{{paperItem.image_url}}"/>
-                <view class="bottom-img-name">{{paperItem.child_name}}</view>
-              </view>
-            </block>
-          </view>
-          <view class="bottom-info">
-            <!-- <image src="{{nearByArr.types_snapshot.type_paper.status_text}}"/> -->
-            <view class="bottom-info-name">{{nearByArr.types_snapshot.type_paper.name}}</view>
-            <view class="bottom-info-price">
-            {{nearByArr.types_snapshot.type_paper.client_price.price}}{{nearByArr.types_snapshot.type_paper.unit}}
-            </view>
-          </view>  
-        </view>
-      </view>
-    </view>
-  </view> 
+    <!-- 横线 -->
+    <cover-view class="striping"></cover-view>
+    <cover-view class="community-info-bottom">
+      <cover-view class="community-bottom-part">
+        <cover-view class="bottom-img">
+          <block wx:for="{{fabricImages}}" wx:for-item="fabricItem" wx:key="{{fabricItem.child_id}}">
+            <cover-view class="bottom-img-box">
+              <cover-image src="{{fabricItem.image_url}}" />
+              <cover-view class="bottom-img-name">{{fabricItem.child_name}}</cover-view>
+            </cover-view>
+          </block>
+        </cover-view>
+        <cover-view class="bottom-info">
+          <cover-image wx:if="{{nearByArr.types_snapshot.type_fabric.status == 'full'}}" 
+                       class="status-img" src="../../../../assets/images/map/full_icon.png" mode="widthFix" />
+          <cover-image wx:if="{{nearByArr.types_snapshot.type_fabric.status == 'normal'}}" 
+                       class="status-img" src="../../../../assets/images/map/capacity_icon.png" mode="widthFix" />
+          <cover-image wx:if="{{nearByArr.types_snapshot.type_fabric.status == 'repair'}}" 
+                       class="status-img" src="../../../../assets/images/map/maintain_icon.png" mode="widthFix" />
+          <cover-view class="bottom-info-name">{{nearByArr.types_snapshot.type_fabric.name}}</cover-view>
+          <cover-view class="bottom-info-price">
+            {{nearByArr.types_snapshot.type_fabric.client_price.price}}元/{{nearByArr.types_snapshot.type_fabric.unit}}
+          </cover-view>
+        </cover-view>
+      </cover-view>
+      <!-- 竖线 -->
+      <cover-image class="vertical-bar" src="../../../../assets/images/map/vertical-bar.png" mode='widthFix' />
+      <cover-view class="community-bottom-part">
+        <cover-view class="bottom-img">
+          <block wx:for="{{paperImages}}" wx:for-item="paperItem" wx:key="{{paperItem.child_id}}">
+            <cover-view class="bottom-img-box">
+              <cover-image src="{{paperItem.image_url}}" />
+              <cover-view class="bottom-img-name">{{paperItem.child_name}}</cover-view>
+            </cover-view>
+          </block>
+        </cover-view>
+        <cover-view class="bottom-info">
+          <cover-image wx:if="{{nearByArr.types_snapshot.type_paper.status == 'full'}}" 
+                       class="status-img" src="../../../../assets/images/map/full_icon.png" mode="widthFix" />
+          <cover-image wx:if="{{nearByArr.types_snapshot.type_paper.status == 'normal'}}" 
+                       class="status-img" src="../../../../assets/images/map/capacity_icon.png" mode="widthFix" />
+          <cover-image wx:if="{{nearByArr.types_snapshot.type_paper.status == 'repair'}}" 
+                       class="status-img" src="../../../../assets/images/map/maintain_icon.png" mode="widthFix" />
+          <cover-view class="bottom-info-name">{{nearByArr.types_snapshot.type_paper.name}}</cover-view>
+          <cover-view class="bottom-info-price">
+            {{nearByArr.types_snapshot.type_paper.client_price.price}}元/{{nearByArr.types_snapshot.type_paper.unit}}
+          </cover-view>
+        </cover-view>
+      </cover-view>
+    </cover-view>
+  </cover-view>
+</cover-view>

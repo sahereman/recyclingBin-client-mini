@@ -6,7 +6,7 @@ import {
 export default function request(options) {
   if (!options.showloading){
     wx.showLoading({
-      title: '数据加载中ing',
+      title: '数据加载中',
     })
   }
   

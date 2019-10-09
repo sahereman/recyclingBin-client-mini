@@ -1,4 +1,4 @@
-import { TOKEN } from '../../common/const.js'
+import { TOKEN, LISTBINTAP } from '../../common/const.js'
 import { isTokenFailure } from '../../util/util.js'
 import { getBinLists } from '../../service/api/recyclingBins.js'
 import { updateToken } from '../../service/api/user.js'
@@ -76,7 +76,6 @@ Page({
       count: 10
     }
     getBinLists(requestData).then(res => {
-      console.log(res);
       wx.stopPullDownRefresh();
       const list = res.data.data;
       let page_num = this.data.category_page;
@@ -111,24 +110,23 @@ Page({
         console.log(res);
       },
       complete: function (res) {
-        // console.log(res);
       }
     })
   },
   //
   gomappage: function (e) {
-    console.log(e)
-    const name = e.currentTarget.dataset.name;
-    const address = e.currentTarget.dataset.address;
-    const no = e.currentTarget.dataset.no;
-    const distance = e.currentTarget.dataset.distance;
-    wx.navigateTo({
-      url: '../binsLists/binsLists?name=' + name + "&address=" + address + "&no=" + no + "&distance=" + distance,
+    const listTapBin = e.currentTarget.dataset.item;
+    wx.setStorage({
+      key: LISTBINTAP,
+      data: listTapBin
+    })
+    wx.redirectTo({
+      url: '../binsLists/binsLists',
     })
   },
   // -----------------事件监听及操作---------------------
   changeShowModule() {
-    wx.navigateTo({
+    wx.redirectTo({
       url: '../binsLists/binsLists',
     })
   },

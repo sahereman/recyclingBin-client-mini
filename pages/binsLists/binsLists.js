@@ -1,4 +1,4 @@
-import { TOKEN, VALIDTIME } from '../../common/const.js'
+import { TOKEN, LISTBINTAP } from '../../common/const.js'
 import { isTokenFailure } from '../../util/util.js'
 import { getNearbyBin, getBinLists } from '../../service/api/recyclingBins.js'
 import { updateToken } from '../../service/api/user.js'
@@ -19,12 +19,6 @@ Page({
     if (isTokenFailure()) {
       // token有效
       this.data.token = token;
-      if (options.name) {
-        this.data.getOptions = options;
-        this.data.fromListMode = true;
-      }else {
-        this.data.fromListMode = false;
-      }
       this._getData();
     } else {
       // token无效
@@ -52,7 +46,14 @@ Page({
           lat: res.latitude,
           lng: res.longitude
         })
-        this._getNearbyBin();
+        const listbintap = wx.getStorageSync(LISTBINTAP);
+        if (listbintap) {
+          this.setData({
+            bearByArr: listbintap
+          })
+        } else {
+          this._getNearbyBin();
+        }
       },
       fail: res => {
         console.log(res)
@@ -70,14 +71,6 @@ Page({
       this.setData({
         bearByArr: res.data
       })
-      if (this.data.fromListMode){
-        this.setData({
-          'bearByArr.name': this.data.getOptions.name,
-          'bearByArr.address': this.data.getOptions.address,
-          'bearByArr.no': this.data.getOptions.no,
-          'bearByArr.distance': this.data.getOptions.distance,
-        })
-      }
     }).catch(res => {
       console.log(res)
     })
@@ -85,11 +78,20 @@ Page({
   // -----------------事件监听及操作---------------------
   changeShowModule(){
     var bearByArr = this.data.bearByArr;
-    wx.navigateTo({
+    wx.redirectTo({
       url: '../binsListsMode/binsListsMode',
     })
   },
   onPullDownRefresh() { //下拉刷新
     wx.stopPullDownRefresh();
+  },
+  onUnload: function(){
+    // 当页面卸载的时候清除缓存
+    const listbintap = wx.getStorageSync(LISTBINTAP);
+    if (listbintap) {
+      wx.removeStorage({
+        key: LISTBINTAP
+      })
+    }
   }
 })

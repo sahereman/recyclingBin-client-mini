@@ -89,7 +89,6 @@ Page({
 
   // ------------------网络请求相关方法----------
   _getData() {
-    
     this.getLocation()
     this._getUserInfo()
   },

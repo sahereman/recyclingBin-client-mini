@@ -1,6 +1,8 @@
 import {
   getBinLists, getNearbyBin
 } from '../../../../service/api/recyclingBins.js'
+import { TOKEN, LISTBINTAP } from '../../../../common/const.js'
+
 Component({
   options: {
     styleIsolation: 'apply-shared'
@@ -72,12 +74,13 @@ Component({
     },
     // 获取回收箱列表
     _getBinsLists() {
+      const token = wx.getStorageSync(TOKEN);
       const that = this;
       const requestData = {
         page: 1,
-        token: this.data.token,
-        lat: this.data.latitude,
-        lng: this.data.longitude,
+        token: token,
+        lat: this.properties.latitude,
+        lng: this.properties.longitude,
         count:20
       }
       var arealist = [];
@@ -113,7 +116,7 @@ Component({
               longitude: res.longitude
             })
             that._getBinsLists();
-            that._getNearbyBin()
+            that._getNearbyBin();
           }
         })
       }
@@ -145,10 +148,11 @@ Component({
       }
     },
     _getNearbyBin() {
+      const token = wx.getStorageSync(TOKEN);
       const requestData = {
-        token: this.data.token,
-        lat: this.data.latitude,
-        lng: this.data.longitude
+        token: token,
+        lat: this.properties.latitude,
+        lng: this.properties.longitude
       }
       getNearbyBin(requestData).then(res => {
         this.setData({

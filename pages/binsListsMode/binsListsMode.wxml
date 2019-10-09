@@ -1,7 +1,10 @@
 <view class="bin-lists container-inner">
   <view wx:if="{{listsArr.length}}">
     <block wx:for="{{listsArr}}" wx:key="{{item.id}}">
-      <view class="bin-list" bindtap="gomappage" data-name="{{item.name}}" data-address="{{item.address}}" data-no="{{item.no}}" data-distance="{{item.distance}}" data-lat="{{item.lat}}" data-lng="{{item.lng}}">
+      <view class="bin-list" bindtap="gomappage" data-name="{{item.name}}" data-item="{{item}}"
+            data-address="{{item.address}}" data-no="{{item.no}}" 
+            data-distance="{{item.distance}}" data-lat="{{item.lat}}" 
+            data-lng="{{item.lng}}">
         <view class="bin-list-left">
           <view class="bin-list-img">
             <image src="../../assets/images/map/place_active_icon.png" mode='widthFix' />
