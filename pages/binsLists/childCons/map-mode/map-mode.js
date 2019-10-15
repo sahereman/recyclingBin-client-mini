@@ -66,8 +66,8 @@ Component({
   methods: {
     openMapChoose() {
       wx.openLocation({
-        latitude: this.properties.latitude,
-        longitude: this.properties.longitude,
+        latitude: Number(this.properties.latitude),
+        longitude: Number(this.properties.longitude),
         scale: 18,
         address: this.properties.nearByArr.address
       })
@@ -158,6 +158,8 @@ Component({
         this.setData({
           nearByArr: res.data
         })
+        this.properties.latitude = res.data.lat
+        this.properties.longitude = res.data.lng
       }).catch(res => {
         console.log(res)
       })

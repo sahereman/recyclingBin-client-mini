@@ -1,3 +1,5 @@
+<!-- 距离换算 -->
+<wxs module="filters" src="../../util/filter.wxs"></wxs>
 <view class="bin-lists container-inner">
   <view wx:if="{{listsArr.length}}">
     <block wx:for="{{listsArr}}" wx:key="{{item.id}}">
@@ -30,7 +32,7 @@
           </view>
         </view>
         <view class="bin-list-right">
-          <text wx:if="{{item.distance>1000}}">{{item.distance/1000}}km</text>
+          <text wx:if="{{item.distance>1000}}">{{ filters.toFix(item.distance/1000)}}km</text>
           <text wx:else>{{item.distance}}m</text>
         </view>
       </view>
