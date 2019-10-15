@@ -1,6 +1,6 @@
 import { TOKEN, USERINFO } from '../../common/const.js'
 import {userInfoShow, updateToken, bindPhone,sendVerification } from '../../service/api/user.js'
-import { sub, isTokenFailure } from '../../util/util.js'
+import { sub, isTokenFailure, forbiddenReLaunch } from '../../util/util.js'
 import {getPhoneNumberajax} from '../../service/api/recyclingBins.js'
 Page({
   data: {
@@ -69,6 +69,10 @@ Page({
       token: this.data.token
     }
     userInfoShow(requestData).then(res => {
+      if (res.statusCode == 403) {
+        forbiddenReLaunch();
+        return;
+      }
       this.setData({
         avatar_url: res.data.avatar_url,
         userName: res.data.name,
@@ -122,6 +126,10 @@ Page({
       }, 1000)
 
       sendVerification(requestData).then(res => {
+        if (res.statusCode == 403) {
+          forbiddenReLaunch();
+          return;
+        }
         that.setData({
           verification_key: res.data.verification_key
         })
@@ -155,7 +163,10 @@ Page({
             verification_code: that.data.vCode
           }
           bindPhone(requestData).then(res => {
-            console.log(res);
+            if (res.statusCode == 403) {
+              forbiddenReLaunch();
+              return;
+            }
             if (res.statusCode == 200) {
               wx.showToast({
                 title: '绑定成功',
@@ -228,6 +239,10 @@ Page({
     }
     console.log(requestData);
     getPhoneNumberajax(requestData).then(res => {
+      if (res.statusCode == 403) {
+        forbiddenReLaunch();
+        return;
+      }
       if (res.data.phoneNumber){
         that.setData({
           inphone: res.data.phoneNumber,

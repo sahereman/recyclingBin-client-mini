@@ -25,6 +25,7 @@ export function updateToken(requestData,page) {
     }
   }).then(res => {
     if (res.statusCode == 403){
+      wx.clearStorage();
       wx.showModal({
         title: '提示',
         content: '当前账号已被禁用,请联系管理员',

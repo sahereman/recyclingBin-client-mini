@@ -58,9 +58,21 @@
   width: 25rpx;
   height: 25rpx;
 }
+.user-notification {
+  position: relative
+}
 .user-notification image {
   width: 63rpx;
   height: 60rpx;
+}
+.red-circle {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 20rpx;
+  height: 20rpx;
+  border-radius: 50%;
+  background: red;
 }
 /* 奖励金 */
 .my-reward {

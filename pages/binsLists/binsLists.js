@@ -1,5 +1,5 @@
 import { TOKEN, LISTBINTAP } from '../../common/const.js'
-import { isTokenFailure } from '../../util/util.js'
+import { isTokenFailure, forbiddenReLaunch } from '../../util/util.js'
 import { getNearbyBin, getBinLists } from '../../service/api/recyclingBins.js'
 import { updateToken } from '../../service/api/user.js'
 //获取应用实例
@@ -68,6 +68,10 @@ Page({
       lng: this.data.lng
     }
     getNearbyBin(requestData).then(res => {
+      if (res.statusCode == 403) {
+        forbiddenReLaunch();
+        return;
+      }
       this.setData({
         bearByArr: res.data
       })

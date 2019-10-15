@@ -1,6 +1,6 @@
 import { updateToken, getMessageData } from '../../service/api/user.js'
 import { TOKEN } from '../../common/const.js'
-import { isTokenFailure } from '../../util/util.js'
+import { isTokenFailure, forbiddenReLaunch } from '../../util/util.js'
 const app = getApp()
 Page({
   data: {
@@ -38,7 +38,10 @@ Page({
       token: that.data.token
     }
     getMessageData(requestData).then(res => {
-      console.log(res);
+      if (res.statusCode == 403) {
+        forbiddenReLaunch();
+        return;
+      }
       wx.stopPullDownRefresh();
       const list = res.data.data;
       const msgList = that.data.msgList;

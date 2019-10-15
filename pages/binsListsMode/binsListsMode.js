@@ -1,5 +1,5 @@
 import { TOKEN, LISTBINTAP } from '../../common/const.js'
-import { isTokenFailure } from '../../util/util.js'
+import { isTokenFailure, forbiddenReLaunch } from '../../util/util.js'
 import { getBinLists } from '../../service/api/recyclingBins.js'
 import { updateToken } from '../../service/api/user.js'
 var QQMapWX = require('../../common/qqmap-wx-jssdk.min.js')
@@ -76,6 +76,10 @@ Page({
       count: 10
     }
     getBinLists(requestData).then(res => {
+      if (res.statusCode == 403) {
+        forbiddenReLaunch();
+        return;
+      }
       wx.stopPullDownRefresh();
       const list = res.data.data;
       let page_num = this.data.category_page;

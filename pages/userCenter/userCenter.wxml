@@ -27,6 +27,7 @@
         </view>
       </view>
       <view class="user-notification">
+        <cover-view wx:if="{{notification_count>0}}" class="red-circle"></cover-view>
         <navigator url="../../pages/messageCenter/messageCenter" hover-class="more-detail-hover">
           <image src="../../assets/images/user/notification.png" />
         </navigator>

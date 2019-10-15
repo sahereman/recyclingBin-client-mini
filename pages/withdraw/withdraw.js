@@ -1,6 +1,6 @@
 import { TOKEN, USERINFO } from '../../common/const.js'
 import { userInfoShow, updateToken, withdrawal } from '../../service/api/user.js'
-import { isTokenFailure } from '../../util/util.js'
+import { isTokenFailure, forbiddenReLaunch } from '../../util/util.js'
 
 Page({
   data: {
@@ -43,6 +43,10 @@ Page({
       token: this.data.token
     }
     userInfoShow(requestData).then(res => {
+      if (res.statusCode == 403) {
+        forbiddenReLaunch();
+        return;
+      }
       wx.stopPullDownRefresh();
       this.setData({
         money: res.data.money,
@@ -97,7 +101,10 @@ Page({
         bank_name:e.detail.value.bankname
       }
       withdrawal(requestData).then(res => {
-        console.log(res);
+        if (res.statusCode == 403) {
+          forbiddenReLaunch();
+          return;
+        }
         if (res.statusCode == 201){
           var timer = setTimeout(function () {
             wx.switchTab({

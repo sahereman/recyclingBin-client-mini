@@ -1,6 +1,6 @@
 import { TOKEN, USERINFO } from '../../common/const.js'
 import { userInfoShow, updateToken } from '../../service/api/user.js'
-import { isTokenFailure } from '../../util/util.js'
+import { isTokenFailure, forbiddenReLaunch } from '../../util/util.js'
 
 Page({
   data: {
@@ -41,7 +41,11 @@ Page({
       token: this.data.token
     }
     userInfoShow(requestData).then(res => {
-      wx.stopPullDownRefresh();s
+      if (res.data.status_code == 444) {
+        forbiddenReLaunch();
+        return;
+      }
+      wx.stopPullDownRefresh();
       this.setData({
         money: res.data.money,
       })

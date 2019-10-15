@@ -1,7 +1,7 @@
 // pages/deliver/deliver.js
 import { checkscanSuccess, getOrderDetail } from '../../service/api/recyclingBins.js'
 import { TOKEN } from '../../common/const.js'
-import { isTokenFailure } from '../../util/util.js'
+import { isTokenFailure, forbiddenReLaunch } from '../../util/util.js'
 import { updateToken } from '../../service/api/user.js'
 //获取应用实例
 const app = getApp()
@@ -50,6 +50,10 @@ Page({
         token_id: that.data.token_id 
       }
       checkscanSuccess(requestData).then(res => {
+        if (res.statusCode == 403) {
+          forbiddenReLaunch();
+          return;
+        }
         if (res.data.related_id){
           clearInterval(that.data.timer); 
           var orderParams = {
@@ -57,9 +61,11 @@ Page({
             order_id:res.data.related_id
           }
           getOrderDetail(orderParams).then(response => {
-            console.log(response)
+            if (res.statusCode == 403) {
+              forbiddenReLaunch();
+              return;
+            }
             if (response.statusCode == 200){
-              
               that.setData({
                 isComplete: !that.data.isComplete,
                 userItems: response.data

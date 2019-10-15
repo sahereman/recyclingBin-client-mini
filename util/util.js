@@ -41,3 +41,21 @@ export function sub(str, startLength, endLength) {
     return str;
   }
 }
+// 如果用户被禁用，请空缓存并返回首页
+ // 跳转到首页的封装方法，默认页面不传参，如果在组件中调用传参为true例如：forbiddenReLaunch(true)即可
+export function forbiddenReLaunch(isCom = false) {
+  const url = isCom ? '../../../../pages/index/index' : '../../pages/index/index'
+  wx.clearStorage();
+  wx.showModal({
+    title: '提示',
+    content: '当前账号已被禁用,请联系管理员',
+    showCancel: false,
+    success(res) {
+      if (res.confirm) {
+        wx.reLaunch({
+          url: url
+        })
+      }
+    }
+  })
+}

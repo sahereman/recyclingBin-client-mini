@@ -23,7 +23,8 @@ import {
 } from '../../service/api/recyclingBins.js'
 import {
   examineToken,
-  isTokenFailure
+  isTokenFailure,
+  forbiddenReLaunch
 } from '../../util/util.js'
 
 //获取应用实例
@@ -99,33 +100,22 @@ Page({
         this.setData({
           show: false,
         })
-        // 403表示用户被禁用
-        wx.showModal({
-          title: '提示',
-          content: '当前账号已被禁用,请联系管理员',
-          showCancel: false,
-          success(res) {
-            if (res.confirm) {
-              wx.reLaunch({
-                url: '../../pages/index/index'
-              })
-            } 
-          }
-        })
-      }else {
-        // 存储到本地缓存
-        const token = res.data.token_type + " " + res.data.access_token
-        const validTime = res.data.expires_in
-        // token和有效期存入缓存
-        wx.setStorageSync(TOKEN, token)
-        examineToken(validTime);
-        // wx.showTabBar({})
-        this.setData({
-          show: false,
-          token: token
-        })
-        this._getData();
+        // 跳转到首页的封装方法，默认页面不传参，如果在组件中调用传参为true例如：forbiddenReLaunch(true)即可
+        forbiddenReLaunch();
+        return;
       }
+      // 存储到本地缓存
+      const token = res.data.token_type + " " + res.data.access_token
+      const validTime = res.data.expires_in
+      // token和有效期存入缓存
+      wx.setStorageSync(TOKEN, token)
+      examineToken(validTime);
+      // wx.showTabBar({})
+      this.setData({
+        show: false,
+        token: token
+      })
+      this._getData();
     }).catch(err => {
       console.log(err)
     })
@@ -154,7 +144,13 @@ Page({
       lng: app.globalData.lng
     }
     getNearbyBin(requestData).then(res => {
-      // wx.setStorage(NEARBYBIN, res.data)
+      if (res.statusCode == 403) {
+        this.setData({
+          show: false,
+        })
+        forbiddenReLaunch();
+        return;
+      }
       wx.setStorage({
         key: NEARBYBIN,
         data: res.data
@@ -214,6 +210,13 @@ Page({
       token: this.data.token
     }
     userInfoShow(requestData).then(res => {
+      if (res.statusCode == 403) {
+        this.setData({
+          show: false,
+        })
+        forbiddenReLaunch();
+        return;
+      }
       wx.stopPullDownRefresh();
       // 将个人信息存入缓存在个人中心进行调用
       this.setData({
@@ -266,6 +269,13 @@ Page({
       }, 1000)
 
       sendVerification(requestData).then(res => {
+        if (res.statusCode == 403) {
+          this.setData({
+            show: false,
+          })
+          forbiddenReLaunch();
+          return;
+        } 
         that.setData({
           verification_key: res.data.verification_key
         })
@@ -299,7 +309,13 @@ Page({
             verification_code: that.data.vCode
           }
           bindPhone(requestData).then(res => {
-            console.log(res);
+            if (res.statusCode == 403) {
+              this.setData({
+                show: false,
+              })
+              forbiddenReLaunch();
+              return;
+            } 
             if (res.statusCode == 200) {
               wx.showToast({
                 title: '绑定成功',
@@ -372,8 +388,13 @@ Page({
       iv: e.detail.iv
     }
     getPhoneNumberajax(requestData).then(res => {
-      console.log(res.data.phoneNumber);
-      console.log(res);
+      if (res.statusCode == 403) {
+        this.setData({
+          show: false,
+        })
+        forbiddenReLaunch();
+        return;
+      }
       that.setData({
         inphone: res.data.phoneNumber,
         ajxtrue: true

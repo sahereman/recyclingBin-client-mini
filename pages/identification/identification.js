@@ -1,6 +1,6 @@
 import { realAuthentication, updateToken } from '../../service/api/user.js'
 import { TOKEN, USERINFO } from '../../common/const.js'
-import { sub, isTokenFailure } from '../../util/util.js'
+import { sub, isTokenFailure, forbiddenReLaunch } from '../../util/util.js'
 
 Page({
   data: {
@@ -46,7 +46,10 @@ Page({
         real_id: idCard
       }
       realAuthentication(requestData).then(res => {
-        console.log(res)
+        if (res.statusCode == 403) {
+          forbiddenReLaunch();
+          return;
+        }
         prevPage.setData({  // 将想要传递的参数在这里直接setData。上个页面就会执行这里的操作。
           real_name: realName,
           real_authenticated_at: true,

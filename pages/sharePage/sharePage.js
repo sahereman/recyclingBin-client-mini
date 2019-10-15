@@ -1,6 +1,6 @@
 import { TOKEN, USERINFO } from '../../common/const.js'
 import { userInfoShow, updateToken } from '../../service/api/user.js'
-import { isTokenFailure } from '../../util/util.js'
+import { isTokenFailure, forbiddenReLaunch } from '../../util/util.js'
 
 Page({
   data: {
@@ -50,6 +50,10 @@ Page({
       token: this.data.token
     }
     userInfoShow(requestData).then(res => {
+      if (res.statusCode == 403) {
+        forbiddenReLaunch();
+        return;
+      }
       this.setData({
         avatar_url: res.data.avatar_url,
         userName: res.data.name,

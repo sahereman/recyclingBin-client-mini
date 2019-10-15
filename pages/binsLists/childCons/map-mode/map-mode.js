@@ -2,6 +2,7 @@ import {
   getBinLists, getNearbyBin
 } from '../../../../service/api/recyclingBins.js'
 import { TOKEN, LISTBINTAP } from '../../../../common/const.js'
+import { forbiddenReLaunch } from '../../../../util/util.js'
 
 Component({
   options: {
@@ -85,6 +86,10 @@ Component({
       }
       var arealist = [];
       getBinLists(requestData).then(res => {
+        if (res.statusCode == 403) {
+          forbiddenReLaunch(true);
+          return;
+        }
         for (var i = 0; i < res.data.data.length; i++) {
           var temp = {
             iconPath: "../../../../assets/images/map/bars_icon.png",
@@ -155,6 +160,10 @@ Component({
         lng: this.properties.longitude
       }
       getNearbyBin(requestData).then(res => {
+        if (res.statusCode == 403) {
+          forbiddenReLaunch(true);
+          return;
+        }
         this.setData({
           nearByArr: res.data
         })

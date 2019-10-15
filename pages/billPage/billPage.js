@@ -1,5 +1,5 @@
 import { TOKEN, USERINFO } from '../../common/const.js'
-import { isTokenFailure } from '../../util/util.js'
+import { isTokenFailure, forbiddenReLaunch } from '../../util/util.js'
 import { getBillList, updateToken } from '../../service/api/user.js'
 
 var animation;
@@ -91,7 +91,10 @@ Page({
       date: this.data.searchDate
     }
     getBillList(requestData).then(res => {
-      console.log(res)
+      if (res.statusCode == 403) {
+        forbiddenReLaunch();
+        return;
+      }
       wx.stopPullDownRefresh();
       const list = res.data.data;
       let page_num = this.data.currentPage;

@@ -6,7 +6,7 @@ import {
 } from '../../service/api/news.js'
 import { updateToken } from '../../service/api/user.js'
 import { TOKEN } from '../../common/const.js'
-import { isTokenFailure } from '../../util/util.js'
+import { isTokenFailure, forbiddenReLaunch } from '../../util/util.js'
 const app = getApp()
 Page({
   data: {
@@ -59,6 +59,10 @@ Page({
   _getTopicCategories(){
     const requestData = this.data.token;
     getTopicCategories(requestData).then(res => {
+      if (res.statusCode == 403) {
+        forbiddenReLaunch();
+        return;
+      }
       wx.stopPullDownRefresh();
       if (res.data.data.length != 0){
         if (this.data.categoryIndex != null){
@@ -96,6 +100,10 @@ Page({
       }
     }
     getTopicLists(requestData).then(res => {
+      if (res.statusCode == 403) {
+        forbiddenReLaunch();
+        return;
+      }
       wx.stopPullDownRefresh();
       const list = res.data.data;
       let page_num = this.data.category_page;

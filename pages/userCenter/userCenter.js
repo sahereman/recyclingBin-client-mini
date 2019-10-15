@@ -1,6 +1,6 @@
 import { TOKEN, USERINFO } from '../../common/const.js'
 import { userInfoShow, updateToken } from '../../service/api/user.js'
-import { sub, isTokenFailure } from '../../util/util.js'
+import { sub, isTokenFailure, forbiddenReLaunch } from '../../util/util.js'
 
 Page({
   data: {
@@ -11,6 +11,7 @@ Page({
     orderCount: 0, //参与投递次数
     orderMoney: '0.00', //当前奖励金
     phone: '',
+    notification_count: 0 //未读消息的数量
   },
   onShow: function (options) {
     const token = wx.getStorageSync(TOKEN);
@@ -53,6 +54,10 @@ Page({
       token: this.data.token
     }
     userInfoShow(requestData).then(res => {
+      if (res.statusCode == 403) {
+        forbiddenReLaunch();
+        return;
+      }
       wx.stopPullDownRefresh();
       this.setData({
         avatar_url: res.data.avatar_url,
@@ -61,7 +66,8 @@ Page({
         orderCount:  res.data.total_client_order_count,
         orderMoney:  res.data.total_client_order_money,
         phone: sub(res.data.phone,3,4),
-        realAuthenticated: res.data.real_authenticated_at
+        realAuthenticated: res.data.real_authenticated_at,
+        notification_count: res.data.notification_count
       })
       wx.setStorage({
         key: USERINFO,

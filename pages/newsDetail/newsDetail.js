@@ -1,7 +1,7 @@
 import { getTopicDetails } from '../../service/api/news.js'
 import { updateToken } from '../../service/api/user.js'
 import { TOKEN } from '../../common/const.js'
-import { isTokenFailure } from '../../util/util.js'
+import { isTokenFailure, forbiddenReLaunch } from '../../util/util.js'
 
 Page({
   data: {
@@ -44,6 +44,10 @@ Page({
       token: this.data.token
     }
     getTopicDetails(requestData).then(res => {
+      if (res.statusCode == 403) {
+        forbiddenReLaunch();
+        return;
+      }
       wx.setNavigationBarTitle({
         title: res.data.title
       })
