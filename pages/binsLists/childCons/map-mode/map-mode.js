@@ -56,7 +56,8 @@ Component({
         image_url: "../../../../assets/images/map/metal_icon.png"
       }
     ],
-    markers: []
+    markers: [],
+    mapChange: false
   },
   created(){
     //this.mapCtx = wx.createMapContext("map");
@@ -66,6 +67,13 @@ Component({
   },
   methods: {
     openMapChoose() {
+      if (!this.data.mapChange){
+        const listbintap = wx.getStorageSync(LISTBINTAP);
+        if (listbintap) {
+          this.properties.latitude = listbintap.lat;
+          this.properties.longitude = listbintap.lng;
+        }
+      }
       wx.openLocation({
         latitude: Number(this.properties.latitude),
         longitude: Number(this.properties.longitude),
@@ -116,6 +124,8 @@ Component({
         mapCtx.getCenterLocation({
           type:'gcj02',
           success: function(res) {
+            console.log(res)
+            that.data.mapChange = true;
             that.setData({
               latitude:res.latitude,
               longitude: res.longitude

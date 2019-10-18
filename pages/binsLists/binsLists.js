@@ -49,7 +49,7 @@ Page({
         const listbintap = wx.getStorageSync(LISTBINTAP);
         if (listbintap) {
           this.setData({
-            bearByArr: listbintap
+            bearByArr: listbintap,
           })
         } else {
           this._getNearbyBin();
