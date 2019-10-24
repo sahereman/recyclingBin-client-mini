@@ -53,35 +53,40 @@ Page({
         if (res.statusCode == 403) {
           forbiddenReLaunch();
           return;
-        }
-        if (res.data.related_id){
-          clearInterval(that.data.timer); 
-          var orderParams = {
-            token: token,
-            order_id:res.data.related_id
-          }
-          getOrderDetail(orderParams).then(response => {
-            if (res.statusCode == 403) {
-              forbiddenReLaunch();
-              return;
-            }
-            if (response.statusCode == 200){
-              that.setData({
-                isComplete: !that.data.isComplete,
-                userItems: response.data
-              })
-            }
-            
-          }).catch(error => {
-            console.log(error)
+        } else if (res.statusCode == 404){
+          wx.reLaunch({
+            url:'../../pages/index/index'
           })
+        }else{
+          if (res.data.related_id) {
+            clearInterval(that.data.timer);
+            var orderParams = {
+              token: token,
+              order_id: res.data.related_id
+            }
+            getOrderDetail(orderParams).then(response => {
+              if (res.statusCode == 403) {
+                forbiddenReLaunch();
+                return;
+              }
+              if (response.statusCode == 200) {
+                that.setData({
+                  isComplete: !that.data.isComplete,
+                  userItems: response.data
+                })
+              }
 
-
-
+            }).catch(error => {
+              console.log(error)
+            })
+          }
         }
       }).catch(res => {
         console.log(res)
       })
     }, 1000);
+  },
+  onPullDownRefresh() { //下拉刷新
+    wx.stopPullDownRefresh();
   }
 })

@@ -84,5 +84,8 @@ Page({
         })
       }
     }
+  },
+  onPullDownRefresh() { //下拉刷新
+    wx.stopPullDownRefresh();
   }
 })

@@ -37,8 +37,6 @@ Component({
                 app.login()
               }
             }
-            console.log(res.result);
-            console.log(res.result.split('/')[2])
             if (res.result.split('/')[2] != 'www.gongyihuishou.com'){
               wx.showModal({
                 title: '二维码识别错误',
@@ -61,7 +59,7 @@ Component({
                 console.log(res);
                 if (res.statusCode == 422) {
                   wx.showModal({
-                    title: '二维码识别识别',
+                    title: res.data.errors.token[0],
                     content: '请扫描工蚁回收相关二维码',
                     confirmText: '重新扫描',
                     success(res) {
@@ -130,5 +128,8 @@ Component({
         }
       })
     }
+  },
+  onPullDownRefresh() { //下拉刷新
+    wx.stopPullDownRefresh();
   }
 })
