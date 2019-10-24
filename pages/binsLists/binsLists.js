@@ -12,7 +12,8 @@ Page({
     lng: null,
     bearByArr: {},
     fromListMode: false,
-    getOptions: {}
+    getOptions: {},
+    isSystemLocal: true
   },
   onShow: function (options) {
     const token = wx.getStorageSync(TOKEN);
@@ -36,9 +37,8 @@ Page({
     // 获取位置授权及信息
     this.getLocation()
   },
-  // 获取位置信息
-  getLocation() {
-    // 获取位置信息
+  // 获取经纬度信息
+  getLatLng(){
     wx.getLocation({
       type: 'gcj02',
       success: res => {
@@ -56,7 +56,43 @@ Page({
         }
       },
       fail: res => {
-        console.log(res)
+        if (res.errMsg === "getLocation: fail: system permission denied"){
+          // 手机系统未授权微信获取位置信息
+          this.setData({
+            isSystemLocal: false
+          })
+        }
+      }
+    })
+  },
+  // 获取位置信息
+  getLocation() {
+    const that = this;
+    wx.getSetting({
+      success(res) {
+        // 判断用户是否授权获取地理位置
+        if (res.authSetting['scope.userLocation'] === true){
+          // 获取位置信息
+          that.getLatLng();
+        }else {
+          // 如果用户没有授权则引导用户前往设置页面开启
+          wx.authorize({
+            scope: 'scope.userLocation',
+            success() {
+              that.getLatLng();
+            },
+            fail() {
+              wx.openSetting({
+                success(res) {
+                  // res.authSetting = {
+                  //   "scope.userInfo": true,
+                  //   "scope.userLocation": true
+                  // }
+                }
+              })
+            }
+          })
+        }
       }
     })
   },

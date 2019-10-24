@@ -1,6 +1,6 @@
 <!-- 判断显示模式为地图模式/列表模式 -->
 <view wx:if="{{ismap}}" class="map-case">
-  <map-mode nearByArr="{{bearByArr}}" latitude="{{lat}}" longitude="{{lng}}"/>
+  <map-mode nearByArr="{{bearByArr}}" latitude="{{lat}}" longitude="{{lng}}" isSystemLocal="{{isSystemLocal}}" />
 </view>
 <!-- 
 <view wx:else>

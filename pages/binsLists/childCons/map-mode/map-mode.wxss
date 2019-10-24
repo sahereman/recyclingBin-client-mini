@@ -208,3 +208,27 @@ map {
   width: 1px;
   border: 0;
 }
+
+/* 未获取手机系统授权 */
+.map-no-local {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  height: 60%;
+  background-color: transparent;
+  overflow: inherit;
+  text-align: center;
+}
+.no-local-taps {
+  margin: auto;
+  margin-top: 40%;
+}
+.no-local-taps-text {
+  margin-bottom: 20rpx;
+  font-size: 16px;
+}
+.no-local-taps button {
+  width: 50%;
+  color: #fff;
+  background-color: rgba(89,219,157,1);
+}

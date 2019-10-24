@@ -20,6 +20,10 @@ Component({
     longitude: {
       type: Number,
       value: 0
+    },
+    isSystemLocal: {
+      type: Boolean,
+      value: true
     }
   },
   data: {
@@ -124,7 +128,6 @@ Component({
         mapCtx.getCenterLocation({
           type:'gcj02',
           success: function(res) {
-            console.log(res)
             that.data.mapChange = true;
             that.setData({
               latitude:res.latitude,

@@ -6,7 +6,8 @@
      bindmarkertap='gotohere' data-markers="{{markers}}" scale="14">
   <cover-image class="moverarea" src="../../../../assets/images/map/location_icon.png" />
 </map>
-<cover-view class="map-element">
+<!-- 如果系统授权微信获取位置信息 -->
+<cover-view wx:if="{{isSystemLocal}}" class="map-element">
   <cover-view class="arc">
     <cover-image src="../../../../assets/images/map/map-cover-top.png"  mode='widthFix' />
   </cover-view>
@@ -86,5 +87,12 @@
         </cover-view>
       </cover-view>
     </cover-view>
+  </cover-view>
+</cover-view>
+<!-- 如果手机系统未授权微信获取位置信息 -->
+<cover-view wx:else class="map-no-local">
+  <cover-view class="no-local-taps">
+    <cover-view class="no-local-taps-text">无法获取位置，请确实是否已授权微信获取位置信息</cover-view>
+    <!-- <button class="optionLocal">去设置</button> -->
   </cover-view>
 </cover-view>
