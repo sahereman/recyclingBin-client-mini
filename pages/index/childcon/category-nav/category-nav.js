@@ -40,7 +40,7 @@ Component({
             if (res.result.split('/')[2] != 'www.gongyihuishou.com'){
               wx.showModal({
                 title: '二维码识别错误',
-                content: '请扫描工蚁回收相关二维码',
+                content: '请扫描小黑点回收相关二维码',
                 confirmText: '重新扫描',
                 success(res) {
                   if (res.confirm) {
@@ -60,7 +60,7 @@ Component({
                 if (res.statusCode == 422) {
                   wx.showModal({
                     title: res.data.errors.token[0],
-                    content: '请扫描工蚁回收相关二维码',
+                    content: '请扫描小黑点回收相关二维码',
                     confirmText: '重新扫描',
                     success(res) {
                       if (res.confirm) {

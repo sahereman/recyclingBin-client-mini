@@ -25,7 +25,7 @@
       <view class="mymoney">
         <view class="_sign">
           <image class="_sign_img" src="../../assets/images/user/_ad.jpg" />
-          <view class="sign_name">工蚁回收</view> >
+          <view class="sign_name">小黑点回收</view> >
         </view>
 
         <view class="amount_con">

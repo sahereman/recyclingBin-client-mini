@@ -85,9 +85,9 @@ Page({
         icon: 'none',
         duration: 2000
       })
-    } else if (e.detail.value.money<10) {
+    } else if (e.detail.value.money<5) {
       wx.showToast({
-        title: '提现金额必须大于等于10',
+        title: '最小提现金额为5.00元',
         icon: 'none',
         duration: 2000
       })

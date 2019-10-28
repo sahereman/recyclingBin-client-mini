@@ -6,7 +6,7 @@ Page({
   data: {
     token: "",
     avatar_url: "../../assets/images/user/default_user.jpeg",
-    userName: "工蚁森林",
+    userName: "小黑点",
     phone: '',
     real_authenticated_at: null,   //是否已经实名认证
     real_name: '',   // 真实姓名

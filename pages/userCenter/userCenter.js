@@ -6,7 +6,7 @@ Page({
   data: {
     token: "",
     avatar_url: "../../assets/images/user/default_user.jpeg",
-    userName: "工蚁回收",
+    userName: "小黑点回收",
     money: "0.00",  //累计奖励金
     orderCount: 0, //参与投递次数
     orderMoney: '0.00', //当前奖励金

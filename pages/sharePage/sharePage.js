@@ -7,7 +7,7 @@ Page({
     canvasHidden: true,
     token: "",
     avatar_url: "../../assets/images/user/default_user.png",
-    userName: "工蚁森林",
+    userName: "小黑点森林",
     money: '0',
     amount:'32.00'
   },
