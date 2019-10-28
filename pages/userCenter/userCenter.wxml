@@ -6,38 +6,36 @@
     <!-- 个人信息区 -->
     <view class="user-info-part">
       <view class="user-info">
-        <navigator url="../../pages/userInfo/userInfo" hover-class="more-detail-hover">
-          <view class="user-info-head">
-            <image src="{{avatar_url}}" />
-          </view>
-        </navigator>
+        <view class="user-info-head" bindtap="goOtherPage" data-url="../../pages/userInfo/userInfo">
+          <image src="{{avatar_url}}" />
+        </view>
         <view class="user-info-edit">
-        <navigator url="../../pages/userInfo/userInfo" hover-class="user-info-name">
-          <view class="user-info-name">
+          <view class="user-info-name" bindtap="goOtherPage" data-url="../../pages/userInfo/userInfo">
             <text>{{userName}}</text>
-            <!-- <navigator url="../../pages/userInfo/userInfo" hover-class="more-detail-hover"> -->
-              <image src="../../assets/images/user/edit.png" />
-            <!-- </navigator> -->
+            <image src="../../assets/images/user/edit.png" />
           </view>
-          </navigator>
-          <view wx:if="{{phone}}" class="user-info-phone">{{phone}}</view>
-          <navigator wx:else url="../../pages/userInfo/userInfo" hover-class="more-detail-hover">
-            <view class="user-info-phone">绑定手机号</view>
-          </navigator>
+          <block wx:if="{{isLogin}}">
+            <view wx:if="{{phone}}" class="user-info-phone">{{phone}}</view>
+            <view wx:else class="user-info-phone">绑定手机号</view>
+          </block>
+          <block wx:else>
+            <view class="user-info-phone" bindtap="goOtherPage" data-url="../../pages/userInfo/userInfo">点我登录</view>
+          </block>
         </view>
       </view>
       <view class="user-notification">
         <cover-view wx:if="{{notification_count>0}}" class="red-circle"></cover-view>
-        <navigator url="../../pages/messageCenter/messageCenter" hover-class="more-detail-hover">
+        <view class="_nav" bindtap="goOtherPage" data-url="../../pages/messageCenter/messageCenter">
           <image src="../../assets/images/user/notification.png" />
-        </navigator>
+        </view>
       </view>
     </view>
     <!-- 奖励金显示区 -->
     <view class="my-reward border-circle">
       <view class="reward-head">
         <text class="reward-head-title">我的奖励金</text>
-        <navigator class="more-detail" url="../../pages/billPage/billPage" hover-class="more-detail-hover">更多明细</navigator>
+        <!-- <navigator class="more-detail" url="../../pages/billPage/billPage" hover-class="more-detail-hover">更多明细</navigator> -->
+        <view class="more-detail" bindtap="goOtherPage" data-url="../../pages/billPage/billPage">更多明细</view>
       </view>
       <view class="reward-content">
         <view class="reward-content-item">
@@ -68,7 +66,7 @@
         </navigator>
       </view>
       <view class="operating-item">
-        <navigator url="../../pages/walletPage/walletPage" hover-class="operating-click">
+        <view class="_nav" bindtap="goOtherPage" data-url="../../pages/walletPage/walletPage">
           <view class="item-left">
             <image src="../../assets/images/user/wallet.png" />
             <text>钱包</text>
@@ -76,10 +74,10 @@
           <view class="item-right">
             <image src="../../assets/images/user/arrow.png" />
           </view>
-        </navigator>
+        </view>
       </view>
       <view class="operating-item">
-        <navigator url="../../pages/sharePage/sharePage" hover-class="operating-click">
+        <view class="_nav" bindtap="goOtherPage" data-url="../../pages/sharePage/sharePage">
           <view class="item-left">
             <image src="../../assets/images/user/share.png" />
             <text>分享给好友</text>
@@ -87,7 +85,8 @@
           <view class="item-right">
             <image src="../../assets/images/user/arrow.png" />
           </view>
-        </navigator>
+        </view>
+        
       </view>
       <view class="operating-item">
         <navigator url="../../pages/helpCenter/helpCenter" hover-class="operating-click">

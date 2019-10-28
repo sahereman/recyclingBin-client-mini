@@ -6,9 +6,6 @@ export function getNearbyBin(requestData) {
   return request({
     url: 'bins/nearby',
     method: "GET",
-    header: {
-      Authorization: requestData.token
-    },
     data: {
       lat: requestData.lat,
       lng: requestData.lng
@@ -26,9 +23,6 @@ export function getBinLists(requestData) {
   return request({
     url: url,
     method: "GET",
-    header: {
-      Authorization: requestData.token
-    },
     data: {
       lat: requestData.lat,
       lng: requestData.lng,

@@ -1,8 +1,5 @@
 import { getTopicDetails } from '../../service/api/news.js'
-import { updateToken } from '../../service/api/user.js'
-import { TOKEN } from '../../common/const.js'
-import { isTokenFailure, forbiddenReLaunch } from '../../util/util.js'
-
+import { forbiddenReLaunch } from '../../util/util.js'
 Page({
   data: {
     nodes: '',
@@ -14,24 +11,7 @@ Page({
   },
   onLoad: function (options) {
     this.data.currentId = options.currentId;
-    const token = wx.getStorageSync(TOKEN);
-    if (isTokenFailure()) {
-      // token有效
-      this.data.token = token;
-      this._getData()
-    } else {
-      // token无效
-      if (token && token.length != 0) {
-        // 当token存在只需要进行更新
-        // 刷新token
-        updateToken(token, this);
-      } else {
-        // token不存在需用户重新登录
-        wx.reLaunch({
-          url: '../../pages/index/index'
-        })
-      }
-    }
+    this._getData();
   },
   // 网络请求
   _getData(){

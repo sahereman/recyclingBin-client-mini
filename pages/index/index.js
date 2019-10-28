@@ -32,7 +32,6 @@ const app = getApp()
 Page({
   data: {
     banners: [],
-    show: true,
     canIUse: wx.canIUse('button.open-type.getUserInfo'),
     token: "",
     lat: null,
@@ -55,37 +54,27 @@ Page({
   },
   onShow: function() {
     this._getBanners() 
-    
     const token = wx.getStorageSync(TOKEN);
     var that = this;
     if (isTokenFailure()) {
       // token有效
       that.data.token = token;
-      that.setData({
-        show: false
-      })
       that._getData()
     } else {
       // token无效
       if (token && token.length != 0) {
         // 当token存在只需要进行更新
-        that.setData({
-          show: false
-        })
         // 刷新token
         updateToken(token, that);
-        // that._getData()
       } else {
-        //wx.hideTabBar(); 
         // token不存在需用户重新登录
-        app.login()
-        that.setData({
-          show: true
-        })
+        app.login();
+        that.getLocation()
       }
     }
   },
   onLoad:function(){
+
   },
 
   // ------------------网络请求相关方法----------
@@ -93,34 +82,6 @@ Page({
     this.getLocation()
     this._getUserInfo()
   },
-  // 获取token
-  _getToken(requestData) {
-    getToken(requestData).then(res => {
-      if (res.statusCode == 403){
-        this.setData({
-          show: false,
-        })
-        // 跳转到首页的封装方法，默认页面不传参，如果在组件中调用传参为true例如：forbiddenReLaunch(true)即可
-        forbiddenReLaunch();
-        return;
-      }
-      // 存储到本地缓存
-      const token = res.data.token_type + " " + res.data.access_token
-      const validTime = res.data.expires_in
-      // token和有效期存入缓存
-      wx.setStorageSync(TOKEN, token)
-      examineToken(validTime);
-      // wx.showTabBar({})
-      this.setData({
-        show: false,
-        token: token
-      })
-      this._getData();
-    }).catch(err => {
-      console.log(err)
-    })
-  },
-  // 获取banner图数组
   _getBanners() {
     const requestData = {
       pageName: 'mini-index'
@@ -144,10 +105,8 @@ Page({
       lng: app.globalData.lng
     }
     getNearbyBin(requestData).then(res => {
+      console.log(res);
       if (res.statusCode == 403) {
-        this.setData({
-          show: false,
-        })
         forbiddenReLaunch();
         return;
       }
@@ -163,27 +122,6 @@ Page({
     })
   },
   // -------------------------------事件监听及操作----------
-  // 获取用户信息
-  getUserInfo(e) {
-    if (app.globalData.code) {
-      if (e.detail.errMsg == "getUserInfo:ok") {
-        app.globalData.userInfo = e.detail.userInfo
-        const requestData = {
-          code: app.globalData.code,
-          iv: e.detail.iv,
-          encryptedData: e.detail.encryptedData
-        }
-        // 获取token
-        this._getToken(requestData);
-      }else{
-        this.setData({
-          show: true
-        })
-      }
-    } else {
-      // app.login()
-    }
-  },
   // 获取位置信息
   getLocation() {
     // 获取位置信息
@@ -211,9 +149,6 @@ Page({
     }
     userInfoShow(requestData).then(res => {
       if (res.statusCode == 403) {
-        this.setData({
-          show: false,
-        })
         forbiddenReLaunch();
         return;
       }
@@ -224,15 +159,6 @@ Page({
         orderCount: res.data.total_client_order_count,
         orderMoney: res.data.total_client_order_money
       })
-      // if(!res.data.phone) {
-      //   this.setData({
-      //     showModal: true
-      //   })
-      // }else {
-      //   this.setData({
-      //     showModal: false
-      //   })
-      // }
       wx.setStorage({
         key: USERINFO,
         data: res.data
@@ -270,9 +196,6 @@ Page({
 
       sendVerification(requestData).then(res => {
         if (res.statusCode == 403) {
-          this.setData({
-            show: false,
-          })
           forbiddenReLaunch();
           return;
         } 
@@ -310,9 +233,6 @@ Page({
           }
           bindPhone(requestData).then(res => {
             if (res.statusCode == 403) {
-              this.setData({
-                show: false,
-              })
               forbiddenReLaunch();
               return;
             } 
@@ -389,9 +309,6 @@ Page({
     }
     getPhoneNumberajax(requestData).then(res => {
       if (res.statusCode == 403) {
-        this.setData({
-          show: false,
-        })
         forbiddenReLaunch();
         return;
       }

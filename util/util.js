@@ -59,3 +59,17 @@ export function forbiddenReLaunch(isCom = false) {
     }
   })
 }
+
+// 判断是否需要跳转登录页面
+export function isGoLoginPage(isLogin,next_url) {
+  let _url = '../../pages/login/login';
+  if (isLogin){
+    wx.navigateTo({
+      url: next_url
+    })
+  }else{
+    wx.reLaunch({
+      url: _url
+    })
+  }
+}

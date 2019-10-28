@@ -24,9 +24,6 @@ Page({
         updateToken(token, this);
       } else {
         // token不存在需用户重新登录
-        wx.reLaunch({
-          url: '../../pages/index/index'
-        })
       }
     }
   },

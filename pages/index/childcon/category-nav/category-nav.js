@@ -12,31 +12,35 @@ Component({
     }
   },
   data: {
-
+    token:''
   },
   methods: {
     // 调用相机扫描二维码
     getScanCode(e) {
       const that = this;
+      const token = wx.getStorageSync(TOKEN);
+      if (isTokenFailure()) {
+        // token有效
+        that.data.token = token;
+      } else {
+        // token无效
+        if (token && token.length != 0) {
+          // 当token存在只需要进行更新
+          // 刷新token
+          updateToken(token, that);
+        } else {
+          // token不存在需用户重新登录
+          app.login()
+          wx.reLaunch({
+            url: '../../pages/login/login'
+          })
+          return;
+        }
+      }
       wx.scanCode({
         onlyFromCamera: true,
         success(res) {
           if (res.result){
-            const token = wx.getStorageSync(TOKEN);
-            if (isTokenFailure()) {
-              // token有效
-              that.data.token = token;
-            } else {
-              // token无效
-              if (token && token.length != 0) {
-                // 当token存在只需要进行更新
-                // 刷新token
-                updateToken(token, that);
-              } else {
-                // token不存在需用户重新登录
-                app.login()
-              }
-            }
             if (res.result.split('/')[2] != 'www.gongyihuishou.com'){
               wx.showModal({
                 title: '二维码识别错误',

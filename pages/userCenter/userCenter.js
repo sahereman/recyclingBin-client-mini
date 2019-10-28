@@ -1,33 +1,28 @@
 import { TOKEN, USERINFO } from '../../common/const.js'
 import { userInfoShow, updateToken } from '../../service/api/user.js'
-import { sub, isTokenFailure, forbiddenReLaunch } from '../../util/util.js'
+import { sub, isTokenFailure, forbiddenReLaunch, isGoLoginPage } from '../../util/util.js'
 
 Page({
   data: {
     token: "",
-    avatar_url: "../../assets/images/user/default_user.jpeg",
+    avatar_url: "../../assets/images/user/default_user.png",
     userName: "小黑点回收",
     money: "0.00",  //累计奖励金
     orderCount: 0, //参与投递次数
     orderMoney: '0.00', //当前奖励金
     phone: '',
-    notification_count: 0 //未读消息的数量
+    notification_count: 0, //未读消息的数量
+    isLogin:false
   },
   onShow: function (options) {
     const token = wx.getStorageSync(TOKEN);
     const userInfo = wx.getStorageSync(USERINFO);
+    var isLogin = false;
     if (isTokenFailure()) {
       // token有效
       this.data.token = token;
+      isLogin = true;
       if (userInfo && userInfo.length != 0) {
-        // this.setData({
-        //   avatar_url: userInfo.avatar_url,
-        //   userName: userInfo.name,
-        //   money: userInfo.money,
-        //   orderCount: userInfo.total_client_order_count,
-        //   orderMoney: userInfo.total_client_order_money,
-        //   phone: sub(userInfo.phone, 3, 4),
-        // })
         this._getData()
       } 
     } else {
@@ -36,13 +31,14 @@ Page({
         // 当token存在只需要进行更新
         // 刷新token
         updateToken(token, this);
+        isLogin = true;
       } else {
         // token不存在需用户重新登录
-        wx.reLaunch({
-          url: '../../pages/index/index'
-        })
       }
     }
+    this.setData({
+      isLogin: isLogin
+    })
   },
   // ----------------网络请求------------
   _getData(){
@@ -86,6 +82,17 @@ Page({
   },
   //下拉刷新
   onPullDownRefresh() {
-    this._getUserInfo();
-  } 
+    var that = this;
+    if (this.data.isLogin){
+      that._getUserInfo();
+    }else{
+      wx.stopPullDownRefresh();
+    }
+    
+  },
+  goOtherPage:function(e){
+    var that = this;
+    var next_url = e.currentTarget.dataset.url;
+    isGoLoginPage(that.data.isLogin, next_url);
+  }
 })

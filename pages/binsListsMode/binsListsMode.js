@@ -1,7 +1,6 @@
-import { TOKEN, LISTBINTAP } from '../../common/const.js'
-import { isTokenFailure, forbiddenReLaunch } from '../../util/util.js'
+import { LISTBINTAP } from '../../common/const.js'
+import { forbiddenReLaunch } from '../../util/util.js'
 import { getBinLists } from '../../service/api/recyclingBins.js'
-import { updateToken } from '../../service/api/user.js'
 var QQMapWX = require('../../common/qqmap-wx-jssdk.min.js')
 var qqmapsdk
 
@@ -14,7 +13,6 @@ Page({
     total_pages: 0,
     lat: null,
     lng: null,
-    token: "",
     bearByArr: {}
   },
   onLoad: function (options) {
@@ -22,21 +20,7 @@ Page({
     qqmapsdk = new QQMapWX({
       key: 'OUTBZ-V6R3O-A7AW2-SLGR3-IF27F-VOFTS'
     });
-    const token = wx.getStorageSync(TOKEN);
-    if (isTokenFailure()) {
-      // token有效
-      this.data.token = token;
-      this._getData()
-    } else {
-      // token无效
-      if (token && token.length != 0) {
-        // 当token存在只需要进行更新
-        // 刷新token
-        updateToken(token, this);
-      } else {
-
-      }
-    }
+    this._getData()
   },
   onShow: function () {
   },
@@ -70,7 +54,6 @@ Page({
   _getBinsLists() {
     const requestData = {
       page: this.data.category_page,
-      token: this.data.token,
       lat: this.data.lat,
       lng: this.data.lng,
       count: 10

@@ -23,24 +23,24 @@ Page({
     isLast: false
   },
   onShow: function (options) {
-    const token = wx.getStorageSync(TOKEN);
-    if (isTokenFailure()) {
-      // token有效
-      this.data.token = token;
-      this._getData()
-    } else {
-      // token无效
-      if (token && token.length != 0) {
-        // 当token存在只需要进行更新
-        // 刷新token
-        updateToken(token, this);
-      } else {
-        // token不存在需用户重新登录
-        wx.reLaunch({
-          url: '../../pages/index/index'
-        })
-      }
-    }
+    // const token = wx.getStorageSync(TOKEN);
+    // if (isTokenFailure()) {
+    //   // token有效
+    //   this.data.token = token;
+    //   this._getData()
+    // } else {
+    //   // token无效
+    //   if (token && token.length != 0) {
+    //     // 当token存在只需要进行更新
+    //     // 刷新token
+    //     updateToken(token, this);
+    //   } else {
+    //     // token不存在需用户重新登录
+    //   }
+    // }
+  },
+  onLoad:function(){
+    this._getData()
   },
   onReachBottom: function () {
     // 监听用户上拉触底事件
