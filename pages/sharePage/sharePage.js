@@ -35,9 +35,9 @@ Page({
   },
   onShareAppMessage: function (options) {
     return {
-      title: '分享测试',
+      title:'我们来环保回收吧',
       path: '/pages/index/index',
-      imageUrl:'../../assets/images/user/_ad.jpg'
+      imageUrl:'../../assets/images/user/share_img.png'
     }
   },
   // ----------------网络请求------------
