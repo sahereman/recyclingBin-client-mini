@@ -1,0 +1,62 @@
+<!-- 距离计算 -->
+<wxs module="filters" src="../../../../util/filter.wxs"></wxs>
+<!-- 地图模式 -->
+<map id="map2" longitude="{{longitude}}" latitude="{{latitude}}" markers="{{markers}}" bindregionchange="mapViewchange" bindmarkertap='gotohere' data-markers="{{markers}}" scale="14" style="height:60%;">
+  <cover-image class="moverarea" src="../../../../assets/images/map/location_icon.png" />
+</map>
+<!-- 如果系统授权微信获取位置信息 -->
+<cover-view wx:if="{{isSystemLocal}}" class="map-element {{changeHeight?'_change':''}}">
+  <cover-view class="temp_cover">
+    <cover-view class="community-info container-inner">
+      <cover-view class="community-info-top">
+        <cover-view class="bin-location-name">
+          <cover-image src="../../../../assets/images/map/local_name_tip.png" mode='widthFix' />
+          <cover-view class="local-name">{{nearByArr.name}}</cover-view>
+        </cover-view>
+        <cover-view class="info-top-part">
+          <cover-image src="../../../../assets/images/map/place_icon.png" mode='widthFix' />
+          <cover-view wx:if="{{nearByArr.distance>1000}}">
+            <cover-view class="nearby-distance">{{filters.toFix(nearByArr.distance/1000)}}km |</cover-view>
+            <cover-view class="nearby-address"> {{nearByArr.address}}</cover-view>
+          </cover-view>
+          <cover-view wx:else>
+            <cover-view class="nearby-distance">{{nearByArr.distance}}m |</cover-view>
+            <cover-view class="nearby-address"> {{nearByArr.address}}</cover-view>
+          </cover-view>
+        </cover-view>
+        <cover-view class="info-top-part">
+          <cover-image src="../../../../assets/images/map/time_icon.png" mode='widthFix' />
+          <cover-view>{{binTime}} | 编码：{{nearByArr.no}}</cover-view>
+        </cover-view>
+        <cover-image class="tra_desc" src="../../../../assets/images/map/tra_desc.png" mode='widthFix'></cover-image>
+      </cover-view>
+      <!-- 横线 -->
+      <cover-view class="community-info-bottom">
+        <cover-view class="community-bottom-part">
+          <cover-view class="bottom-img">
+            <block wx:for="{{fabricImages}}" wx:for-item="fabricItem" wx:key="{{fabricItem.child_id}}">
+              <cover-view class="bottom-img-box">
+                <cover-image src="{{fabricItem.image_url}}" />
+                <cover-view class="bottom-img-name">{{fabricItem.child_name}}</cover-view>
+              </cover-view>
+            </block>
+          </cover-view>
+        </cover-view>
+      </cover-view>
+    </cover-view>
+    <cover-view class="arc">
+      <cover-image src="../../../../assets/images/map/map-cover-top.png" mode='widthFix' />
+    </cover-view>
+    <cover-view class="nav_icon" bindtap="openMapChoose">
+      <cover-image class="go_map_icon" src="../../../../assets/images/map/navigation_icon.png" />
+      <cover-view class="nav_icon_text">导航</cover-view>
+    </cover-view>
+  </cover-view>
+</cover-view>
+<!-- 如果手机系统未授权微信获取位置信息 -->
+<cover-view wx:else class="map-no-local">
+  <cover-view class="no-local-taps">
+    <cover-view class="no-local-taps-text">无法获取位置，请确实是否已授权微信获取位置信息</cover-view>
+    <!-- <button class="optionLocal">去设置</button> -->
+  </cover-view>
+</cover-view>

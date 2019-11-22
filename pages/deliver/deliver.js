@@ -50,6 +50,7 @@ Page({
         token_id: that.data.token_id 
       }
       checkscanSuccess(requestData).then(res => {
+        console.log(res);
         if (res.statusCode == 403) {
           forbiddenReLaunch();
           return;

@@ -11,3 +11,15 @@ export function getTopicCategories(requestData) {
     }
   })
 } 
+
+
+//获取传统的订单
+export function traditionOrder(requestData) {
+  return request({
+    url: 'box_orders?page=' + requestData.page,
+    method: "GET",
+    header: {
+      Authorization: requestData.token
+    }
+  })
+} 

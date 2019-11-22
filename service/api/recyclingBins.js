@@ -81,3 +81,89 @@ export function getPhoneNumberajax(requestData) {
     }
   })
 }
+
+//传统回收箱
+//获取传统箱奖励参数
+export function getProfits(requestData) {
+  return request({
+    url: 'boxes/profits',
+    method: "GET"
+  })
+}
+
+// 上传并投递 传统回收箱
+export function deliveryBox(requestData) {
+  return request({
+    url: 'box_orders',
+    method: "POST",
+    header: {
+      Authorization: requestData.token
+    },
+    data: {
+      box_no: requestData.box_no,
+      image_proof: requestData.image_proof
+    }
+  })
+}
+
+// 上传图片
+export function upLoadImg(requestData) {
+  return request({
+    url: 'upload/image',
+    method: "POST",
+    header: {
+      Authorization: requestData.token
+    },
+    data: {
+      file: requestData.file
+    }
+  })
+}
+
+// 获取距离最近的传统回收箱
+export function getTraNearbyBin(requestData) {
+  return request({
+    url: 'boxes/nearby',
+    method: "GET",
+    data: {
+      lat: requestData.lat,
+      lng: requestData.lng
+    }
+  })
+} 
+
+// 获取传统回收箱列表
+export function getTraBinLists(requestData) {
+  let url = '';
+  if (requestData.page == 1) {
+    url = 'boxes?page=' + requestData.page
+  } else {
+    url = 'bins?lat=' + requestData.lat + '&lng=' + requestData.lng + '&count=' + requestData.count + '&page=' + requestData.page
+  }
+  return request({
+    url: url,
+    method: "GET",
+    data: {
+      lat: requestData.lat,
+      lng: requestData.lng,
+      count: requestData.count
+    }
+  })
+} 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,9 +1,9 @@
 import { LISTBINTAP } from '../../common/const.js'
 import { forbiddenReLaunch } from '../../util/util.js'
-import { getBinLists } from '../../service/api/recyclingBins.js'
+import { getBinLists, getTraBinLists } from '../../service/api/recyclingBins.js'
 var QQMapWX = require('../../common/qqmap-wx-jssdk.min.js')
 var qqmapsdk
-
+var modelsState;
 Page({
   data: {
     localInfo: "",
@@ -13,9 +13,14 @@ Page({
     total_pages: 0,
     lat: null,
     lng: null,
-    bearByArr: {}
+    bearByArr: {},
+    modelsState:0
   },
   onLoad: function (options) {
+    modelsState = options.modelsState;
+    this.setData({
+      modelsState: options.modelsState
+    })
     // 腾讯地图初始化
     qqmapsdk = new QQMapWX({
       key: 'OUTBZ-V6R3O-A7AW2-SLGR3-IF27F-VOFTS'
@@ -58,27 +63,50 @@ Page({
       lng: this.data.lng,
       count: 10
     }
-    getBinLists(requestData).then(res => {
-      if (res.statusCode == 403) {
-        forbiddenReLaunch();
-        return;
-      }
-      wx.stopPullDownRefresh();
-      const list = res.data.data;
-      let page_num = this.data.category_page;
-      page_num++
-      this.data.dataList.push(...list);
-      this.setData({
-        listsArr: this.data.dataList,
-        category_page: page_num,
-        total_pages: res.data.meta.pagination.total_pages
+    if (modelsState == 0){
+      getBinLists(requestData).then(res => {
+        if (res.statusCode == 403) {
+          forbiddenReLaunch();
+          return;
+        }
+        wx.stopPullDownRefresh();
+        const list = res.data.data;
+        let page_num = this.data.category_page;
+        page_num++
+        this.data.dataList.push(...list);
+        this.setData({
+          listsArr: this.data.dataList,
+          category_page: page_num,
+          total_pages: res.data.meta.pagination.total_pages
+        })
+      }).catch(res => {
+        this.setData({
+          listsArr: []
+        })
       })
-    }).catch(res => {
-      console.log(res)
-      this.setData({
-        listsArr: []
+    }else{
+      getTraBinLists(requestData).then(res => {
+        if (res.statusCode == 403) {
+          forbiddenReLaunch();
+          return;
+        }
+        wx.stopPullDownRefresh();
+        const list = res.data.data;
+        let page_num = this.data.category_page;
+        page_num++
+        this.data.dataList.push(...list);
+        this.setData({
+          listsArr: this.data.dataList,
+          category_page: page_num,
+          total_pages: res.data.meta.pagination.total_pages
+        })
+      }).catch(res => {
+        this.setData({
+          listsArr: []
+        })
       })
-    })
+    }
+    
   },
   // 获取当前位置的详细描述
   getLocalInfo() {
@@ -108,13 +136,13 @@ Page({
       data: listTapBin
     })
     wx.redirectTo({
-      url: '../binsLists/binsLists',
+      url: '../binsLists/binsLists?modelsState=' + modelsState,
     })
   },
   // -----------------事件监听及操作---------------------
   changeShowModule() {
     wx.redirectTo({
-      url: '../binsLists/binsLists',
+      url: '../binsLists/binsLists?modelsState=' + modelsState,
     })
   },
   //下拉刷新

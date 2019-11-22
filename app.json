@@ -1,13 +1,14 @@
 {
-  "pages": [ 
+  "pages": [
     "pages/index/index",
+    "pages/order/order",
+    "pages/keepImg/keepImg",
+    "pages/binsLists/binsLists",
+    "pages/deliveryGuide/deliveryGuide",
     "pages/login/login",
     "pages/news/news",
     "pages/userCenter/userCenter",
-    "pages/order/order",
     "pages/categroies/categroies",
-    "pages/deliveryGuide/deliveryGuide",
-    "pages/binsLists/binsLists",
     "pages/deliver/deliver",
     "pages/newsDetail/newsDetail",
     "pages/binsListsMode/binsListsMode",

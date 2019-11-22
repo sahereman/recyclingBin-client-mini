@@ -1,6 +1,7 @@
 {
   "usingComponents": {
-    "map-mode": "childCons/map-mode/map-mode"
+    "map-mode": "childCons/map-mode/map-mode",
+    "tra-map":"childCons/tra-map/tra-map"
   },
   "navigationBarTitleText": "附近回收机",
   "enablePullDownRefresh": false

@@ -1,15 +1,22 @@
 <view class="container">
+  <view class="menu_tab">
+    <view class="menu_con">
+      <view class="{{showOrder?'cur':''}}" bindtap="changeMenu">智能机</view>
+      <view class="{{!showOrder?'tra_cur':''}}" bindtap="changeMenu">传统机</view>
+      <view class="move"></view>
+    </view>
+  </view>
   <view class="orderLists container-inner">
-    <view wx:if="{{orderLists.length}}">
+    <view wx:if="{{orderLists.length>0 && showOrder == true}}">
       <block wx:for="{{orderLists}}" wx:key="{{index}}">
         <view class="order-list">
           <view class="list-time-status">
             <view class="list-time">{{item.created_at}}</view>
             <!-- <view class="list-status">{{item.status_text}}</view> -->
-            <view class="list-total">共收入<text>{{item.total}}</text>奖励金</view>
+            <view class="list-total">共收入￥<text>{{item.total}}</text>奖励金</view>
           </view>
           <view class="list-localtion">
-            <view class="circle"></view>
+            <!-- <view class="circle"></view> -->
             <view class="list-location-text">{{item.bin_name}}</view>
           </view>
           <view class="list-info" wx:if="{{item.items.length}}">
@@ -18,7 +25,7 @@
                 <view class="type-name">{{childItem.type_name}}</view>
                 <view class="type-weight">{{childItem.number}}{{childItem.unit}}</view>
                 <view class="type-price">
-                  <image class="price-image" src="../../assets/images/deliver/dollar_icon.png" />
+                  <image class="price-image" src="../../assets/images/deliver/dollar_icon2.png" />
                   <text>{{childItem.subtotal}}</text>
                 </view>
               </view>
@@ -28,7 +35,26 @@
       </block>
       <view class="last-tips" wx:if="{{isLast}}">到底啦，没有更多内容喽~~</view>
     </view>
-    <view wx:else  class="data-empty">
+
+    <!-- 传统回收机 -->
+    <view wx:if="{{traOrderList.length>0 && showOrder == false}}">
+      <block wx:for="{{traOrderList}}" wx:key="{{index}}">
+        <view class="order-list">
+          <view class="list-time-status">
+            <view class="list-time">{{item.created_at}}</view>
+            <!-- <view class="list-status">{{item.status_text}}</view> -->
+            <view class="list-total">收入￥<text>{{item.total}}</text>奖励金</view>
+          </view>
+          <view class="tra_con">
+            <image src="{{item.image_proof_url}}" mode="aspectFill" bindtap="previewImg" data-url="{{item.image_proof_url}}"></image>
+            <view class="order_name">{{item.box_name}}</view>
+          </view>
+          
+        </view>
+      </block>
+      <view class="last-tips" wx:if="{{traIsLast}}">到底啦，没有更多内容喽~~</view>
+    </view>
+    <view wx:if="{{(orderLists.length<=0 && showOrder == true) || (traOrderList.length<=0 && showOrder == false)}}" class="data-empty">
       <view class="noOrder_con">
         <image src="../../assets/images/order/no_order.jpg"></image>
         <view class="noorder_text">暂无订单</view>
@@ -36,4 +62,7 @@
       </view>
     </view>
   </view>
+</view>
+<view class="showBIgImg" wx:if="{{showBIgIMg}}" bindtap="closeImg">
+  <image src="{{bigImgUrl}}" mode="aspectFit"></image>
 </view>

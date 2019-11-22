@@ -2,20 +2,57 @@
   width: 100%;
   height: 100%;
 }
+
 .change-module-btn {
   position: absolute;
-  top: 97rpx;
+  top: 40rpx;
   right: 29rpx;
   padding: 15rpx 30rpx;
-  box-shadow:0px 21px 20px 1px rgba(0, 0, 0, 0.1);
-  border-radius:30rpx;
+  box-shadow: 0px 21px 20px 1px rgba(0, 0, 0, 0.1);
+  border-radius: 30rpx;
   text-align: center;
   font-size: 30rpx;
 }
+
 .map-module {
-  background:rgba(255,255,255,1);
+  background: rgba(255, 255, 255, 1);
 }
+
 .list-module {
-  background:rgba(89,219,157,1);
+  background: rgba(89, 219, 157, 1);
+  color: #fff;
+}
+
+.machine_tab {
+  position: absolute;
+  left:-40rpx;
+  top: 40rpx;
+  background: #fefefe;
+  width: 300rpx;
+  height: 80rpx;
+  border-radius: 40rpx;
+}
+
+.machine_tab ._item {
+  width: 116rpx;
+  height: 50rpx;
+  text-align: center;
+  line-height: 50rpx;
+  border-radius: 25rpx;
+  position: absolute;
+  top: 14rpx;
+  font-size: 26rpx;
+}
+
+.machine_tab ._item._art {
+  left: 54rpx;
+}
+
+.machine_tab ._item._tra {
+  right: 14rpx;
+}
+
+.machine_tab ._item.cur {
+  background: #5487fb;
   color: #fff;
 }

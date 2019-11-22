@@ -1,11 +1,17 @@
 <!-- 判断显示模式为地图模式/列表模式 -->
-<view wx:if="{{ismap}}" class="map-case">
+<view wx:if="{{modelsState==0}}" class="map-case">
   <map-mode nearByArr="{{bearByArr}}" latitude="{{lat}}" longitude="{{lng}}" isSystemLocal="{{isSystemLocal}}" />
+</view>
+<view wx:else class="map-case">
+  <tra-map nearByArr="{{bearByArr}}" latitude="{{lat}}" longitude="{{lng}}" isSystemLocal="{{isSystemLocal}}" />
 </view>
 <!-- 
 <view wx:else>
   <list-mode lists="{{ binsLists }}"></list-mode>
 </view> -->
 <!-- 切换按钮 -->
-<cover-view class="change-module-btn map-module" 
-            bindtap="changeShowModule">列表模式</cover-view> 
+<cover-view class="change-module-btn map-module" bindtap="changeShowModule">列表模式</cover-view>
+<cover-view class="machine_tab">
+  <cover-view class="_item _art {{modelsState==0?'cur':''}}" bindtap="getModelsState" data-state="0">智能机</cover-view>
+  <cover-view class="_item _tra {{modelsState==1?'cur':''}}" bindtap="getModelsState" data-state="1">传统机</cover-view>
+</cover-view>

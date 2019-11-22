@@ -1,0 +1,42 @@
+<view class="keepImg">
+  <!-- 投递审核 -->
+  <view class="keep_part _audit" wx:if="{{isFinished}}">
+    <view class="_bt">您的包裹识别为</view>
+    <view class="box_weight">
+      <text>5</text>
+      <text class="_count">kg</text>
+    </view>
+    <image class="box_sign" src="../../assets/images/traditional/box.png"></image>
+
+    <view class="_tip">
+      <view class="_con">审核成功后，将获取奖励金，请耐心等待</view>
+    </view>
+  </view>
+  <!-- 打包照片 -->
+  <view class="keep_part" wx:else>
+    <view class="keep_title">
+      <image class="_sign" src="../../assets/images/traditional/username_sign.png"></image>
+      请参考示例给包裹拍照</view>
+    <view class="keep_con">
+      <view wx:if="{{showImg}}" class="openCamer">
+        <image class="showImg" src="{{showImg}}" mode="aspectFill"></image>
+        <!-- <image class="del_img" bindtap="delImg" src="../../assets/images/user/close_icon2.png"></image> -->
+        <view class="del_img" bindtap="delImg">重新拍照</view>
+      </view>
+      <view wx:else class="openCamer" bindtap="takePicture">
+        <image class="cen" src="../../assets/images/traditional/camer_icon.png"></image>
+      </view>
+      <view class="eg_img">
+        <image class="_sign" src="../../assets/images/traditional/_sign.png"></image>
+        <image class="_img" src="../../assets/images/traditional/img_eg.png"></image>
+      </view>
+    </view>
+    <view class="_tip">
+      <view class="_con">{{box_order_profit_day}}天内可投递{{box_order_profit_number}}次，获得 ￥{{box_order_profit_money}} 奖励金</view>
+    </view>
+    <view class="btn_part">
+      <button bindtap="deliveryGoods">上传并投递</button>
+      <view class="no_click" wx:if="{{!showImg}}"></view>
+    </view>
+  </view>
+</view>

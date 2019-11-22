@@ -3,10 +3,7 @@
 <view class="bin-lists container-inner">
   <view wx:if="{{listsArr.length}}">
     <block wx:for="{{listsArr}}" wx:key="{{item.id}}">
-      <view class="bin-list" bindtap="gomappage" data-name="{{item.name}}" data-item="{{item}}"
-            data-address="{{item.address}}" data-no="{{item.no}}" 
-            data-distance="{{item.distance}}" data-lat="{{item.lat}}" 
-            data-lng="{{item.lng}}">
+      <view class="bin-list" bindtap="gomappage" data-name="{{item.name}}" data-item="{{item}}" data-address="{{item.address}}" data-no="{{item.no}}" data-distance="{{item.distance}}" data-lat="{{item.lat}}" data-lng="{{item.lng}}">
         <view class="bin-list-left">
           <view class="bin-list-img">
             <image src="../../assets/images/map/place_active_icon.png" mode='widthFix' />
@@ -15,20 +12,21 @@
             <view class="location-name">{{item.name}}</view>
             <view class="location-info">{{item.address}}</view>
             <!-- <view class="location-status">{{item.site_id}}</view> -->
-
-            <view wx:if="{{item.types_snapshot.type_fabric.status == 'normal' && item.types_snapshot.type_paper.status == 'normal'}}">
-              <view class="location-status" style="background:rgba(89,219,157,1);color:#fff;">正常投递</view>
-            </view>
-
-            <view wx:else>
-              <view wx:if="{{item.types_snapshot.type_fabric.status == 'repair' || item.types_snapshot.type_paper.status == 'repair'}}">
-                <view class="location-status error-status">维修中</view>
+            <block wx:if="{{modelsState == 0}}">
+              <view class="sign_box" wx:if="{{item.types_snapshot.type_fabric.status == 'normal' && item.types_snapshot.type_paper.status == 'normal'}}">
+                <view class="location-status" style="background:rgba(89,219,157,1);color:#fff;">正常投递</view>
               </view>
-              <view wx:else>
-                <view wx:if="item.types_snapshot.type_fabric.status == 'full'" class="location-status error-status">{{item.types_snapshot.type_fabric.name}}已满</view>
-                <view wx:if="item.types_snapshot.type_paper.status == 'full'" class="location-status error-status">{{item.types_snapshot.type_paper.name}}已满</view>
+
+              <view wx:else class="sign_box">
+                <view wx:if="{{item.types_snapshot.type_fabric.status == 'repair' || item.types_snapshot.type_paper.status == 'repair'}}">
+                  <view class="location-status error-status">维修中</view>
+                </view>
+                <view wx:else>
+                  <view wx:if="item.types_snapshot.type_fabric.status == 'full'" class="location-status error-status">{{item.types_snapshot.type_fabric.name}}已满</view>
+                  <view wx:if="item.types_snapshot.type_paper.status == 'full'" class="location-status error-status">{{item.types_snapshot.type_paper.name}}已满</view>
+                </view>
               </view>
-            </view>
+            </block>
           </view>
         </view>
         <view class="bin-list-right">

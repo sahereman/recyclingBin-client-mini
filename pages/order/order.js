@@ -1,5 +1,5 @@
 import { TOKEN } from '../../common/const.js'
-import { getTopicCategories } from '../../service/api/order.js'
+import { getTopicCategories, traditionOrder } from '../../service/api/order.js'
 import { updateToken } from '../../service/api/user.js'
 import { isTokenFailure, forbiddenReLaunch } from '../../util/util.js'
 
@@ -10,9 +10,27 @@ Page({
     currentPage: 1,  // 当前页
     totalPages: 0,  // 总页数
     isLast: false,  //是否有更多数据
-    token: ''
+    token: '',
+    showOrder:true,
+    traOrderList:[],
+    traPage:1,
+    traTotalPages: 0,  // 总页数
+    traIsLast: false,  //是否有更多数据
+    showBIgIMg:false,
+    bigImgUrl: ''
   },
-  onLoad: function (options) {
+  onShow: function (options) {
+    this.setData({
+      orderLists: [],
+      orderListsData: [],  //临时存储数据
+      currentPage: 1,  // 当前页
+      totalPages: 0,  // 总页数
+      isLast: false,  //是否有更多数据
+      traOrderList: [],
+      traPage: 1,
+      traTotalPages: 0,  // 总页数
+      traIsLast: false  //是否有更多数据
+    })
     const token = wx.getStorageSync(TOKEN);
     if (isTokenFailure()) {
       // token有效
@@ -28,17 +46,28 @@ Page({
     }
   },
   onReachBottom: function () {
-    if (this.data.currentPage <= this.data.totalPages) {
-      this._getTopicCategories()
-    } else {
-      this.setData({
-        isLast: true
-      })
+    if (this.data.showOrder){
+      if (this.data.currentPage <= this.data.totalPages) {
+        this._getTopicCategories()
+      } else {
+        this.setData({
+          isLast: true
+        })
+      }
+    }else{
+      if (this.data.traPage <= this.data.traTotalPages) {
+        this.getTraOrder()
+      } else {
+        this.setData({
+          traIsLast: true
+        })
+      }
     }
   },
   // 网络请求
   _getData(){
     this._getTopicCategories();
+    this.getTraOrder()
   },
   // 获取订单列表
   _getTopicCategories(){
@@ -56,21 +85,12 @@ Page({
       let page_num = this.data.currentPage;
       page_num++;
       this.data.orderListsData.push(...list);
-      // if (res.data.meta.pagination.links) {
-      //   if (res.data.meta.pagination.links.next){
-      //     let splitArr = res.data.meta.pagination.links.next.split("=")
-      //     page_num = splitArr[splitArr.length - 1]
-      //   }
-      // } else {
-      //   page_num = 1;
-      // }
       this.setData({
         orderLists: this.data.orderListsData,
         currentPage: page_num,
         totalPages: res.data.meta.pagination.total_pages
       })
     }).catch(res => {
-      console.log(res)
       this.setData({
         orderLists: []
       })
@@ -78,14 +98,26 @@ Page({
   },
   onPullDownRefresh() {//下拉刷新
     this.setData({
-      orderListsData: [],
-      currentPage:1
+      orderLists: [],
+      orderListsData: [],  //临时存储数据
+      currentPage: 1,  // 当前页
+      totalPages: 0,  // 总页数
+      isLast: false,  //是否有更多数据
+      traOrderList: [],
+      traPage: 1,
+      traTotalPages: 0,  // 总页数
+      traIsLast: false  //是否有更多数据
     })
     this._getTopicCategories();
+    this.getTraOrder()
   },
   binsListShow() {//查看附近回收机
+    var modelsState = 0;
+    if (!this.data.showOrder){
+      modelsState = 1;
+    }
     wx.navigateTo({
-      url: '../binsLists/binsLists',
+      url: '../binsLists/binsLists?modelsState=' + modelsState,
       events: {
         // 为指定事件添加一个监听器，获取被打开页面传送到当前页面的数据
         acceptDataFromOpenedPage: function (data) {
@@ -99,6 +131,54 @@ Page({
         // 通过eventChannel向被打开页面传送数据
         res.eventChannel.emit('acceptDataFromOpenerPage', { data: 'test' })
       }
+    })
+  },
+  changeMenu:function(){//更换menu
+    var that = this;
+    var showOrder = !this.data.showOrder;
+    this.setData({
+      showOrder: showOrder,
+    })
+  },
+  getTraOrder:function(){//获取传统机订单
+    var that = this;
+    const requestData = {
+      token: this.data.token,
+      page: this.data.traPage
+    }
+    traditionOrder(requestData).then(res => {
+      if (res.statusCode == 403) {
+        forbiddenReLaunch();
+        return;
+      }
+      wx.stopPullDownRefresh();
+      const list = res.data.data;
+      let page_num = this.data.traPage;
+      let traOrderList = that.data.traOrderList;
+      page_num++;
+      traOrderList.push(...list);
+      this.setData({
+        traOrderList: traOrderList,
+        traPage: page_num,
+        traTotalPages: res.data.meta.pagination.total_pages
+      })
+    }).catch(res => {
+      this.setData({
+        traOrderList: []
+      })
+    })
+  },
+  previewImg:function(e){//预览订单图片
+    var _url = e.currentTarget.dataset.url;
+    this.setData({
+      bigImgUrl: _url,
+      showBIgIMg:true
+    })
+  },
+  closeImg:function(){//关闭预览图片
+    this.setData({
+      bigImgUrl: '',
+      showBIgIMg: false
     })
   }
 })

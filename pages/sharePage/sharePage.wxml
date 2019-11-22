@@ -30,7 +30,7 @@
 
         <view class="amount_con">
           <view class="_my">我的奖励金</view>
-          <view class="_amount">共获得奖励金 <text style='font-size:28rpx;font-weight:500;'>￥</text><text>{{amount}}</text></view>
+          <view class="_amount">共获得奖励金 <text style='font-size:28rpx;font-weight:500;'>￥</text><text>{{money}}</text></view>
         </view>
       </view>
       <view class="code_part">

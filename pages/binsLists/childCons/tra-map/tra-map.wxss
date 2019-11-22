@@ -1,0 +1,256 @@
+#map2 {
+  width: 100%;
+  height:60%;
+  position: relative;
+}
+
+.map-element {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  height:60%;
+  background:#fff;
+  overflow: inherit;
+  transition: 0.2s height ease-in-out;
+}
+.map-element._change{
+  height:50%;
+  background-color: transparent;
+}
+.arc {
+  position: absolute;
+  top: 11%;
+  width: 100%;
+  height: 10%;
+  background: transparent;
+}
+
+.arc cover-image {
+  width: 100%;
+  height: 100%;
+}
+
+.nav_icon {
+  position: absolute;
+  width: 170rpx;
+  height: 170rpx;
+  border-radius: 50%;
+  background-color: #fff;
+  text-align: center;
+  left: 40%;
+  top: 0;
+}
+
+.nav_icon .go_map_icon {
+  margin: auto;
+  margin-top:37rpx;
+  width: 96rpx;
+  height: 96rpx;
+}
+
+.nav_icon_text {
+  height: 25px;
+  font-size: 24rpx;
+  font-weight: 400;
+  color: rgba(90, 219, 158, 1);
+  line-height: 53rpx;
+}
+
+.community-info {
+  position: absolute;
+  bottom:0rpx;
+  left: 0;
+  right: 0;
+  height: 80%;
+  background:#fff;
+  width:100%;
+  padding:0 2.5%;
+  box-sizing:border-box;
+}
+
+.community-info-top {
+  margin-top:35rpx;
+}
+
+.community-info-top  cover-image {
+  margin: auto;
+  margin-right: 24rpx;
+  width: 30rpx;
+}
+
+.bin-location-name {
+  display: flex;
+  margin-bottom: 25rpx;
+}
+
+.bin-location-name cover-image {
+  width: 12rpx;
+  height: 6rpx;
+  margin: auto 24rpx;
+  margin-left: 10rpx;
+}
+.local-name {
+  width: 100%;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  font-size: 16px;
+  color: #333;
+}
+
+.info-top-part {
+  display: flex;
+  justify-content: flex-start;
+  margin-bottom: 14rpx;
+}
+
+.info-top-part cover-view {
+  display: flex;
+  width: 100%;
+  overflow: hidden;
+  height: 50rpx;
+  line-height: 50rpx;
+  font-size: 14px;
+  color: #a6a6a6;
+}
+
+.info-top-part .nearby-distance {
+  display: inline-block;
+  width: auto;
+}
+
+.info-top-part .nearby-address {
+  display: inline-block;
+  width: 80%;
+  margin-left: 5rpx;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+.community-info-top .tra_desc{
+  width:370rpx;
+  margin-left:50rpx;
+}
+.community-info-top{
+  padding-bottom:12rpx;
+  border-bottom:2px solid #f7f7f7;
+}
+.striping {
+  width: 100%;
+  height: 1rpx;
+  background: #f7f7f7
+}
+
+.community-info-bottom {
+  display: flex;
+  justify-content: space-between;
+}
+
+.community-bottom-part {
+  position: relative;
+  flex: 1;
+  margin: 35rpx 28rpx;
+  text-align: center;
+}
+
+.top_circle {
+  position: absolute;
+  height: 100%;
+  width: 1px;
+  border: 0rpx;
+  border-right: 1px dashed #e5e5e5;
+  top: 0;
+  right: -16%;
+}
+
+.bottom-img {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 26rpx;
+}
+
+.bottom-img-box {
+  flex: 1;
+  text-align: center;
+}
+
+.bottom-img cover-image {
+  margin: auto;
+  width: 63rpx;
+  height: 63rpx;
+}
+
+.bottom-img-name {
+  font-size: 12px;
+  font-weight: 300;
+  color: #adadad;
+  line-height: 30px;
+}
+
+.bottom-info cover-image {
+  position: relative;
+  left: 30%;
+  width: 86rpx;
+  height: 30rpx;
+}
+
+.bottom-info-name {
+  margin-bottom: 20rpx;
+  color: #333;
+}
+
+.bottom-info-price {
+  color: #bbb;
+}
+
+.moverarea {
+  width: 56rpx;
+  height: 69rpx;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  margin: auto;
+  position: absolute;
+}
+.status-img {
+  margin-left: 100rpx;
+  margin-bottom: 15rpx;
+}
+.vertical-bar {
+  margin: auto;
+  height: 260rpx;
+  width: 1px;
+  border: 0;
+}
+
+/* 未获取手机系统授权 */
+.map-no-local {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  height: 60%;
+  background-color: transparent;
+  overflow: inherit;
+  text-align: center;
+}
+.no-local-taps {
+  margin: auto;
+  margin-top: 40%;
+}
+.no-local-taps-text {
+  margin-bottom: 20rpx;
+  font-size: 16px;
+}
+.no-local-taps button {
+  width: 50%;
+  color: #fff;
+  background-color: rgba(89,219,157,1);
+}
+
+.temp_cover{
+  width:100%;
+  height:100%;
+  background:transparent;
+  position:relative;
+}

@@ -1,6 +1,6 @@
 import { LISTBINTAP } from '../../common/const.js'
 import { forbiddenReLaunch } from '../../util/util.js'
-import { getNearbyBin } from '../../service/api/recyclingBins.js'
+import { getNearbyBin, getTraNearbyBin } from '../../service/api/recyclingBins.js'
 //获取应用实例
 const app = getApp()
 Page({
@@ -11,10 +11,19 @@ Page({
     bearByArr: {},
     fromListMode: false,
     getOptions: {},
-    isSystemLocal: true
+    isSystemLocal: true,
+    modelsState:0//机型（传统机/智能机）
   },
   onShow: function (options) {
     this._getData();
+  },
+  onLoad: function (options) {
+    var that = this;
+    if (options.modelsState){
+      that.setData({
+        modelsState: options.modelsState
+      })
+    }
   },
   // ------------------网络请求-------------------
   _getData() {
@@ -23,21 +32,25 @@ Page({
   },
   // 获取经纬度信息
   getLatLng(){
-    console.log("22222222222");
+    var that = this;
     wx.getLocation({
       type: 'gcj02',
       success: res => {
-        this.setData({
+        that.setData({
           lat: res.latitude,
           lng: res.longitude
         })
         const listbintap = wx.getStorageSync(LISTBINTAP);
         if (listbintap) {
-          this.setData({
+          that.setData({
             bearByArr: listbintap,
           })
         } else {
-          this._getNearbyBin();
+          if (that.data.modelsState == 0){
+            that._getNearbyBin();
+          }else{
+            that.getTradionalData()
+          }
         }
       },
       fail: res => {
@@ -88,6 +101,7 @@ Page({
       lng: this.data.lng
     }
     getNearbyBin(requestData).then(res => {
+      console.log(res);
       if (res.statusCode == 403) {
         forbiddenReLaunch();
         return;
@@ -103,8 +117,9 @@ Page({
   changeShowModule(){
     var bearByArr = this.data.bearByArr;
     wx.redirectTo({
-      url: '../binsListsMode/binsListsMode',
+      url: '../binsListsMode/binsListsMode?modelsState=' + this.data.modelsState,
     })
+
   },
   onPullDownRefresh() { //下拉刷新
     wx.stopPullDownRefresh();
@@ -117,5 +132,35 @@ Page({
         key: LISTBINTAP
       })
     }
+  },
+  getModelsState:function(e){
+    var that = this;
+    var _state = e.currentTarget.dataset.state;
+    this.setData({
+      modelsState: _state
+    })
+    if (_state == 1){
+      that.getTradionalData()
+    }else{
+      that._getNearbyBin()
+    }
+  },
+  getTradionalData:function(){
+    const requestData = {
+      lat: this.data.lat,
+      lng: this.data.lng
+    }
+    getTraNearbyBin(requestData).then(res => {
+      console.log(res);
+      if (res.statusCode == 403) {
+        forbiddenReLaunch();
+        return;
+      }
+      this.setData({
+        bearByArr: res.data
+      })
+    }).catch(res => {
+      console.log(res)
+    })
   }
 })
