@@ -39,6 +39,7 @@ page {
   background:#E0F9F5;
   position:relative;
   border-radius:8rpx;
+  overflow: hidden;
 }
 .keepImg .eg_img{
   background:#F3F8FF;
@@ -80,6 +81,7 @@ page {
 .keepImg .openCamer .showImg{
   width:100%;
   height:100%;
+  border-radius:8rpx;
 }
 .keepImg .openCamer .del_img{
   position:absolute;
@@ -121,8 +123,12 @@ page {
   font-size:34rpx;
   line-height:100rpx;
   height:100rpx;
+  border:0;
+  outline:none;
 }
-
+.btn_part button::after{
+  border:0;
+}
 .keepImg ._tip{
   padding:42rpx 88rpx 18rpx;
 }

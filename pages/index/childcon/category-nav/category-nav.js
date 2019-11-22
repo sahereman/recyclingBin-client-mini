@@ -1,5 +1,5 @@
 import { scanSuccess } from '../../../../service/api/recyclingBins.js'
-import { TOKEN } from '../../../../common/const.js'
+import { TOKEN,BOXNUMBER } from '../../../../common/const.js'
 import { isTokenFailure } from '../../../../util/util.js'
 import { updateToken } from '../../../../service/api/user.js'
 //获取应用实例
@@ -55,7 +55,6 @@ Component({
                 }
               })
             }else{
-              console.log(res.result.split("?")[1].split('=')[0]);
               if (res.result.split("?")[1].split('=')[0] == 'token'){
                 const requestData = {
                   token: token,
@@ -94,7 +93,12 @@ Component({
                   url: '../keepImg/keepImg',
                   success: function (rel) {
                     // 通过eventChannel向被打开页面传送数据
-                    rel.eventChannel.emit('acceptDataFromOpenerPage', { data: res.result.split("?")[1].split('=')[1] })
+                    //rel.eventChannel.emit('acceptDataFromOpenerPage', { data: res.result.split("?")[1].split('=')[1] })
+                    const box_no = res.result.split("?")[1].split('=')[1];
+                    wx.setStorage({
+                      key: BOXNUMBER,
+                      data: box_no
+                    })
                   },
                 })
               }

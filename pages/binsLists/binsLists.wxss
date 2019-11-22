@@ -7,11 +7,13 @@
   position: absolute;
   top: 40rpx;
   right: 29rpx;
-  padding: 15rpx 30rpx;
+  width:149rpx;
+  height:60rpx;
+  text-align:center;
+  line-height:60rpx;
   box-shadow: 0px 21px 20px 1px rgba(0, 0, 0, 0.1);
   border-radius: 30rpx;
-  text-align: center;
-  font-size: 30rpx;
+  font-size:26rpx;
 }
 
 .map-module {
@@ -53,6 +55,6 @@
 }
 
 .machine_tab ._item.cur {
-  background: #5487fb;
+  background: #3bc18a;
   color: #fff;
 }

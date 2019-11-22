@@ -1,5 +1,5 @@
 // pages/aboutUs/aboutUs.js
-import { TOKEN, USERINFO } from '../../common/const.js'
+import { TOKEN, USERINFO, BOXNUMBER } from '../../common/const.js'
 import { updateToken } from '../../service/api/user.js'
 import { isTokenFailure, forbiddenReLaunch } from '../../util/util.js'
 import { getProfits, deliveryBox, upLoadImg } from '../../service/api/recyclingBins.js'
@@ -24,11 +24,9 @@ Page({
    */
   onLoad: function (options) {
     var that = this;
-    const eventChannel = this.getOpenerEventChannel();
-    eventChannel.on('acceptDataFromOpenerPage', function (data) {
-      that.setData({
-        box_no: data.data
-      })
+    const box_no = wx.getStorageSync(BOXNUMBER);
+    that.setData({
+      box_no: box_no
     })
   },
 
@@ -98,9 +96,10 @@ Page({
         console.log(respnse);
         if (respnse.statusCode == 200){
           var image_proof = JSON.parse(respnse.data).path;
+          var box_no = wx.getStorageSync(BOXNUMBER);
           var param = {
             token: that.data.token,
-            box_no: that.data.box_no,
+            box_no: box_no,
             image_proof: image_proof
           }
           console.log(image_proof);
@@ -148,7 +147,9 @@ Page({
    * 生命周期函数--监听页面卸载
    */
   onUnload: function () {
-
+    this.setData({
+      isFinished:false
+    })
   },
 
   /**
@@ -164,21 +165,24 @@ Page({
       sizeType: ['compressed'], // 可以指定是原图还是压缩图，默认二者都有
       sourceType: ['camera'], // 可以指定来源是相册还是相机，默认二者都有 'album', 
       success: function (res) {
-        console.log(res.tempFiles[0].size);
         // 返回选定照片的本地文件路径列表，tempFilePath可以作为img标签的src属性显示图片
         var tempFilePaths = res.tempFilePaths;
-
-        wx.compressImage({
-          src: tempFilePaths[0], // 图片路径
-          quality:60, // 压缩质量
-          success: function (response) {
-            console.log(response)
-            that.setData({
-              showImg: response.tempFilePath
-            })
-            
-          }
-        })
+        if (wx.compressImage) {
+          wx.compressImage({
+            src: tempFilePaths[0], // 图片路径
+            quality: 60, // 压缩质量
+            success: function (response) {
+              console.log(response)
+              that.setData({
+                showImg: response.tempFilePath
+              })
+            }
+          })
+        } else {
+          that.setData({
+            showImg: tempFilePaths[0]
+          })
+        }
       },
       fail: function (res) {
         console.log(res.errMsg)

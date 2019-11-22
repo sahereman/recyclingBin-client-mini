@@ -4,7 +4,8 @@ import {
   USERINFO,
   VALIDTIME,
   BANNER,
-  ISFORBIDDEN
+  ISFORBIDDEN,
+  BOXNUMBER
 } from '../../common/const.js'
 import {
   getToken,
@@ -74,7 +75,12 @@ Page({
     }
   },
   onLoad:function(){
-
+    const box_no = wx.getStorageSync(BOXNUMBER);
+    if (box_no) {
+      wx.removeStorage({
+        key: BOXNUMBER
+      })
+    }
   },
 
   // ------------------网络请求相关方法----------
