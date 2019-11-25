@@ -32,7 +32,7 @@
       </view>
     </view>
     <view class="_tip">
-      <view class="_con">{{box_order_profit_day}}天内可投递{{box_order_profit_number}}次，获得 ￥{{box_order_profit_money}} 奖励金</view>
+      <view class="_con">{{box_order_profit_day}}天内前{{box_order_profit_number}}次投递，可获得 ￥{{box_order_profit_money}} 奖励金</view>
     </view>
     <view class="btn_part">
       <button bindtap="deliveryGoods">上传并投递</button>

@@ -149,6 +149,8 @@ export function getTraBinLists(requestData) {
       count: requestData.count
     }
   })
+
+  
 } 
 
 

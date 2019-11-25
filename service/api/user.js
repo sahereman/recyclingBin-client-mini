@@ -165,3 +165,18 @@ export function getMessageData(requestData) {
     }
   })
 }
+
+
+// 用户微信钱包提现
+export function weChatdrawal(requestData) {
+  return request({
+    url: 'users/withdraw/unionPay',
+    method: "POST",
+    header: {
+      Authorization: requestData.token
+    },
+    data: {
+      money: requestData.money
+    }
+  })
+}

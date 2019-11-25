@@ -147,6 +147,7 @@ Page({
       page: this.data.traPage
     }
     traditionOrder(requestData).then(res => {
+      console.log(res.data);
       if (res.statusCode == 403) {
         forbiddenReLaunch();
         return;

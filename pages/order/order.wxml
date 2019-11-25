@@ -43,7 +43,10 @@
           <view class="list-time-status">
             <view class="list-time">{{item.created_at}}</view>
             <!-- <view class="list-status">{{item.status_text}}</view> -->
-            <view class="list-total">收入￥<text>{{item.total}}</text>奖励金</view>
+            <view wx:if="{{item.status == 'wait'}}" class="list-total">{{item.status_text}}</view>
+            <view wx:if="{{item.status == 'completed' && item.total > 0 }}" class="list-total">收入￥<text>{{item.total}}</text>奖励金</view>
+            <view wx:if="{{item.status == 'completed' && item.total <= 0}}" class="list-total">奖励次数限制</view>
+            
           </view>
           <view class="tra_con">
             <image src="{{item.image_proof_url}}" mode="aspectFill" bindtap="previewImg" data-url="{{item.image_proof_url}}"></image>

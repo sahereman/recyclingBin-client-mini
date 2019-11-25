@@ -17,7 +17,8 @@ Page({
     box_order_profit_money: 0,
     box_order_profit_number: 0,
     box_no:'',
-    image_proof:null
+    image_proof:null,
+    timer:null//延时器
   },
   /**
    * 生命周期函数--监听页面加载
@@ -84,7 +85,6 @@ Page({
   },
   deliveryGoods: function () {//上传并投递
     var that = this;
-    
     wx.uploadFile({
       url: baseURL + 'upload/image', //仅为示例，非真实的接口地址
       filePath: that.data.showImg,
@@ -93,7 +93,6 @@ Page({
         Authorization: that.data.token
       },
       success(respnse) {
-        console.log(respnse);
         if (respnse.statusCode == 200){
           var image_proof = JSON.parse(respnse.data).path;
           var box_no = wx.getStorageSync(BOXNUMBER);
@@ -102,34 +101,43 @@ Page({
             box_no: box_no,
             image_proof: image_proof
           }
-          console.log(image_proof);
-          deliveryBox(param).then(res => {
-            console.log(res);
-            wx.stopPullDownRefresh();
-            if (res.statusCode == 403) {
-              forbiddenReLaunch();
-              return;
-            }
-            if (res.statusCode == 200) {
-              wx.showToast({
-                title: '投递成功',
-                icon: 'success',
-                duration: 2000
-              })
-              that.setData({
-                isFinished: true
-              })
-            } else {
-              wx.showToast({
-                title: '投递失败，请稍后重试',
-                icon: 'none',
-                duration: 2000
-              })
-            }
+          that.data.timer = setTimeout(function () {
+            deliveryBox(param).then(res => {
+              wx.stopPullDownRefresh();
+              if (res.statusCode == 403) {
+                forbiddenReLaunch();
+                return;
+              }
+              if (res.statusCode == 200) {
+                wx.showToast({
+                  title: '投递成功',
+                  icon: 'success',
+                  duration: 2000
+                })
+                that.setData({
+                  isFinished: true
+                })
+              } else {
+                console.log(res);
+                wx.showToast({
+                  title: res.data.errors.box_no[0],
+                  icon: 'none',
+                  duration:3000
+                })
+              }
 
-          }).catch(res => {
-            console.log(res)
+            }).catch(res => {
+              console.log(res)
 
+            })
+            clearTimeout(that.data.timer);
+          }, 100);
+          
+        }else{
+          wx.showToast({
+            title: "上传失败，请重新上传",
+            icon: 'none',
+            duration: 3000
           })
         }
       }
@@ -150,6 +158,7 @@ Page({
     this.setData({
       isFinished:false
     })
+    clearTimeout(this.data.timer);
   },
 
   /**
