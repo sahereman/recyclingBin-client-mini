@@ -21,6 +21,7 @@ Page({
     isLoaded:false
   },
   onShow: function (options) {
+    var that = this;
     this.setData({
       orderLists: [],
       orderListsData: [],  //临时存储数据
@@ -43,6 +44,9 @@ Page({
         updateToken(token, this);
       } else {
         // token不存在需用户重新登录
+        that.setData({
+          isLoaded:true
+        })
       }
     }
   },
