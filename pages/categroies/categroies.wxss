@@ -9,6 +9,9 @@
   width: 25%;
   height: 100%;
   text-align: center;
+  position:fixed;
+  left:0;
+  top:0;
 }
 
 /*左侧栏list的item*/

@@ -20,7 +20,8 @@ Page({
     categoryLists: [],
     currentIndex: 0,
     categoryIndex: null,
-    isLast: false
+    isLast: false,
+    isLoaded:false
   },
   onShow: function (options) {
     // const token = wx.getStorageSync(TOKEN);
@@ -53,10 +54,12 @@ Page({
     }
   },
   _getData(){
+    this.data.isLoaded = false;
     this._getTopicCategories()
   },
   // 获取话题分类
   _getTopicCategories(){
+    var that = this;
     const requestData = this.data.token;
     getTopicCategories(requestData).then(res => {
       if (res.statusCode == 403) {
@@ -79,6 +82,10 @@ Page({
         }
         // 默认获取第一个分类列表
         this._getTopicLists();
+      }else{
+        that.setData({
+          isLoaded: true
+        })  
       }
     }).catch(res => {
       console.log(res)
@@ -112,7 +119,8 @@ Page({
       that.setData({
         categoryLists: that.data.dataList,
         category_page: page_num,
-        total_pages: res.data.meta.pagination.total_pages
+        total_pages: res.data.meta.pagination.total_pages,
+        isLoaded: true
       })
     }).catch(res => {
       console.log(res)
@@ -147,8 +155,9 @@ Page({
       categories:[],
       category_page:1,
       dataList: [],
-      categoryLists:[]
+      categoryLists:[],
+      isLoaded: false
     })
     this._getTopicCategories();
-  } 
+  }
 })

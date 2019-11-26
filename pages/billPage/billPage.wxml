@@ -48,9 +48,9 @@
         </block>
         <view class="last-tips" wx:if="{{isLast}}">到底啦，没有更多内容喽~~</view>
       </view>
-      <view wx:else class="data-empty">
+      <view  wx:if="{{!billArr.length && isLoaded}}" class="data-empty">
         <view class="noOrder_con">
-          <image src="../../assets/images/order/no_order.jpg"></image>
+          <image src="../../assets/images/order/no_order.png"></image>
           <view class="noorder_text">暂无数据</view>
         </view>
       </view>

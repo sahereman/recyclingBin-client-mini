@@ -8,6 +8,7 @@ Page({
     msgList:[],
     category_page:1,
     total_pages: 0,
+    isLoaded:false
   },
   onShow: function (options) {
     const token = wx.getStorageSync(TOKEN);
@@ -48,16 +49,11 @@ Page({
       let page_num = this.data.category_page;
       page_num++;
       msgList.push(...list);
-      // if (res.data.meta.pagination.links) {
-      //   if (res.data.meta.pagination.links.next){
-      //     page_num = res.data.meta.pagination.links.next.split("=")[1]
-      //   }
-      // }
-      console.log(page_num);
       that.setData({
         msgList: msgList,
         category_page: page_num,
-        total_pages: res.data.meta.pagination.total_pages
+        total_pages: res.data.meta.pagination.total_pages,
+        isLoaded: true
       })
     }).catch(res => {
       console.log(res)
@@ -74,7 +70,13 @@ Page({
       msgList: [],
       category_page: 1,
       total_pages: 0,
+      isLoaded: false
     })
     this.getMsgList()
-  }
+  },
+  onHide: function () {
+    this.setData({
+      isLoaded: false
+    })
+  },
 })

@@ -17,7 +17,8 @@ Page({
     traTotalPages: 0,  // 总页数
     traIsLast: false,  //是否有更多数据
     showBIgIMg:false,
-    bigImgUrl: ''
+    bigImgUrl: '',
+    isLoaded:false
   },
   onShow: function (options) {
     this.setData({
@@ -88,11 +89,13 @@ Page({
       this.setData({
         orderLists: this.data.orderListsData,
         currentPage: page_num,
-        totalPages: res.data.meta.pagination.total_pages
+        totalPages: res.data.meta.pagination.total_pages,
+        isLoaded:true
       })
     }).catch(res => {
       this.setData({
-        orderLists: []
+        orderLists: [],
+        isLoaded: true
       })
     })
   },
@@ -106,7 +109,8 @@ Page({
       traOrderList: [],
       traPage: 1,
       traTotalPages: 0,  // 总页数
-      traIsLast: false  //是否有更多数据
+      traIsLast: false,  //是否有更多数据
+      isLoaded: false
     })
     this._getTopicCategories();
     this.getTraOrder()
@@ -161,11 +165,13 @@ Page({
       this.setData({
         traOrderList: traOrderList,
         traPage: page_num,
-        traTotalPages: res.data.meta.pagination.total_pages
+        traTotalPages: res.data.meta.pagination.total_pages,
+        isLoaded: true
       })
     }).catch(res => {
       this.setData({
-        traOrderList: []
+        traOrderList: [],
+        isLoaded: true
       })
     })
   },
@@ -181,5 +187,13 @@ Page({
       bigImgUrl: '',
       showBIgIMg: false
     })
-  }
+  },
+  /**
+   * 生命周期函数--监听页面隐藏
+   */
+  onHide: function () {
+    this.setData({
+      isLoaded: false
+    })
+  },
 })

@@ -1,8 +1,10 @@
 {
   "pages": [
     "pages/index/index",
+    "pages/binsListsMode/binsListsMode",
+    "pages/billPage/billPage",
+    "pages/messageCenter/messageCenter",
     "pages/weChatCash/weChatCash",
-    
     "pages/order/order",
     "pages/keepImg/keepImg",
     "pages/binsLists/binsLists",
@@ -13,16 +15,14 @@
     "pages/categroies/categroies",
     "pages/deliver/deliver",
     "pages/newsDetail/newsDetail",
-    "pages/binsListsMode/binsListsMode",
-    "pages/billPage/billPage",
+    
     "pages/walletPage/walletPage",
     "pages/sharePage/sharePage",
     "pages/aboutUs/aboutUs",
     "pages/helpCenter/helpCenter",
     "pages/userInfo/userInfo",
     "pages/identification/identification",
-    "pages/withdraw/withdraw",
-    "pages/messageCenter/messageCenter"
+    "pages/withdraw/withdraw"
   ],
   "permission": {
     "scope.userLocation": {

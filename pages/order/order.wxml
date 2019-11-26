@@ -57,9 +57,9 @@
       </block>
       <view class="last-tips" wx:if="{{traIsLast}}">到底啦，没有更多内容喽~~</view>
     </view>
-    <view wx:if="{{(orderLists.length<=0 && showOrder == true) || (traOrderList.length<=0 && showOrder == false)}}" class="data-empty">
+    <view wx:if="{{(orderLists.length<=0 && showOrder == true && isLoaded == true) || (traOrderList.length<=0 && showOrder == false && isLoaded == true)}}" class="data-empty">
       <view class="noOrder_con">
-        <image src="../../assets/images/order/no_order.jpg"></image>
+        <image src="../../assets/images/order/no_order.png"></image>
         <view class="noorder_text">暂无订单</view>
         <view class="golist" bindtap="binsListShow">查看附近回收机</view>
       </view>

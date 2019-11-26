@@ -14,7 +14,8 @@ Page({
     lat: null,
     lng: null,
     bearByArr: {},
-    modelsState:0
+    modelsState:0,
+    isLoaded:false
   },
   onLoad: function (options) {
     modelsState = options.modelsState;
@@ -77,11 +78,13 @@ Page({
         this.setData({
           listsArr: this.data.dataList,
           category_page: page_num,
-          total_pages: res.data.meta.pagination.total_pages
+          total_pages: res.data.meta.pagination.total_pages,
+          isLoaded:true
         })
       }).catch(res => {
         this.setData({
-          listsArr: []
+          listsArr: [],
+          isLoaded: true
         })
       })
     }else{
@@ -98,11 +101,13 @@ Page({
         this.setData({
           listsArr: this.data.dataList,
           category_page: page_num,
-          total_pages: res.data.meta.pagination.total_pages
+          total_pages: res.data.meta.pagination.total_pages,
+          isLoaded: true
         })
       }).catch(res => {
         this.setData({
-          listsArr: []
+          listsArr: [],
+          isLoaded: true
         })
       })
     }
@@ -150,7 +155,8 @@ Page({
     this.setData({
       category_page: 1,
       listsArr: [],
-      dataList: []
+      dataList: [],
+      isLoaded: false
     });
     this._getBinsLists();
   }

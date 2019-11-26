@@ -39,9 +39,9 @@ Page({
     value: [9999, date.getMonth()],
     checktype:1,
     searchDate:'',
-    ordertimeName:'全部月份'
+    ordertimeName:'全部月份',
+    isLoaded:false
   },
-
   onLoad: function (options) {
     const token = wx.getStorageSync(TOKEN);
     const userInfo = wx.getStorageSync(USERINFO);
@@ -103,13 +103,13 @@ Page({
       this.setData({
         billArr: this.data.billArrData,
         currentPage: page_num,
-        totalPages: res.data.meta.pagination.total_pages
+        totalPages: res.data.meta.pagination.total_pages,
+        isLoaded:true
       })
-      console.log(this.data.currentPage)
     }).catch(res => {
-      console.log(res)
       this.setData({
-        listsArr: []
+        listsArr: [],
+        isLoaded: true
       })
     })
   },
@@ -207,7 +207,8 @@ Page({
       ordertimeName:'全部月份',
       currentIndex: 0,
       ordertype: 'all',
-      ordertypeName: '全部奖励金类型'
+      ordertypeName: '全部奖励金类型',
+      isLoaded: false
     })
     this._getBillList();
   }

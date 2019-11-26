@@ -9,9 +9,9 @@
     <!-- 分类列表 -->
     <w-content categoryLists="{{categoryLists}}" isLast="{{isLast}}" bind:listsclick="listsClick" />
   </view>
-  <view wx:if="{{!categoryLists.length}}" class="data-empty">
+  <view wx:if="{{!categoryLists.length && isLoaded}}" class="data-empty">
     <view class="noOrder_con">
-      <image src="../../assets/images/order/no_order.jpg"></image>
+      <image src="../../assets/images/order/no_order.png"></image>
       <view class="noorder_text">暂无话题</view>
     </view>
   </view>

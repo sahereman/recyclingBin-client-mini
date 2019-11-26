@@ -36,7 +36,13 @@
       </view>
     </block>
   </view>
-  <view wx:else>暂无回收箱列表</view>
+  <!-- <view wx:else class="no_list">暂无回收箱列表</view> -->
+  <view wx:if="{{listsArr.length<=0 && isLoaded == true}}" class="data-empty">
+      <view class="noOrder_con">
+        <image src="../../assets/images/order/no_order.png"></image>
+        <view class="noorder_text">暂无回收箱列表</view>
+      </view>
+    </view>
 </view>
 <!-- 当前位置 -->
 <cover-view class="normal-location">
