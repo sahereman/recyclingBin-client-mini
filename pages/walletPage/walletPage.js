@@ -60,5 +60,15 @@ Page({
   //下拉刷新
   onPullDownRefresh() {
     this._getUserInfo();
+  },
+  goWeChatWallet:function(){
+    wx.showModal({
+      title: '提示',
+      content: '该功能暂未开放',
+      showCancel: false,
+      success(res) {
+        
+      }
+    })
   }
 })
