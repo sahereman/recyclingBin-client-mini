@@ -9,7 +9,7 @@ Page({
     localInfo: "",
     listsArr: [],
     dataList: [],  //临时数组存放数据
-    category_page: 1,
+    category_page:1,
     total_pages: 0,
     lat: null,
     lng: null,

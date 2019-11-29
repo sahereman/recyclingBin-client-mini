@@ -138,7 +138,7 @@ export function getTraBinLists(requestData) {
   if (requestData.page == 1) {
     url = 'boxes?page=' + requestData.page
   } else {
-    url = 'bins?lat=' + requestData.lat + '&lng=' + requestData.lng + '&count=' + requestData.count + '&page=' + requestData.page
+    url = 'boxes?lat=' + requestData.lat + '&lng=' + requestData.lng + '&count=' + requestData.count + '&page=' + requestData.page
   }
   return request({
     url: url,

@@ -11,26 +11,35 @@ Component({
   },
   data: {
     title: "距离最近的回收箱",
-    content_btn: "正常投递"
+    content_btn: "正常投递",
+    buttonClicked:true
   },
   methods: {
     binsListShow() {
-      wx.getSetting({
-        success(res) {
-          if (res.authSetting['scope.userLocation'] == false) {
-            wx.openSetting({
-              success(res) {
-                console.log(res.authSetting)
-              }
-            })
-          } else {
-            wx.navigateTo({
-              url: '../binsLists/binsLists',
-            })
+      var that = this;
+      if (that.data.buttonClicked){//防止重复点击
+        that.setData({
+          buttonClicked:false
+        })
+        wx.getSetting({
+          success(res) {
+            if (res.authSetting['scope.userLocation'] == false) {
+              wx.openSetting({
+                success(res) {
+                  console.log(res.authSetting)
+                }
+              })
+            } else {
+              wx.navigateTo({
+                url: '../binsLists/binsLists',
+              })
+              that.setData({
+                buttonClicked: true
+              })
+            }
           }
-        }
-      })
-
+        })
+      }
     }
   }
 })
