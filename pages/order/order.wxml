@@ -1,8 +1,8 @@
 <view class="container">
   <view class="menu_tab">
     <view class="menu_con">
-      <view class="{{showOrder?'cur':''}}" bindtap="changeMenu">智能机</view>
-      <view class="{{!showOrder?'tra_cur':''}}" bindtap="changeMenu">传统机</view>
+      <view class="{{showOrder?'cur':''}}" bindtap="changeMenu" data-index="{{true}}">智能机</view>
+      <view class="{{!showOrder?'tra_cur':''}}" bindtap="changeMenu" data-index="{{false}}">传统机</view>
       <view class="move"></view>
     </view>
   </view>

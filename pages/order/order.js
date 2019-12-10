@@ -141,12 +141,18 @@ Page({
       }
     })
   },
-  changeMenu:function(){//更换menu
+  changeMenu:function(e){//更换menu
     var that = this;
-    var showOrder = !this.data.showOrder;
-    this.setData({
-      showOrder: showOrder,
-    })
+    var showOrder = e.currentTarget.dataset.index;
+    if (showOrder != that.data.showOrder){
+      wx.pageScrollTo({
+        scrollTop: 0
+      })
+      that.setData({
+        showOrder: showOrder
+      })
+    }
+    
   },
   getTraOrder:function(){//获取传统机订单
     var that = this;
