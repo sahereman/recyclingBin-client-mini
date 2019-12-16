@@ -5,6 +5,8 @@
   <category-nav class="container-inner" comToken="{{token}}" />
   <!-- 距离最近的回收箱 -->
   <nearby-bin class="container-inner nearby-bin" nearByInfo="{{nearBybininfo}}" />
+  <!-- 绑定手机号 -->
+  <bind-phone loginState="{{loginState}}" wx:if="{{loginState != 2}}" />
   <!-- 我的奖励金 -->
   <my-reward class="container-inner my-reward" bounty="{{orderMoney}}" deliveryTimes="{{orderCount}}" totalBounty="{{money}}" /> 
 </view>

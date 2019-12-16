@@ -51,7 +51,8 @@ Page({
     vcodeSate: false, //验证码验证
     timerNum: 10, //倒计时
     closeTimerNum: true,
-    timer: null //定时器
+    timer: null, //定时器
+    loginState:0 //0为未登录   1 是登录 但没有绑定手机号   2 登录并绑定手机号
   },
   onShow: function() {
     this._getBanners() 
@@ -154,16 +155,24 @@ Page({
       token: this.data.token
     }
     userInfoShow(requestData).then(res => {
+      console.log(res.data.phone);
       if (res.statusCode == 403) {
         forbiddenReLaunch();
         return;
       }
       wx.stopPullDownRefresh();
       // 将个人信息存入缓存在个人中心进行调用
+      var tempState = 0;
+      if (res.data.phone){
+        tempState = 2;
+      }else{
+        tempState = 1;
+      }
       this.setData({
         money: res.data.money,
         orderCount: res.data.total_client_order_count,
-        orderMoney: res.data.total_client_order_money
+        orderMoney: res.data.total_client_order_money,
+        loginState: tempState
       })
       wx.setStorage({
         key: USERINFO,

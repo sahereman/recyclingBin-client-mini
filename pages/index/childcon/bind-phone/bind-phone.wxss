@@ -1,0 +1,38 @@
+.bind_phone_part{
+  width: 700rpx;
+  height:98rpx;
+  background:#ffffff;
+  border-radius:49rpx;
+  position:relative;
+  margin:0 auto;
+  margin-bottom:26rpx;
+}
+.bind_phone_part .bind_phone_sign{
+  position:absolute;
+  width:290rpx;
+  height:104rpx;
+  left: 54rpx;
+  top:-10rpx;
+}
+.bind_phone_part ._leave{
+  width:230rpx;
+  height:64rpx;
+  position:absolute;
+  right:26rpx;
+  top:18rpx;
+  background:#E1FAF6;
+  border-radius:32rpx;
+  color:#00B395;
+  font-size:28rpx;
+  line-height:64rpx;
+  text-align:center;
+  padding-right:20rpx;
+  box-sizing:border-box;
+}
+.bind_phone_part ._leave .leave_icon{
+  position:absolute;
+  width:38rpx;
+  height:32rpx;
+  right:24rpx;
+  top:17rpx;
+}

@@ -23,6 +23,12 @@ Page({
     timer: null //定时器
   },
   onLoad: function (options) {
+    var that = this;
+    if (options.bindphone == 1){
+      that.setData({
+        showModal:true
+      })
+    }
     const token = wx.getStorageSync(TOKEN);
     const userInfo = wx.getStorageSync(USERINFO);
     if (isTokenFailure()) {

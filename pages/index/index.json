@@ -3,7 +3,8 @@
     "w-swiper": "/components/w-swiper/w-swiper",
     "category-nav": "childcon/category-nav/category-nav",
     "nearby-bin": "childcon/nearby-bin/nearby-bin",
-    "my-reward": "childcon/my-reward/my-reward"
+    "my-reward": "childcon/my-reward/my-reward",
+    "bind-phone":"childcon/bind-phone/bind-phone"
   },
   "navigationBarTitleText": "首页"
 }

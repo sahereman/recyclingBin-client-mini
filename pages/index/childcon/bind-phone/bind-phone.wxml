@@ -1,0 +1,9 @@
+<view class="bind_phone_part">
+  <image class="bind_phone_sign" src="../../../../assets/images/home_nav/bind_phone_sign.png"></image>
+  <view class="_leave" wx:if="{{loginState==0}}" bindtap="leavepage">点我登录
+    <image class="leave_icon" src="../../../../assets/images/home_nav/leave_icon.png"></image>
+  </view>
+  <view class="_leave" wx:if="{{loginState==1}}" bindtap="leavepage">绑定手机号
+    <image class="leave_icon" src="../../../../assets/images/home_nav/leave_icon.png"></image>
+  </view>
+</view>
