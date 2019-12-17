@@ -155,29 +155,30 @@ Page({
       token: this.data.token
     }
     userInfoShow(requestData).then(res => {
-      console.log(res.data.phone);
+      console.log(res);
+      wx.stopPullDownRefresh();
       if (res.statusCode == 403) {
         forbiddenReLaunch();
         return;
+      } else if (res.statusCode == 200){
+        // 将个人信息存入缓存在个人中心进行调用
+        var tempState = 0;
+        if (res.data.phone) {
+          tempState = 2;
+        } else {
+          tempState = 1;
+        }
+        this.setData({
+          money: res.data.money,
+          orderCount: res.data.total_client_order_count,
+          orderMoney: res.data.total_client_order_money,
+          loginState: tempState
+        })
+        wx.setStorage({
+          key: USERINFO,
+          data: res.data
+        })
       }
-      wx.stopPullDownRefresh();
-      // 将个人信息存入缓存在个人中心进行调用
-      var tempState = 0;
-      if (res.data.phone){
-        tempState = 2;
-      }else{
-        tempState = 1;
-      }
-      this.setData({
-        money: res.data.money,
-        orderCount: res.data.total_client_order_count,
-        orderMoney: res.data.total_client_order_money,
-        loginState: tempState
-      })
-      wx.setStorage({
-        key: USERINFO,
-        data: res.data
-      })
     }).catch(res => {
       console.log(res)
     })
@@ -289,8 +290,13 @@ Page({
 
   },
   onPullDownRefresh() { //下拉刷新
-    this.getLocation()
-    this._getUserInfo()
+    var that = this;
+    if (that.data.token){
+      that.getLocation()
+      that._getUserInfo()
+    }else{
+      wx.stopPullDownRefresh();
+    }
   },
   blurPhone: function(e) { //验证手机号
     var phone = e.detail.value;
