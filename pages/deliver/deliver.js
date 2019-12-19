@@ -14,14 +14,15 @@ Page({
   },
   onLoad: function(options) {
     var that = this;
+    that.data.token_id = options.id;
+    that.checkIsSuccess();
+    // const eventChannel = this.getOpenerEventChannel()
     
-    const eventChannel = this.getOpenerEventChannel()
-    
-    // 监听acceptDataFromOpenerPage事件，获取上一页面通过eventChannel传送到当前页面的数据
-    eventChannel.on('acceptDataFromOpenerPage', function (data) {
-      that.data.token_id = data.data;
-      that.checkIsSuccess();
-    })
+    // // 监听acceptDataFromOpenerPage事件，获取上一页面通过eventChannel传送到当前页面的数据
+    // eventChannel.on('acceptDataFromOpenerPage', function (data) {
+    //   that.data.token_id = data.data;
+    //   that.checkIsSuccess();
+    // })
   },
   onUnload:function(){
     clearInterval(this.data.timer);

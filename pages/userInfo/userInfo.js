@@ -1,7 +1,8 @@
 import { TOKEN, USERINFO } from '../../common/const.js'
-import {userInfoShow, updateToken, bindPhone,sendVerification } from '../../service/api/user.js'
-import { sub, isTokenFailure, forbiddenReLaunch } from '../../util/util.js'
+import { userInfoShow, updateToken, bindPhone, sendVerification, getToken } from '../../service/api/user.js'
+import { sub, isTokenFailure, forbiddenReLaunch, examineToken } from '../../util/util.js'
 import {getPhoneNumberajax} from '../../service/api/recyclingBins.js'
+const app = getApp()
 Page({
   data: {
     token: "",
@@ -20,7 +21,9 @@ Page({
     vcodeSate: false, //验证码验证
     timerNum:60, //倒计时
     closeTimerNum: true,
-    timer: null //定时器
+    timer: null, //定时器
+    canIUse: wx.canIUse('button.open-type.getUserInfo'),
+    showLoginState:false
   },
   onLoad: function (options) {
     var that = this;
@@ -64,6 +67,9 @@ Page({
     eventChannel.on('acceptDataFromOpenerPage', function (data) {
       console.log(data)
     })
+  },
+  onShow:function(){
+    
   },
   // --------------------------------网络请求---------
   _getData(){
@@ -243,7 +249,6 @@ Page({
       encryptedData: e.detail.encryptedData,
       iv: e.detail.iv
     }
-    console.log(requestData);
     getPhoneNumberajax(requestData).then(res => {
       if (res.statusCode == 403) {
         forbiddenReLaunch();
@@ -282,13 +287,74 @@ Page({
     clearInterval(this.data.timer);
   },
   openPhonemodal:function(){//打开绑定手机弹窗
+    app.login();
     this.setData({
-      showModal:true
+      showLoginState:true
     })
   },
   hideModal:function(){
     this.setData({
       showModal:false
+    })
+  },
+  getUserInfo(e) {
+    console.log(e);
+    var that = this;
+    if (app.globalData.code) {
+      if (e.detail.errMsg == "getUserInfo:ok") {
+        app.globalData.userInfo = e.detail.userInfo
+        const requestData = {
+          code: app.globalData.code,
+          iv: e.detail.iv,
+          encryptedData: e.detail.encryptedData
+        }
+        // 获取token
+        this._getToken(requestData);
+      }
+    } else {
+      // app.login()
+    }
+  },
+  // 获取token
+  _getToken(requestData) {
+    var that = this;
+    getToken(requestData).then(res => {
+      if (res.statusCode == 403) {
+        // 跳转到首页的封装方法，默认页面不传参，如果在组件中调用传参为true例如：forbiddenReLaunch(true)即可
+        forbiddenReLaunch();
+        return;
+      } else if (res.statusCode == 201){
+        // 存储到本地缓存
+        const token = res.data.token_type + " " + res.data.access_token
+        const validTime = res.data.expires_in
+        // token和有效期存入缓存
+        wx.setStorageSync(TOKEN, token)
+        examineToken(validTime);
+        wx.showToast({
+          title: '授权成功',
+          icon: 'success',
+          duration: 2000
+        })
+        that.setData({
+          showLoginState:false,
+          showModal:true,
+          token: token
+        })
+      }else{
+        wx.showToast({
+          title: '授权失败，请稍后再试',
+          icon: 'none',
+          duration: 2000
+        })
+      }
+      
+    }).catch(err => {
+      console.log(err)
+    })
+  },
+  noLogin:function(){
+    this.setData({
+      showLoginState:false
     })
   }
 })

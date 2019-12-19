@@ -64,8 +64,7 @@ Component({
                   console.log(res);
                   if (res.statusCode == 422) {
                     wx.showModal({
-                      title: res.data.errors.token[0],
-                      content: '请扫描小黑点回收相关二维码',
+                      content: res.data.errors.token[0],
                       confirmText: '重新扫描',
                       success(res) {
                         if (res.confirm) {
@@ -77,12 +76,11 @@ Component({
                     })
                   } else {
                     wx.navigateTo({
-                      url: '../deliver/deliver',
-                      success: function (rel) {
-                        // 通过eventChannel向被打开页面传送数据
-                        rel.eventChannel.emit('acceptDataFromOpenerPage', { data: res.data.id })
-                      },
-
+                      url: '../deliver/deliver?id=' + res.data.id,
+                      // success: function (rel) {
+                      //   // 通过eventChannel向被打开页面传送数据
+                      //   rel.eventChannel.emit('acceptDataFromOpenerPage', { data: res.data.id })
+                      // },
                     })
                   }
                 }).catch(res => {

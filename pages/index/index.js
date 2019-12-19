@@ -112,7 +112,6 @@ Page({
       lng: app.globalData.lng
     }
     getNearbyBin(requestData).then(res => {
-      console.log(res);
       if (res.statusCode == 403) {
         forbiddenReLaunch();
         return;
@@ -155,7 +154,6 @@ Page({
       token: this.data.token
     }
     userInfoShow(requestData).then(res => {
-      console.log(res);
       wx.stopPullDownRefresh();
       if (res.statusCode == 403) {
         forbiddenReLaunch();

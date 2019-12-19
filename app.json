@@ -1,6 +1,8 @@
 {
   "pages": [
     "pages/index/index",
+    "pages/userInfo/userInfo",
+    "pages/loadPage/loadPage",
     "pages/binsListsMode/binsListsMode",
     "pages/billPage/billPage",
     "pages/messageCenter/messageCenter",
@@ -15,12 +17,10 @@
     "pages/categroies/categroies",
     "pages/deliver/deliver",
     "pages/newsDetail/newsDetail",
-    
     "pages/walletPage/walletPage",
     "pages/sharePage/sharePage",
     "pages/aboutUs/aboutUs",
     "pages/helpCenter/helpCenter",
-    "pages/userInfo/userInfo",
     "pages/identification/identification",
     "pages/withdraw/withdraw"
   ],

@@ -28,4 +28,85 @@
   color: #707070;
 }
 
+.login_part {
+  padding:0 56rpx 0 54rpx;
+  text-align: center;
+}
 
+.login_part .login_con {
+  border-radius: 16rpx;
+  margin-top:30%;
+  background:#fff;
+  padding-bottom:58rpx;
+}
+
+.main-content .dialog_title{
+  padding-top:16rpx;
+  line-height:76rpx;
+  height:76rpx;
+  color:#222;
+  font-size:36rpx;
+  border-bottom:1px solid #F1F1F1;
+}
+
+.login_cover{
+  position:fixed;
+  left:0;
+  top:0;
+  width:100%;
+  height:100%;
+  background:rgba(0,0,0,.6);
+}
+.login_part .authorization_con {
+  padding-top:22rpx;
+}
+.login_part .n_desc {
+  font-size:28rpx;
+  line-height:40rpx;
+  color:#666;
+  margin-bottom:10rpx;
+}
+.login_part .detail_desc {
+  padding:0;
+}
+
+.login_part .detail_desc .getYorsinfo{
+  font-size:28rpx;
+  line-height:52rpx;
+  color:#222;
+}
+.login_part .detail_desc .getYorsinfo text{
+  color:#00B395;
+  font-size:36rpx;
+}
+.login_part .detail_desc .infoUse{
+  font-size:28rpx;
+  line-height:52rpx;
+  color:#666;
+  margin-bottom:20rpx;
+}
+
+.login_part .btn_part{
+  padding:0 50rpx;
+  display:flex;
+  justify-content:space-between;
+}
+.login_part .btn_part ._btn{
+  width:240rpx;
+  height:90rpx;
+  border-radius:50rpx;
+  text-align:center;
+  line-height:90rpx;
+  font-size:34rpx;
+}
+.login_part .btn_part ._btn._cancel{
+  border:2rpx solid rgba(238,238,238,1);
+  color:#AAAAAA;
+}
+.login_part .btn_part button._btn{
+  border:0;
+  color:#fff;
+  outline:none;
+  background:#00B395;
+  margin:0;
+}
