@@ -46,22 +46,24 @@ Page({
   },
   // 获取个人信息
   _getUserInfo(){
+    var that = this;
     const requestData = {
       token: this.data.token
     }
     userInfoShow(requestData).then(res => {
+      wx.stopPullDownRefresh();
+      
       if (res.statusCode == 403) {
         forbiddenReLaunch();
         return;
       }
-      wx.stopPullDownRefresh();
-      this.setData({
+      that.setData({
         avatar_url: res.data.avatar_url,
         userName:  res.data.name,
         money:  res.data.money,
         orderCount:  res.data.total_client_order_count,
         orderMoney:  res.data.total_client_order_money,
-        phone: sub(res.data.phone,3,4),
+        phone: res.data.phone ? sub(res.data.phone, 3, 4) : res.data.phone,
         realAuthenticated: res.data.real_authenticated_at,
         notification_count: res.data.notification_count
       })

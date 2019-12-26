@@ -72,7 +72,6 @@ export function deleteToken(requestData) {
 } 
 // 发送手机验证码
 export function sendVerification(requestData) {
-  console.log(requestData)
   return request({
     url: 'sms/verification',
     method: "POST",

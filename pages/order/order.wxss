@@ -204,7 +204,10 @@
   padding-left:30rpx;
   text-align:justify;
 }
-
+.tra_con .tra_order_name{
+  display:flex;
+  align-items:center;
+}
 .showBIgImg{
   position:fixed;
   left:0;

@@ -50,7 +50,7 @@
           </view>
           <view class="tra_con">
             <image src="{{item.image_proof_url}}" mode="aspectFill" bindtap="previewImg" data-url="{{item.image_proof_url}}"></image>
-            <view class="order_name">{{item.box_name}}</view>
+            <view class="order_name tra_order_name">{{item.box_name}}</view>
           </view>
           
         </view>

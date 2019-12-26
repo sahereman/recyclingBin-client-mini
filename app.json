@@ -1,6 +1,7 @@
 {
   "pages": [
     "pages/index/index",
+    "pages/bindPhone/bindPhone",
     "pages/userInfo/userInfo",
     "pages/loadPage/loadPage",
     "pages/binsListsMode/binsListsMode",

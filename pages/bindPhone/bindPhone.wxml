@@ -1,0 +1,36 @@
+<view class="container">
+  <!-- 绑定手机号弹窗 -->
+  <view class="bind_phone_con">
+    <view slot="content" class='main-content'>
+      <view class="dialog_title">微信手机绑定</view>
+      <view class="content-row">
+        <image src="../../assets/images/home_nav/phone_icon.png"></image>
+        <input type="number" placeholder-class="_input" value="{{inphone}}" placeholder="请输入手机号" maxlength="11" bindinput='blurPhone' />
+      </view>
+      <view class="content-row pwd_row">
+        <image src="../../assets/images/home_nav/pwd_icon.png"></image>
+        <input type="number" placeholder-class="_input" value="{{vCode}}" bindinput='blurCode' placeholder="输入验证码" />
+        <!-- <view >获取验证码</view> -->
+        <view class="security" wx:if="{{closeTimerNum}}" bindtap="_sendVerification">获取验证码</view>
+        <view class="security" wx:else>{{timerNum}}</view>
+      </view>
+    </view>
+    <view slot="operation" class="main-footer bindWxPhone">
+      <button class='confirm-btn' bindtap="_bindPhone">立即绑定</button>
+      <button open-type="getUserInfo" bindgetuserinfo="getUserInfo" class='confirm-btn fastBind'>一键绑定微信手机号</button>
+    </view>
+  </view>
+</view>
+<view class="login_cover" wx:if="{{showLoginState}}">
+  <view class="login_part">
+    <view class="login_con">
+      <view slot="content" class='main-content'>
+        <view class="dialog_title">一键绑定微信手机号</view>
+      </view>
+      <view class="btn_part">
+        <view class="_btn _cancel" bindtap="noLogin">取消</view>
+        <button class='confirm-btn _btn' open-type="getPhoneNumber" bindgetphonenumber="_getPhoneNumber">确定</button>
+      </view>
+    </view>
+  </view>
+</view>

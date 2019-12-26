@@ -22,7 +22,7 @@ Component({
         })
       }else{
         wx.navigateTo({
-          url: '../../pages/userInfo/userInfo?bindphone=1'
+          url: '../../pages/bindPhone/bindPhone'
         })
       }
     }

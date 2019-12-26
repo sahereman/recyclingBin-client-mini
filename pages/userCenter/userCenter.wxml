@@ -14,10 +14,10 @@
             <text>{{userName}}</text>
             <image src="../../assets/images/user/edit.png" />
           </view>
-          <block wx:if="{{isLogin}}">
+          <view wx:if="{{isLogin}}" bindtap="goOtherPage" data-url="../../pages/bindPhone/bindPhone">
             <view wx:if="{{phone}}" class="user-info-phone">{{phone}}</view>
             <view wx:else class="user-info-phone">绑定手机号</view>
-          </block>
+          </view>
           <block wx:else>
             <view class="user-info-phone" bindtap="goOtherPage" data-url="../../pages/userInfo/userInfo">点我登录</view>
           </block>

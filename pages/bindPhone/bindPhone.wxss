@@ -1,0 +1,79 @@
+.container{
+  padding:30rpx;
+  box-sizing:border-box;
+}
+.bind_phone_con{
+  background:#fff;
+  border-radius:16rpx;
+  padding:0 15rpx;
+}
+.dialog_title{
+  padding:0 30rpx;
+}
+.main-content .content-row input{
+  height:95rpx;
+}
+.main-footer.bindWxPhone{
+  padding:35rpx 30rpx 30rpx;
+}
+.main-content .content-row.pwd_row .security {
+  margin-top:23rpx;
+  text-align:center;
+}
+.login_part {
+  padding:0 90rpx;
+  text-align: center;
+}
+
+.login_part .login_con {
+  border-radius: 8rpx;
+  margin-top:50%;
+  background:#fff;
+}
+
+.main-content .dialog_title{
+  padding-top:16rpx;
+  line-height:150rpx;
+  height:150rpx;
+  color:#222;
+  font-size:36rpx;
+  border-bottom:1px solid #F1F1F1;
+}
+
+.login_cover{
+  position:fixed;
+  left:0;
+  top:0;
+  width:100%;
+  height:100%;
+  background:rgba(0,0,0,.6);
+  z-index:2;
+}
+
+
+.login_part .btn_part{
+  padding:0;
+  display:flex;
+  justify-content:space-between;
+}
+.login_part .btn_part ._btn{
+  width:50%;
+  height:110rpx;
+  text-align:center;
+  line-height:110rpx;
+  font-size:34rpx;
+}
+.login_part .btn_part ._btn._cancel{
+  border-right:2rpx solid rgba(238,238,238,1);
+  color:#000;
+}
+.login_part .btn_part button._btn{
+  border:0;
+  outline:none;
+  margin:0;
+  color:#576b95;
+  background:#fff;
+}
+.login_part .btn_part button::after{
+  display:none;
+}

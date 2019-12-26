@@ -27,11 +27,6 @@ Page({
   },
   onLoad: function (options) {
     var that = this;
-    if (options.bindphone == 1){
-      that.setData({
-        showModal:true
-      })
-    }
     const token = wx.getStorageSync(TOKEN);
     const userInfo = wx.getStorageSync(USERINFO);
     if (isTokenFailure()) {
@@ -45,7 +40,7 @@ Page({
           this.setData({
             avatar_url: userInfo.avatar_url,
             userName: userInfo.name,
-            phone: sub(userInfo.phone, 3, 4),
+            phone: userInfo.phone ? sub(userInfo.phone, 3, 4) :"",
             real_authenticated_at: userInfo.real_authenticated_at,
             real_name: userInfo.real_name
           })
@@ -110,112 +105,6 @@ Page({
       })
     }
   },
-  // 获取验证码
-  _sendVerification() {
-    var that = this;
-    if (that.data.ajxtrue == true) {
-      const requestData = {
-        token: that.data.token,
-        phone: that.data.inphone
-      }
-      that.setData({
-        closeTimerNum: false
-      })
-      var timerNumtemp = that.data.timerNum;
-
-      that.data.timer = setInterval(function () {
-        timerNumtemp--;
-        that.setData({
-          timerNum: timerNumtemp
-        })
-        if (timerNumtemp <= 0) {
-          clearInterval(that.data.timer);
-          that.setData({
-            closeTimerNum: true
-          })
-        }
-
-      }, 1000)
-
-      sendVerification(requestData).then(res => {
-        if (res.statusCode == 403) {
-          forbiddenReLaunch();
-          return;
-        }
-        that.setData({
-          verification_key: res.data.verification_key
-        })
-      }).catch(res => {
-        console.log(res);
-      })
-    } else {
-      wx.showToast({
-        title: '请输入手机号',
-        icon: 'none',
-        duration: 2000
-      })
-    }
-  },
-  // 绑定手机号
-  _bindPhone() {
-    var that = this;
-    if (that.data.ajxtrue == true) {
-      if (that.data.verification_key) {
-        if (that.data.vcodeSate == false) {
-          wx.showToast({
-            title: '验证码不正确',
-            icon: 'none',
-            duration: 2000
-          })
-        } else {
-          const requestData = {
-            token: that.data.token,
-            phone: that.data.inphone,
-            verification_key: that.data.verification_key,
-            verification_code: that.data.vCode
-          }
-          bindPhone(requestData).then(res => {
-            if (res.statusCode == 403) {
-              forbiddenReLaunch();
-              return;
-            }
-            if (res.statusCode == 200) {
-              wx.showToast({
-                title: '绑定成功',
-                icon: 'success',
-                duration: 2000
-              })
-              that.setData({
-                showModal: false
-              })
-              that._getUserInfo();
-            } else {
-              wx.showToast({
-                title: '绑定失败，请稍后重试',
-                icon: 'none',
-                duration: 2000
-              })
-            }
-          }).catch(res => {
-            console.log(res);
-          })
-        }
-      } else {
-        wx.showToast({
-          title: '请先获取验证码',
-          icon: 'none',
-          duration: 2000
-        })
-      }
-    } else {
-      wx.showToast({
-        title: '请输入正确的手机号',
-        icon: 'none',
-        duration: 2000
-      })
-    }
-
-  },
   onPullDownRefresh() { //下拉刷新
     wx.stopPullDownRefresh();
   },
@@ -270,91 +159,12 @@ Page({
       console.log(res);
     })
   },
-  blurCode: function (e) { //验证验证码
-    var vCode = e.detail.value;
-    let that = this
-    that.setData({
-      vcodeSate: false
-    })
-    if (vCode.length == 4) {
-      that.setData({
-        vcodeSate: true,
-        vCode: vCode
-      })
-    }
-  },
   onUnload: function () {
     clearInterval(this.data.timer);
   },
   openPhonemodal:function(){//打开绑定手机弹窗
-    app.login();
-    this.setData({
-      showLoginState:true
-    })
-  },
-  hideModal:function(){
-    this.setData({
-      showModal:false
-    })
-  },
-  getUserInfo(e) {
-    console.log(e);
-    var that = this;
-    if (app.globalData.code) {
-      if (e.detail.errMsg == "getUserInfo:ok") {
-        app.globalData.userInfo = e.detail.userInfo
-        const requestData = {
-          code: app.globalData.code,
-          iv: e.detail.iv,
-          encryptedData: e.detail.encryptedData
-        }
-        // 获取token
-        this._getToken(requestData);
-      }
-    } else {
-      // app.login()
-    }
-  },
-  // 获取token
-  _getToken(requestData) {
-    var that = this;
-    getToken(requestData).then(res => {
-      if (res.statusCode == 403) {
-        // 跳转到首页的封装方法，默认页面不传参，如果在组件中调用传参为true例如：forbiddenReLaunch(true)即可
-        forbiddenReLaunch();
-        return;
-      } else if (res.statusCode == 201){
-        // 存储到本地缓存
-        const token = res.data.token_type + " " + res.data.access_token
-        const validTime = res.data.expires_in
-        // token和有效期存入缓存
-        wx.setStorageSync(TOKEN, token)
-        examineToken(validTime);
-        wx.showToast({
-          title: '授权成功',
-          icon: 'success',
-          duration: 2000
-        })
-        that.setData({
-          showLoginState:false,
-          showModal:true,
-          token: token
-        })
-      }else{
-        wx.showToast({
-          title: '授权失败，请稍后再试',
-          icon: 'none',
-          duration: 2000
-        })
-      }
-      
-    }).catch(err => {
-      console.log(err)
-    })
-  },
-  noLogin:function(){
-    this.setData({
-      showLoginState:false
+    wx.navigateTo({
+      url: '../bindPhone/bindPhone',
     })
   }
 })

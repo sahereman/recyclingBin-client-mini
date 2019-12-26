@@ -139,7 +139,9 @@ page {
   height:33rpx;
   position:absolute;
   left:5rpx;
-  top:28rpx;
+  top:0;
+  bottom:0;
+  margin:auto;
 }
 .main-content .content-row ._input{
   font-size:30rpx;
