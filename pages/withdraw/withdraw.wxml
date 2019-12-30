@@ -46,7 +46,7 @@
           <text class="get-total" bindtap="getTotalMoney">全部</text>
         </view>
       </view>
-      <view class="min_tip">最小提现金额为5.00元</view>
+      <!-- <view class="min_tip">最小提现金额为5.00元</view> -->
       <button class="sub-btn" formType="submit">确认提现</button>
     </form>
   </view>
