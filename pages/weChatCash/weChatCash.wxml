@@ -8,14 +8,14 @@
           <input name="money" 
                  type="digit" 
                  class="money-num" 
-                 placeholder="可提现到卡{{money}}元" 
+                 placeholder="可提现到微信{{money}}元" 
                  placeholder-class="placeholder-class" 
                  value="{{total_money}}"
           />
           <text class="get-total" bindtap="getTotalMoney">全部</text>
         </view>
       </view>
-      <view class="min_tip">最小提现金额为5.00元</view>
+      <!-- <view class="min_tip">最小提现金额为5.00元</view> -->
       <button class="sub-btn" formType="submit">确认提现</button>
     </form>
   </view>

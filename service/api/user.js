@@ -169,7 +169,7 @@ export function getMessageData(requestData) {
 // 用户微信钱包提现
 export function weChatdrawal(requestData) {
   return request({
-    url: 'users/withdraw/unionPay',
+    url: 'users/withdraw/wechatPay',
     method: "POST",
     header: {
       Authorization: requestData.token

@@ -61,15 +61,16 @@ Page({
   },
   formSubmit(e) {
     var that = this;
-    if (e.detail.value.money<5) {
-      wx.showToast({
-        title: '最小提现金额为5.00元',
-        icon: 'none',
-        duration: 2000
-      })
-    } else{
+    // if (e.detail.value.money<5) {
+    //   wx.showToast({
+    //     title: '最小提现金额为5.00元',
+    //     icon: 'none',
+    //     duration: 2000
+    //   })
+    // } else{
       const requestData = {
-        money: e.detail.value.money
+        money: e.detail.value.money,
+        token:that.data.token
       }
       weChatdrawal(requestData).then(res => {
         console.log(res);
@@ -103,7 +104,7 @@ Page({
           duration: 2000
         })
       })
-    }
+    // }
 
     
   },
