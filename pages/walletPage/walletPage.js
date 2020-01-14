@@ -5,7 +5,8 @@ import { isTokenFailure, forbiddenReLaunch } from '../../util/util.js'
 Page({
   data: {
     token: "",
-    money: 0
+    money: 0,
+    showTip:true//展示提现规则
   },
   onLoad: function (options) {
     const token = wx.getStorageSync(TOKEN);
@@ -69,6 +70,11 @@ Page({
       success(res) {
         
       }
+    })
+  },
+  closeTip:function(){//关闭提现规则弹窗
+    this.setData({
+      showTip:false
     })
   }
 })

@@ -28,7 +28,7 @@ Page({
   // ------------------网络请求-------------------
   _getData() {
     // 获取位置授权及信息
-    this.getLocation()
+    this.getLatLng()
   },
   // 获取经纬度信息
   getLatLng(){
@@ -36,6 +36,7 @@ Page({
     wx.getLocation({
       type: 'gcj02',
       success: res => {
+        console.log(res.latitude);
         that.setData({
           lat: res.latitude,
           lng: res.longitude
@@ -101,7 +102,6 @@ Page({
       lng: this.data.lng
     }
     getNearbyBin(requestData).then(res => {
-      console.log(res);
       if (res.statusCode == 403) {
         forbiddenReLaunch();
         return;

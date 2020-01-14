@@ -33,13 +33,16 @@ Component({
               wx.navigateTo({
                 url: '../binsLists/binsLists',
               })
-              that.setData({
-                buttonClicked: true
-              })
             }
           }
         })
       }
+      var timer = setTimeout(function(){
+        that.setData({
+          buttonClicked: true
+        })
+        clearTimeout(timer);
+      },3000)
     }
   }
 })

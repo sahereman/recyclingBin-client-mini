@@ -10,6 +10,17 @@
     </view>
   </view>
   <view class="container-inner wallet">
+  <view class="operating-item">
+      <navigator url="../../pages/weChatCash/weChatCash" hover-class="operating-click">
+        <view class="item-left">
+          <image src="../../assets/images/user/weChatCash.png"/>
+          <text>微信钱包提现</text>
+        </view>
+        <view class="item-right">
+          <image src="../../assets/images/user/arrow.png"/>
+        </view>
+      </navigator>
+    </view>
     <view class="operating-item">
       <navigator url="../../pages/withdraw/withdraw" hover-class="operating-click">
         <view class="item-left">
@@ -21,16 +32,17 @@
         </view>
       </navigator>
     </view>
-    <view class="operating-item">
-      <navigator url="../../pages/weChatCash/weChatCash" hover-class="operating-click">
-        <view class="item-left">
-          <image src="../../assets/images/user/weChatCash.png"/>
-          <text>微信钱包提现</text>
-        </view>
-        <view class="item-right">
-          <image src="../../assets/images/user/arrow.png"/>
-        </view>
-      </navigator>
+  </view>
+</view>
+<view class="cover" wx:if="{{showTip}}">
+  <view class="tip_con">
+    <view class="tip_t">提现规则</view>
+    <view class="tip_b">
+      <view>1、每周最多可提现<text>2</text>笔(以申请成功为准)</view>
+      <view>2、实际到账时间以第三方机构(微信、银行)为准</view>
+      <view>3、提现中的金额将先冻结，如提现失败将返回到账户中，可再次发起申请</view>
+      <view>4、如<text>3</text>个工作日内仍未到账，可联系客服咨询<text>400-0788-108</text></view>
     </view>
+    <view class="close_tip" bindtap="closeTip">关闭</view>
   </view>
 </view>
