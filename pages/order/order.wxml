@@ -8,7 +8,7 @@
   </view>
   <view class="orderLists container-inner">
     <view wx:if="{{orderLists.length>0 && showOrder == true}}">
-      <block wx:for="{{orderLists}}" wx:key="{{index}}">
+      <block wx:for="{{orderLists}}" wx:key="id">
         <view class="order-list">
           <view class="list-time-status">
             <view class="list-time">{{item.created_at}}</view>
@@ -20,7 +20,7 @@
             <view class="list-location-text">{{item.bin_name}}</view>
           </view>
           <view class="list-info" wx:if="{{item.items.length}}">
-            <block wx:for="{{item.items}}" wx:for-index="idx" wx:for-item="childItem" wx:key="{{idx}}">
+            <block wx:for="{{item.items}}" wx:for-index="idx" wx:for-item="childItem" wx:key="id">
               <view class="child_list">
                 <view class="type-name">{{childItem.type_name}}</view>
                 <view class="type-weight">{{childItem.number}}{{childItem.unit}}</view>

@@ -2,7 +2,7 @@
 <wxs module="filters" src="../../util/filter.wxs"></wxs>
 <view class="bin-lists container-inner">
   <view wx:if="{{listsArr.length}}">
-    <block wx:for="{{listsArr}}" wx:key="{{item.id}}">
+    <block wx:for="{{listsArr}}" wx:key="id">
       <view class="bin-list" bindtap="gomappage" data-name="{{item.name}}" data-item="{{item}}" data-address="{{item.address}}" data-no="{{item.no}}" data-distance="{{item.distance}}" data-lat="{{item.lat}}" data-lng="{{item.lng}}">
         <view class="bin-list-left">
           <view class="bin-list-img">

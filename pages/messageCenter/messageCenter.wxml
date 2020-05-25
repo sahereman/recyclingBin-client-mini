@@ -1,5 +1,5 @@
 <view class="msgCenter" wx:if="{{msgList.length}}">
-  <view class="msg_item" wx:for="{{msgList}}" wx:key="{{item}}">
+  <view class="msg_item" wx:for="{{msgList}}" wx:key="relation_id">
     <view class="bt">
       <view class="_time">{{item.created_at}}</view>
       <view class="t_con">

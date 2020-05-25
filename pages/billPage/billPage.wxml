@@ -31,7 +31,7 @@
     </view>
     <view class="bill-lists">
       <view wx:if="{{billArr.length}}">
-        <block wx:for="{{billArr}}" wx:key="{{item.id}}">
+        <block wx:for="{{billArr}}" wx:key="id">
           <view class="bill-list border-circle">
             <view class="bill-list-date">{{item.created_at}}</view>
             <view class="bill-list-type">

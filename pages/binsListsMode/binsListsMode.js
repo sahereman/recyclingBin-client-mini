@@ -44,6 +44,7 @@ Page({
     wx.getLocation({
       type: 'gcj02',
       success: res => {
+        console.log(res);
         this.setData({
           lat: res.latitude,
           lng: res.longitude

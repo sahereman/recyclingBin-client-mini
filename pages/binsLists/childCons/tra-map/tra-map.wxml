@@ -34,7 +34,7 @@
       <cover-view class="community-info-bottom">
         <cover-view class="community-bottom-part">
           <cover-view class="bottom-img">
-            <block wx:for="{{fabricImages}}" wx:for-item="fabricItem" wx:key="{{fabricItem.child_id}}">
+            <block wx:for="{{fabricImages}}" wx:for-item="fabricItem" wx:key="child_id">
               <cover-view class="bottom-img-box">
                 <cover-image src="{{fabricItem.image_url}}" />
                 <cover-view class="bottom-img-name">{{fabricItem.child_name}}</cover-view>
